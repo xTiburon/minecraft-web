@@ -49,7 +49,7 @@
       bottom: -150px; left: -150px; animation: drift2 25s ease-in-out infinite alternate;
     }
 
-    /* ── PLANET DECORATIONS (toque temático) ── */
+    /* ── PLANET DECORATIONS ── */
     .planet-deco {
       position: fixed; pointer-events: none; z-index: 0;
       top: 60px; right: -120px; width: 380px; height: 380px; border-radius: 50%;
@@ -100,16 +100,17 @@
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       display: flex; align-items: center; justify-content: space-between;
-      padding: 0 40px; height: 64px;
+      padding: 0 32px; height: 64px;
       background: rgba(5,8,16,.85); backdrop-filter: blur(14px);
       border-bottom: 1px solid var(--border);
+      gap: 16px;
     }
     .nav-logo {
-      font-family: var(--head); font-size: 1.2rem; font-weight: 900;
+      font-family: var(--head); font-size: 1.1rem; font-weight: 900;
       color: var(--accent); text-shadow: var(--glow); letter-spacing: 2px;
-      display: flex; align-items: center; gap: 12px; text-decoration: none;
+      display: flex; align-items: center; gap: 10px; text-decoration: none;
+      flex-shrink: 0;
     }
-    /* CSS planet icon */
     .nav-planet { position: relative; width: 26px; height: 26px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
     .nav-planet .orb {
       width: 20px; height: 20px; border-radius: 50%;
@@ -123,15 +124,22 @@
     }
     .nav-logo span { color: var(--text); }
     .nav-logo .dot { color: var(--accent2); }
-    .nav-links { display: flex; gap: 8px; list-style: none; }
-    .nav-links a {
-      font-family: var(--mono); font-size: .8rem; color: var(--text-dim);
-      text-decoration: none; padding: 6px 16px; border: 1px solid transparent;
-      border-radius: var(--radius); transition: all .25s; letter-spacing: 1px;
+
+    /* Desktop nav links — scrollable row so all items fit */
+    .nav-links {
+      display: flex; gap: 2px; list-style: none;
+      flex: 1; overflow-x: auto; justify-content: flex-end;
     }
-    .nav-links a:hover { color: var(--accent); border-color: var(--accent); background: rgba(0,229,255,.06); text-shadow: var(--glow); }
+    .nav-links::-webkit-scrollbar { display: none; }
+    .nav-links a {
+      font-family: var(--mono); font-size: .72rem; color: var(--text-dim);
+      text-decoration: none; padding: 5px 11px; border: 1px solid transparent;
+      border-radius: var(--radius); transition: all .25s; letter-spacing: .7px;
+      white-space: nowrap; display: block;
+    }
+    .nav-links a:hover  { color: var(--accent); border-color: var(--accent); background: rgba(0,229,255,.06); text-shadow: var(--glow); }
     .nav-links a.active { color: var(--accent); border-color: rgba(0,229,255,.4); background: rgba(0,229,255,.08); }
-    .nav-toggle { display: none; background: none; border: none; color: var(--accent); font-size: 1.4rem; cursor: pointer; }
+    .nav-toggle { display: none; background: none; border: none; color: var(--accent); font-size: 1.4rem; cursor: pointer; flex-shrink: 0; }
 
     /* ── BUTTONS ── */
     .btn {
@@ -145,18 +153,40 @@
       background: linear-gradient(135deg, rgba(255,255,255,.06) 0%, transparent 60%);
       pointer-events: none;
     }
-    .btn-primary { background: var(--accent); border-color: var(--accent); color: var(--bg); font-weight: 700; box-shadow: 0 0 24px rgba(0,229,255,.4); }
-    .btn-primary:hover { box-shadow: 0 0 40px rgba(0,229,255,.7); transform: translateY(-2px); }
-    .btn-discord { background: rgba(88,101,242,.15); border-color: rgba(88,101,242,.5); color: #7289da; }
-    .btn-discord:hover { background: rgba(88,101,242,.25); box-shadow: 0 0 20px rgba(88,101,242,.3); transform: translateY(-2px); }
-    .btn-tiktok { background: rgba(255,0,80,.1); border-color: rgba(255,0,80,.4); color: #ff0050; }
-    .btn-tiktok:hover { background: rgba(255,0,80,.2); box-shadow: 0 0 20px rgba(255,0,80,.3); transform: translateY(-2px); }
-    .btn-shop { background: rgba(124,58,237,.15); border-color: rgba(124,58,237,.5); color: #a78bfa; }
-    .btn-shop:hover { background: rgba(124,58,237,.25); box-shadow: 0 0 20px rgba(124,58,237,.3); transform: translateY(-2px); }
-    .btn-ip { background: rgba(34,211,165,.1); border-color: rgba(34,211,165,.4); color: var(--accent3); }
-    .btn-ip:hover { background: rgba(34,211,165,.2); box-shadow: 0 0 20px rgba(34,211,165,.3); transform: translateY(-2px); }
-    .btn-outline { background: transparent; border-color: rgba(0,229,255,.4); color: var(--accent); }
-    .btn-outline:hover { background: rgba(0,229,255,.07); box-shadow: var(--glow); transform: translateY(-2px); }
+    .btn-primary  { background: var(--accent); border-color: var(--accent); color: var(--bg); font-weight: 700; box-shadow: 0 0 24px rgba(0,229,255,.4); }
+    .btn-primary:hover  { box-shadow: 0 0 40px rgba(0,229,255,.7); transform: translateY(-2px); }
+    .btn-discord  { background: rgba(88,101,242,.15); border-color: rgba(88,101,242,.5); color: #7289da; }
+    .btn-discord:hover  { background: rgba(88,101,242,.25); box-shadow: 0 0 20px rgba(88,101,242,.3); transform: translateY(-2px); }
+    .btn-tiktok   { background: rgba(255,0,80,.1); border-color: rgba(255,0,80,.4); color: #ff0050; }
+    .btn-tiktok:hover   { background: rgba(255,0,80,.2); box-shadow: 0 0 20px rgba(255,0,80,.3); transform: translateY(-2px); }
+    .btn-shop     { background: rgba(124,58,237,.15); border-color: rgba(124,58,237,.5); color: #a78bfa; }
+    .btn-shop:hover     { background: rgba(124,58,237,.25); box-shadow: 0 0 20px rgba(124,58,237,.3); transform: translateY(-2px); }
+    .btn-outline  { background: transparent; border-color: rgba(0,229,255,.4); color: var(--accent); }
+    .btn-outline:hover  { background: rgba(0,229,255,.07); box-shadow: var(--glow); transform: translateY(-2px); }
+
+    /* ── HERO JOIN BUTTON ── */
+    .btn-join-server {
+      display: inline-flex; align-items: center; gap: 14px;
+      font-family: var(--mono); font-size: .95rem; font-weight: 700; letter-spacing: 1.5px;
+      padding: 18px 40px; border-radius: var(--radius); border: 1px solid rgba(34,211,165,.6);
+      cursor: pointer; text-decoration: none; transition: all .3s; position: relative; overflow: hidden;
+      background: linear-gradient(135deg, rgba(34,211,165,.15) 0%, rgba(0,229,255,.08) 100%);
+      color: var(--accent3);
+      box-shadow: 0 0 28px rgba(34,211,165,.25), inset 0 0 28px rgba(34,211,165,.04);
+      width: 100%; max-width: 520px; justify-content: center;
+    }
+    .btn-join-server::before {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(34,211,165,.1) 0%, rgba(0,229,255,.05) 100%);
+      opacity: 0; transition: opacity .3s;
+    }
+    .btn-join-server:hover { box-shadow: 0 0 48px rgba(34,211,165,.5), inset 0 0 36px rgba(34,211,165,.07); transform: translateY(-3px); border-color: rgba(34,211,165,.9); color: #fff; }
+    .btn-join-server:hover::before { opacity: 1; }
+    .btn-join-server .join-icon { font-size: 1.3rem; filter: drop-shadow(0 0 6px rgba(34,211,165,.6)); flex-shrink: 0; }
+    .btn-join-server .join-text { display: flex; flex-direction: column; align-items: flex-start; gap: 2px; }
+    .btn-join-server .join-main { font-size: .95rem; line-height: 1.2; }
+    .btn-join-server .join-sub  { font-size: .68rem; color: rgba(34,211,165,.6); letter-spacing: 2px; transition: color .3s; }
+    .btn-join-server:hover .join-sub { color: rgba(255,255,255,.5); }
 
     /* ── IP TOAST ── */
     .ip-toast {
@@ -169,9 +199,9 @@
     .ip-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
     /* ── SECTION TITLES ── */
-    .sec-title { font-family: var(--mono); font-size: .7rem; letter-spacing: 3px; color: var(--accent); text-transform: uppercase; margin-bottom: 10px; }
+    .sec-title   { font-family: var(--mono); font-size: .7rem; letter-spacing: 3px; color: var(--accent); text-transform: uppercase; margin-bottom: 10px; }
     .sec-heading { font-family: var(--head); font-size: clamp(1.6rem,3vw,2.4rem); font-weight: 900; margin-bottom: 12px; }
-    .sec-desc { color: var(--text-dim); font-size: 1rem; max-width: 560px; line-height: 1.7; }
+    .sec-desc    { color: var(--text-dim); font-size: 1rem; max-width: 560px; line-height: 1.7; }
     .section-header { margin-bottom: 48px; }
 
     /* ── HERO ── */
@@ -190,7 +220,8 @@
     .hero-title .hl  { color: var(--accent);  text-shadow: var(--glow); }
     .hero-title .hl2 { color: var(--accent2); text-shadow: var(--glow2); }
     .hero-sub { font-size: 1.15rem; color: var(--text-dim); margin-bottom: 40px; line-height: 1.7; animation: fadeDown .7s .2s ease both; }
-    .hero-btns { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; animation: fadeDown .7s .3s ease both; }
+    .hero-btns-wrap      { display: flex; flex-direction: column; align-items: center; gap: 18px; animation: fadeDown .7s .3s ease both; }
+    .hero-btns-secondary { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; }
 
     /* ── INFO STATS ── */
     .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap: 16px; }
@@ -199,55 +230,170 @@
     .info-stat .val { font-family: var(--head); font-size: 2.2rem; font-weight: 900; color: var(--accent); }
     .info-stat .lbl { font-family: var(--mono); font-size: .72rem; color: var(--text-dim); letter-spacing: 2px; text-transform: uppercase; margin-top: 6px; }
 
-    /* ── STAFF ── */
-    .staff-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px,1fr)); gap: 16px; }
-    .staff-card { background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 24px 16px; text-align: center; transition: all .3s; }
-    .staff-card:hover { transform: translateY(-4px); box-shadow: 0 10px 30px rgba(0,0,0,.4); }
-    .staff-avatar { width: 64px; height: 64px; border-radius: 50%; background: linear-gradient(135deg,var(--accent2),var(--accent)); display: flex; align-items: center; justify-content: center; font-size: 1.6rem; margin: 0 auto 14px; border: 2px solid var(--border); position: relative; }
-    .staff-avatar .status-dot { position: absolute; bottom: 2px; right: 2px; width: 12px; height: 12px; border-radius: 50%; background: var(--accent3); border: 2px solid var(--panel); }
-    .staff-name { font-family: var(--head); font-size: .8rem; font-weight: 700; margin-bottom: 4px; }
-    .staff-role { font-family: var(--mono); font-size: .7rem; letter-spacing: 1px; padding: 3px 12px; border-radius: 99px; display: inline-block; margin-top: 8px; }
-    .role-owner  { background: rgba(255,170,0,.12); color: #ffaa00; border: 1px solid rgba(255,170,0,.3); }
-    .role-admin  { background: rgba(255,50,50,.12);  color: #ff4040; border: 1px solid rgba(255,50,50,.3); }
-    .role-mod    { background: rgba(124,58,237,.15); color: #a78bfa; border: 1px solid rgba(124,58,237,.3); }
-    .role-helper { background: rgba(34,211,165,.12); color: var(--accent3); border: 1px solid rgba(34,211,165,.3); }
-    .role-support{ background: rgba(0,229,255,.1);   color: var(--accent); border: 1px solid rgba(0,229,255,.3); }
+    /* ══════════════════════════════════════
+       ── STAFF UNIFICADO ──
+    ══════════════════════════════════════ */
+    .staff-unified-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 18px;
+    }
 
-    /* ── HIERARCHY ── */
-    .hierarchy { display: flex; flex-direction: column; gap: 0; max-width: 560px; }
-    .hier-item { display: flex; align-items: center; gap: 16px; padding: 14px 20px; border: 1px solid var(--border); background: var(--panel); transition: .25s; position: relative; }
-    .hier-item:first-child { border-radius: 10px 10px 0 0; }
-    .hier-item:last-child  { border-radius: 0 0 10px 10px; }
-    .hier-item:not(:last-child) { border-bottom: none; }
-    .hier-item:hover { background: rgba(0,229,255,.04); border-color: rgba(0,229,255,.2); z-index: 1; }
-    .hier-icon { font-size: 1.1rem; width: 32px; text-align: center; }
-    .hier-name { font-family: var(--head); font-size: .9rem; font-weight: 700; }
-    .hier-desc { font-size: .82rem; color: var(--text-dim); margin-top: 2px; }
-    .hier-badge { margin-left: auto; }
+    /* base card */
+    .su-card {
+      background: var(--panel); border: 1px solid var(--border);
+      border-radius: 12px; overflow: hidden;
+      transition: transform .3s, box-shadow .3s, border-color .3s;
+      position: relative;
+    }
+    .su-card:hover { transform: translateY(-4px); }
+
+    /* top accent stripe */
+    .su-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      border-radius: 12px 12px 0 0;
+    }
+
+    /* per-rank colours */
+    .su-card.rank-owner  { border-color: rgba(255,170,0,.22); }
+    .su-card.rank-owner::before  { background: linear-gradient(90deg,#ffaa00,#ff8c00); }
+    .su-card.rank-owner:hover    { border-color: rgba(255,170,0,.5); box-shadow: 0 14px 40px rgba(255,170,0,.1); }
+
+    .su-card.rank-admin  { border-color: rgba(255,60,60,.22); }
+    .su-card.rank-admin::before  { background: linear-gradient(90deg,#ff4040,#ff6060); }
+    .su-card.rank-admin:hover    { border-color: rgba(255,60,60,.5); box-shadow: 0 14px 40px rgba(255,60,60,.1); }
+
+    .su-card.rank-mod    { border-color: rgba(124,58,237,.28); }
+    .su-card.rank-mod::before    { background: linear-gradient(90deg,#7c3aed,#a78bfa); }
+    .su-card.rank-mod:hover      { border-color: rgba(124,58,237,.55); box-shadow: 0 14px 40px rgba(124,58,237,.12); }
+
+    .su-card.rank-helper { border-color: rgba(34,211,165,.22); }
+    .su-card.rank-helper::before { background: linear-gradient(90deg,#22d3a5,#0ea5e9); }
+    .su-card.rank-helper:hover   { border-color: rgba(34,211,165,.5); box-shadow: 0 14px 40px rgba(34,211,165,.1); }
+
+    .su-card.rank-support{ border-color: rgba(0,229,255,.18); }
+    .su-card.rank-support::before{ background: linear-gradient(90deg,#00e5ff,#22d3a5); }
+    .su-card.rank-support:hover  { border-color: rgba(0,229,255,.45); box-shadow: 0 14px 40px rgba(0,229,255,.09); }
+
+    /* header row */
+    .su-header {
+      display: flex; align-items: center; gap: 14px;
+      padding: 22px 22px 16px;
+      border-bottom: 1px solid var(--border);
+    }
+    .su-icon-wrap {
+      width: 52px; height: 52px; border-radius: 50%; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem; position: relative; border: 2px solid rgba(255,255,255,.08);
+    }
+    .su-icon-wrap .su-dot {
+      position: absolute; bottom: 1px; right: 1px;
+      width: 11px; height: 11px; border-radius: 50%;
+      background: var(--accent3); border: 2px solid var(--panel);
+      box-shadow: 0 0 6px rgba(34,211,165,.6);
+    }
+    .rank-owner  .su-icon-wrap { background: linear-gradient(135deg,#ffaa00 0%,#ff6600 100%); }
+    .rank-admin  .su-icon-wrap { background: linear-gradient(135deg,#ff4040 0%,#7c3aed 100%); }
+    .rank-mod    .su-icon-wrap { background: linear-gradient(135deg,#7c3aed 0%,#4f46e5 100%); }
+    .rank-helper .su-icon-wrap { background: linear-gradient(135deg,#22d3a5 0%,#0ea5e9 100%); }
+    .rank-support .su-icon-wrap{ background: linear-gradient(135deg,#00e5ff 0%,#22d3a5 100%); }
+
+    .su-rank-info { flex: 1; min-width: 0; }
+    .su-rank-name { font-family: var(--head); font-size: 1rem; font-weight: 900; margin-bottom: 5px; }
+    .rank-owner   .su-rank-name { color: #ffaa00; }
+    .rank-admin   .su-rank-name { color: #ff5555; }
+    .rank-mod     .su-rank-name { color: #a78bfa; }
+    .rank-helper  .su-rank-name { color: var(--accent3); }
+    .rank-support .su-rank-name { color: var(--accent); }
+
+    .su-rank-desc { font-size: .82rem; color: var(--text-dim); line-height: 1.5; }
+
+    .su-lvl-badge {
+      font-family: var(--mono); font-size: .68rem; letter-spacing: 1px;
+      padding: 4px 12px; border-radius: 99px; flex-shrink: 0;
+    }
+    .rank-owner   .su-lvl-badge { background: rgba(255,170,0,.12); color: #ffaa00; border: 1px solid rgba(255,170,0,.3); }
+    .rank-admin   .su-lvl-badge { background: rgba(255,60,60,.12);  color: #ff5555; border: 1px solid rgba(255,60,60,.3); }
+    .rank-mod     .su-lvl-badge { background: rgba(124,58,237,.15); color: #a78bfa; border: 1px solid rgba(124,58,237,.3); }
+    .rank-helper  .su-lvl-badge { background: rgba(34,211,165,.12); color: var(--accent3); border: 1px solid rgba(34,211,165,.3); }
+    .rank-support .su-lvl-badge { background: rgba(0,229,255,.1);   color: var(--accent); border: 1px solid rgba(0,229,255,.3); }
+
+    /* members area */
+    .su-members { padding: 16px 22px 22px; display: flex; flex-direction: column; gap: 8px; }
+    .su-members-label {
+      font-family: var(--mono); font-size: .65rem; letter-spacing: 2px;
+      color: var(--text-dim); text-transform: uppercase; margin-bottom: 4px;
+    }
+    .su-member-row {
+      display: flex; align-items: center; gap: 10px;
+      background: rgba(255,255,255,.025); border: 1px solid rgba(255,255,255,.05);
+      border-radius: 6px; padding: 8px 12px; transition: background .2s;
+    }
+    .su-member-row:hover { background: rgba(255,255,255,.045); }
+
+    .su-member-avatar {
+      width: 30px; height: 30px; border-radius: 6px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: .72rem; font-family: var(--mono); font-weight: 700; color: var(--bg);
+    }
+    .rank-owner   .su-member-avatar { background: linear-gradient(135deg,#ffaa00,#ff8c00); }
+    .rank-admin   .su-member-avatar { background: linear-gradient(135deg,#ff4040,#7c3aed); }
+    .rank-mod     .su-member-avatar { background: linear-gradient(135deg,#7c3aed,#4f46e5); }
+    .rank-helper  .su-member-avatar { background: linear-gradient(135deg,#22d3a5,#0ea5e9); }
+    .rank-support .su-member-avatar { background: linear-gradient(135deg,#00e5ff,#22d3a5); }
+
+    .su-member-nick { font-family: var(--mono); font-size: .83rem; color: var(--text); }
+    .su-member-online {
+      margin-left: auto; width: 8px; height: 8px; border-radius: 50%;
+      background: var(--accent3); flex-shrink: 0;
+      box-shadow: 0 0 6px rgba(34,211,165,.6);
+    }
+    .su-member-unknown {
+      font-family: var(--mono); font-size: .78rem; color: var(--text-dim);
+      font-style: italic; padding: 6px 4px; opacity: .7;
+    }
+
+    /* ── Staff CTA ── */
+    .staff-cta {
+      margin-top: 56px;
+      display: flex; flex-direction: column; align-items: center; gap: 16px;
+      text-align: center;
+    }
+    .staff-cta-text {
+      font-family: var(--mono); font-size: .8rem; letter-spacing: 2px;
+      color: var(--text-dim); text-transform: uppercase;
+    }
+    .staff-cta-text span { color: var(--accent3); }
+    .btn-apply {
+      display: inline-flex; align-items: center; gap: 12px;
+      font-family: var(--mono); font-size: .85rem; font-weight: 700; letter-spacing: 1.5px;
+      padding: 14px 40px; border-radius: var(--radius);
+      border: 1px solid rgba(88,101,242,.6);
+      background: linear-gradient(135deg, rgba(88,101,242,.18) 0%, rgba(124,58,237,.1) 100%);
+      color: #7289da; cursor: pointer; text-decoration: none; transition: all .3s;
+      box-shadow: 0 0 20px rgba(88,101,242,.2);
+    }
+    .btn-apply:hover {
+      box-shadow: 0 0 36px rgba(88,101,242,.45); transform: translateY(-2px);
+      border-color: rgba(88,101,242,.9); color: #a5b4fc;
+    }
 
     /* ── SHOP ── */
     .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap: 20px; }
-
-    /* Banner "ir a tienda externa" */
     .shop-banner {
       display: flex; align-items: center; justify-content: space-between;
       gap: 20px; flex-wrap: wrap;
       background: linear-gradient(135deg, rgba(124,58,237,.11) 0%, rgba(0,229,255,.06) 100%);
       border: 1px solid rgba(124,58,237,.35); border-radius: 10px;
-      padding: 22px 32px; margin-bottom: 36px;
-      position: relative; overflow: hidden;
+      padding: 22px 32px; margin-bottom: 36px; position: relative; overflow: hidden;
     }
-    .shop-banner::before { /* top accent line */
+    .shop-banner::before {
       content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
       background: linear-gradient(90deg, var(--accent2), var(--accent), var(--accent2));
     }
-    .shop-banner-planet { /* decorative planet glyph */
-      position: absolute; right: 80px; top: 50%; transform: translateY(-50%);
-      font-size: 4rem; opacity: .06; pointer-events: none; user-select: none;
-    }
+    .shop-banner-planet { position: absolute; right: 80px; top: 50%; transform: translateY(-50%); font-size: 4rem; opacity: .06; pointer-events: none; user-select: none; }
     .shop-banner-text strong { display: block; font-family: var(--head); font-size: 1rem; font-weight: 700; color: var(--text); margin-bottom: 4px; }
     .shop-banner-text span  { font-size: .88rem; color: var(--text-dim); }
-
     .shop-card { background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 28px; text-align: center; transition: all .3s; position: relative; overflow: hidden; }
     .shop-card::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg,rgba(124,58,237,.06) 0%,transparent 60%); pointer-events: none; }
     .shop-card:hover { border-color: rgba(124,58,237,.4); transform: translateY(-4px); box-shadow: 0 12px 40px rgba(124,58,237,.2); }
@@ -265,21 +411,44 @@
     .rules-list { list-style: none; display: grid; gap: 12px; }
     .rules-list li { display: flex; align-items: flex-start; gap: 16px; background: var(--panel); border: 1px solid var(--border); border-radius: 8px; padding: 16px 20px; transition: border-color .25s; }
     .rules-list li:hover { border-color: rgba(0,229,255,.25); }
-    .rule-num { font-family: var(--mono); font-size: .8rem; color: var(--accent); min-width: 28px; padding-top: 2px; }
+    .rule-num  { font-family: var(--mono); font-size: .8rem; color: var(--accent); min-width: 28px; padding-top: 2px; }
     .rule-text { font-size: .95rem; line-height: 1.6; color: var(--text); }
 
     /* ── GUIDES TABS ── */
     .tab-nav { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 28px; }
     .tab-btn { font-family: var(--mono); font-size: .78rem; letter-spacing: 1px; padding: 8px 20px; border-radius: var(--radius); border: 1px solid var(--border); background: var(--panel); color: var(--text-dim); cursor: pointer; transition: all .25s; }
-    .tab-btn:hover { color: var(--accent); border-color: rgba(0,229,255,.3); }
+    .tab-btn:hover  { color: var(--accent); border-color: rgba(0,229,255,.3); }
     .tab-btn.active { color: var(--accent); border-color: var(--accent); background: rgba(0,229,255,.08); box-shadow: var(--glow); }
     .tab-pane { display: none; }
     .tab-pane.active { display: block; animation: fadeIn .3s ease; }
     .guide-step { display: flex; gap: 20px; align-items: flex-start; background: var(--panel); border: 1px solid var(--border); border-radius: 8px; padding: 20px 24px; margin-bottom: 12px; transition: border-color .25s; }
     .guide-step:hover { border-color: rgba(0,229,255,.25); }
-    .step-num { font-family: var(--head); font-size: 1.5rem; font-weight: 900; color: rgba(0,229,255,.2); min-width: 40px; line-height: 1; }
-    .step-body h4 { font-family: var(--head); font-size: .95rem; margin-bottom: 6px; color: var(--accent); }
-    .step-body p  { font-size: .9rem; color: var(--text-dim); line-height: 1.65; }
+    .step-num       { font-family: var(--head); font-size: 1.5rem; font-weight: 900; color: rgba(0,229,255,.2); min-width: 40px; line-height: 1; }
+    .step-body h4   { font-family: var(--head); font-size: .95rem; margin-bottom: 6px; color: var(--accent); }
+    .step-body p    { font-size: .9rem; color: var(--text-dim); line-height: 1.65; }
+
+    /* Tab CTAs */
+    .tab-cta { display: flex; justify-content: center; margin-top: 28px; }
+    .btn-cta-postular {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-family: var(--mono); font-size: .85rem; letter-spacing: 1.5px;
+      padding: 14px 36px; border-radius: var(--radius);
+      border: 1px solid rgba(124,58,237,.6);
+      background: linear-gradient(135deg, rgba(124,58,237,.18) 0%, rgba(88,101,242,.1) 100%);
+      color: #a78bfa; cursor: pointer; text-decoration: none; transition: all .3s;
+      box-shadow: 0 0 20px rgba(124,58,237,.2);
+    }
+    .btn-cta-postular:hover { box-shadow: 0 0 36px rgba(124,58,237,.45); transform: translateY(-2px); border-color: rgba(124,58,237,.9); color: #c4b5fd; }
+    .btn-cta-rango {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-family: var(--mono); font-size: .85rem; letter-spacing: 1.5px;
+      padding: 14px 36px; border-radius: var(--radius);
+      border: 1px solid rgba(0,229,255,.5);
+      background: linear-gradient(135deg, rgba(0,229,255,.12) 0%, rgba(34,211,165,.08) 100%);
+      color: var(--accent); cursor: pointer; text-decoration: none; transition: all .3s;
+      box-shadow: 0 0 20px rgba(0,229,255,.15);
+    }
+    .btn-cta-rango:hover { box-shadow: 0 0 36px rgba(0,229,255,.4); transform: translateY(-2px); border-color: var(--accent); }
 
     /* ── RANKS TABLE ── */
     .ranks-table { width: 100%; border-collapse: collapse; }
@@ -292,17 +461,17 @@
     .support-options { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); gap: 16px; }
     .support-card { display: flex; align-items: flex-start; gap: 16px; background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 24px 20px; text-decoration: none; color: var(--text); transition: all .3s; }
     .support-card:hover { border-color: rgba(0,229,255,.3); transform: translateY(-3px); }
-    .support-icon { font-size: 1.6rem; padding-top: 2px; }
+    .support-icon  { font-size: 1.6rem; padding-top: 2px; }
     .support-title { font-family: var(--head); font-size: .95rem; font-weight: 700; margin-bottom: 5px; color: var(--accent); }
-    .support-desc { font-size: .85rem; color: var(--text-dim); line-height: 1.6; }
+    .support-desc  { font-size: .85rem; color: var(--text-dim); line-height: 1.6; }
 
     /* ── REDES ── */
     .social-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap: 16px; }
     .social-card { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; padding: 36px 20px; text-align: center; background: var(--panel); border: 1px solid var(--border); border-radius: 10px; text-decoration: none; color: var(--text); transition: all .3s; }
-    .social-card i { font-size: 2rem; }
-    .social-card span { font-family: var(--head); font-size: .95rem; font-weight: 700; }
+    .social-card i     { font-size: 2rem; }
+    .social-card span  { font-family: var(--head); font-size: .95rem; font-weight: 700; }
     .social-card small { font-family: var(--mono); font-size: .72rem; color: var(--text-dim); letter-spacing: 1px; }
-    .social-card.discord { --c: #7289da; } .social-card.tiktok { --c: #ff0050; }
+    .social-card.discord { --c: #7289da; } .social-card.tiktok  { --c: #ff0050; }
     .social-card.youtube { --c: #ff4040; } .social-card.twitter { --c: #1da1f2; }
     .social-card:hover { border-color: var(--c); color: var(--c); box-shadow: 0 8px 30px rgba(0,0,0,.4); transform: translateY(-4px); }
     .social-card:hover i { filter: drop-shadow(0 0 8px var(--c)); }
@@ -310,34 +479,59 @@
     /* ── FOOTER ── */
     footer { position: relative; z-index: 1; border-top: 1px solid var(--border); padding: 40px 40px 24px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 20px; }
     .foot-logo { font-family: var(--head); font-size: 1rem; font-weight: 900; color: var(--accent); letter-spacing: 2px; display: flex; align-items: center; gap: 10px; }
-    .foot-orb { width: 18px; height: 18px; border-radius: 50%; background: radial-gradient(circle at 35% 35%, rgba(0,229,255,.7), rgba(124,58,237,1)); box-shadow: 0 0 8px rgba(0,229,255,.3); flex-shrink: 0; }
+    .foot-orb  { width: 18px; height: 18px; border-radius: 50%; background: radial-gradient(circle at 35% 35%, rgba(0,229,255,.7), rgba(124,58,237,1)); box-shadow: 0 0 8px rgba(0,229,255,.3); flex-shrink: 0; }
     .foot-copy { font-family: var(--mono); font-size: .72rem; color: var(--text-dim); letter-spacing: 1px; }
+
+    /* ── SCROLL REVEAL ── */
+    .reveal { opacity: 0; transform: translateY(22px); transition: opacity .6s ease, transform .6s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
 
     /* ── ANIMATIONS ── */
     @keyframes fadeDown { from { opacity:0; transform:translateY(-18px); } to { opacity:1; transform:translateY(0); } }
     @keyframes fadeIn   { from { opacity:0; transform:translateY(10px);  } to { opacity:1; transform:translateY(0); } }
 
     /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .staff-unified-grid { grid-template-columns: 1fr 1fr; }
+    }
     @media (max-width: 768px) {
       nav { padding: 0 20px; }
-      .nav-links { display: none; flex-direction: column; gap: 4px; position: absolute; top: 64px; left: 0; right: 0; background: rgba(5,8,16,.97); border-bottom: 1px solid var(--border); padding: 16px 20px; }
+      /* Mobile nav */
+      .nav-links {
+        display: none; flex-direction: column; gap: 0;
+        position: absolute; top: 64px; left: 0; right: 0;
+        background: rgba(5,8,16,.97); backdrop-filter: blur(14px);
+        border-bottom: 1px solid var(--border); padding: 12px 16px 16px;
+        overflow-x: visible;
+      }
       .nav-links.open { display: flex; }
       .nav-links li { width: 100%; }
-      .nav-links a { display: block; }
+      .nav-links a {
+        display: block; font-size: .82rem;
+        padding: 11px 16px; letter-spacing: 1px;
+        border-radius: 6px; border-color: transparent;
+      }
+      .nav-links a:hover, .nav-links a.active {
+        background: rgba(0,229,255,.07);
+        border-color: rgba(0,229,255,.25);
+      }
       .nav-toggle { display: block; }
       footer { flex-direction: column; text-align: center; padding: 30px 20px; }
       .shop-banner { flex-direction: column; text-align: center; }
       .planet-deco, .planet-deco-2 { display: none; }
+      .btn-join-server { max-width: 100%; padding: 16px 24px; font-size: .85rem; }
+      .btn-join-server .join-text { align-items: center; }
+      .staff-unified-grid { grid-template-columns: 1fr; }
     }
     @media (max-width: 480px) {
-      .hero-btns { flex-direction: column; align-items: stretch; }
+      .hero-btns-secondary { flex-direction: column; align-items: stretch; }
       .btn { justify-content: center; }
+      .btn-join-server { padding: 15px 20px; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Background layers -->
   <div class="nebula"></div>
   <div class="planet-deco"></div>
   <div class="planet-deco-2"></div>
@@ -351,13 +545,17 @@
       <div class="nav-planet"><div class="orb"></div><div class="ring"></div></div>
       PLANET<span>MC</span><span class="dot">.</span>
     </a>
+    <!-- Desktop + Mobile links -->
     <ul class="nav-links" id="navLinks">
-      <li><a href="#inicio"  class="active">INICIO</a></li>
+      <li><a href="#inicio"   class="active">INICIO</a></li>
+      <li><a href="#staff">EQUIPO</a></li>
+      <li><a href="#normas">NORMAS</a></li>
       <li><a href="#guias">GUÍAS</a></li>
       <li><a href="#tienda">TIENDA</a></li>
+      <li><a href="#soporte">SOPORTE</a></li>
       <li><a href="#redes">REDES</a></li>
     </ul>
-    <button class="nav-toggle" id="navToggle" aria-label="Menu"><i class="fas fa-bars"></i></button>
+    <button class="nav-toggle" id="navToggle" aria-label="Menú"><i class="fas fa-bars"></i></button>
   </nav>
 
   <!-- ═══ HERO ═══ -->
@@ -373,20 +571,19 @@
         Únete a la comunidad más épica. Aventuras, rangos, eventos y mucho más<br>
         te esperan en el servidor.
       </p>
-      <div class="hero-btns">
-        <a href="https://discord.gg/HvcPfgXVHf" target="_blank" class="btn btn-discord">
-          <i class="fab fa-discord"></i> DISCORD
-        </a>
-        <a href="https://www.tiktok.com/@planetmc.net" target="_blank" class="btn btn-tiktok">
-          <i class="fab fa-tiktok"></i> TIKTOK
-        </a>
-        <button class="btn btn-ip" onclick="copyIP()">
-          <i class="fas fa-copy"></i> COPIAR IP
+      <div class="hero-btns-wrap">
+        <button class="btn-join-server" onclick="copyIP()">
+          <span class="join-icon"><i class="fas fa-satellite-dish"></i></span>
+          <span class="join-text">
+            <span class="join-main">ÚNETE A NUESTRO SERVIDOR DE MINECRAFT</span>
+            <span class="join-sub">JAVA &amp; BEDROCK · CLICK PARA COPIAR IP</span>
+          </span>
         </button>
-        <!-- Scroll interno a la sección tienda -->
-        <a href="#tienda" class="btn btn-shop">
-          <i class="fas fa-store"></i> TIENDA
-        </a>
+        <div class="hero-btns-secondary">
+          <a href="https://discord.gg/HvcPfgXVHf" target="_blank" class="btn btn-discord"><i class="fab fa-discord"></i> DISCORD</a>
+          <a href="https://www.tiktok.com/@planetmc.net" target="_blank" class="btn btn-tiktok"><i class="fab fa-tiktok"></i> TIKTOK</a>
+          <a href="#tienda" class="btn btn-shop"><i class="fas fa-store"></i> TIENDA</a>
+        </div>
       </div>
     </div>
   </section>
@@ -396,72 +593,143 @@
   <!-- ═══ INFORMACIÓN ═══ -->
   <section id="informacion" class="sec-wrap">
     <div class="container">
-      <div class="section-header">
+      <div class="section-header reveal">
         <p class="sec-title">// ESTADÍSTICAS</p>
         <h2 class="sec-heading">Información del Servidor</h2>
         <p class="sec-desc">Datos de nuestra comunidad galáctica.</p>
       </div>
       <div class="info-grid">
-        <div class="info-stat"><div class="val">21.2</div><div class="lbl">Versión</div></div>
-        <div class="info-stat"><div class="val">24/7</div><div class="lbl">Online</div></div>
-        <div class="info-stat"><div class="val">6</div><div class="lbl">Staff</div></div>
-        <div class="info-stat"><div class="val">Survival</div><div class="lbl">Modalidad</div></div>
+        <div class="info-stat reveal"><div class="val">21.2</div><div class="lbl">Versión</div></div>
+        <div class="info-stat reveal"><div class="val">24/7</div><div class="lbl">Online</div></div>
+        <div class="info-stat reveal"><div class="val">6</div><div class="lbl">Staff</div></div>
+        <div class="info-stat reveal"><div class="val">Survival</div><div class="lbl">Modalidad</div></div>
       </div>
     </div>
   </section>
 
   <div class="divider"></div>
 
-  <!-- ═══ STAFF ═══ -->
+  <!-- ═══ STAFF UNIFICADO ═══ -->
   <section id="staff" class="sec-wrap">
     <div class="container">
-      <div class="section-header">
-        <p class="sec-title">// EQUIPO</p>
+
+      <div class="section-header reveal">
+        <p class="sec-title">// EQUIPO &amp; JERARQUÍA</p>
         <h2 class="sec-heading">Nuestro Staff</h2>
-        <p class="sec-desc">El equipo detrás de la experiencia. Siempre listos para ayudarte.</p>
-      </div>
-      <div class="staff-grid">
-        <div class="staff-card">
-          <div class="staff-avatar">👑<div class="status-dot"></div></div>
-          <div class="staff-name">xTiburon</div>
-          <div class="staff-name">sSylentsS</div>
-          <div class="staff-name">zkross</div>
-          <div class="staff-name">xxarokiproxx</div>
-          <span class="staff-role role-owner">OWNER</span>
-        </div>
-        <div class="staff-card">
-          <div class="staff-avatar" style="background:linear-gradient(135deg,#ff4040,#7c3aed)">🛡️<div class="status-dot"></div></div>
-          <div class="staff-name">????</div>
-          <span class="staff-role role-admin">ADMIN</span>
-        </div>
-        <div class="staff-card">
-          <div class="staff-avatar" style="background:linear-gradient(135deg,#7c3aed,#4f46e5)">⚙️<div class="status-dot"></div></div>
-          <div class="staff-name">???</div>
-          <span class="staff-role role-mod">MOD</span>
-        </div>
-        <div class="staff-card">
-          <div class="staff-avatar" style="background:linear-gradient(135deg,#22d3a5,#0ea5e9)">🌟<div class="status-dot"></div></div>
-          <div class="staff-name">???</div>
-          <span class="staff-role role-helper">HELPER</span>
-        </div>
-        <div class="staff-card">
-          <div class="staff-avatar" style="background:linear-gradient(135deg,#00e5ff,#22d3a5)">💬<div class="status-dot"></div></div>
-          <div class="staff-name">???</div>
-          <span class="staff-role role-support">SOPORTE</span>
-        </div>
+        <p class="sec-desc">El equipo detrás de la experiencia. Estructura, roles y miembros activos.</p>
       </div>
 
-      <div class="section-header" style="margin-top:60px">
-        <p class="sec-title">// ESTRUCTURA</p>
-        <h2 class="sec-heading">Jerarquía del Servidor</h2>
+      <div class="staff-unified-grid">
+
+        <!-- OWNER -->
+        <div class="su-card rank-owner reveal">
+          <div class="su-header">
+            <div class="su-icon-wrap">👑<span class="su-dot"></span></div>
+            <div class="su-rank-info">
+              <div class="su-rank-name">Owner</div>
+              <div class="su-rank-desc">Fundador y máxima autoridad del servidor</div>
+            </div>
+            <span class="su-lvl-badge">LVL 5</span>
+          </div>
+          <div class="su-members">
+            <div class="su-members-label">Miembros</div>
+            <div class="su-member-row">
+              <div class="su-member-avatar">xT</div>
+              <span class="su-member-nick">xTiburon</span>
+              <span class="su-member-online"></span>
+            </div>
+            <div class="su-member-row">
+              <div class="su-member-avatar">sS</div>
+              <span class="su-member-nick">sSylentsS</span>
+              <span class="su-member-online"></span>
+            </div>
+            <div class="su-member-row">
+              <div class="su-member-avatar">zk</div>
+              <span class="su-member-nick">zkross</span>
+              <span class="su-member-online"></span>
+            </div>
+            <div class="su-member-row">
+              <div class="su-member-avatar">xp</div>
+              <span class="su-member-nick">xxarokiproxx</span>
+              <span class="su-member-online"></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ADMIN -->
+        <div class="su-card rank-admin reveal">
+          <div class="su-header">
+            <div class="su-icon-wrap">🛡️<span class="su-dot"></span></div>
+            <div class="su-rank-info">
+              <div class="su-rank-name">Admin</div>
+              <div class="su-rank-desc">Gestión del servidor y decisiones clave</div>
+            </div>
+            <span class="su-lvl-badge">LVL 4</span>
+          </div>
+          <div class="su-members">
+            <div class="su-members-label">Miembros</div>
+            <div class="su-member-unknown">— Vacante / Por anunciar —</div>
+          </div>
+        </div>
+
+        <!-- MODERADOR -->
+        <div class="su-card rank-mod reveal">
+          <div class="su-header">
+            <div class="su-icon-wrap">⚙️<span class="su-dot"></span></div>
+            <div class="su-rank-info">
+              <div class="su-rank-name">Moderador</div>
+              <div class="su-rank-desc">Control de chat, sanciones y orden</div>
+            </div>
+            <span class="su-lvl-badge">LVL 3</span>
+          </div>
+          <div class="su-members">
+            <div class="su-members-label">Miembros</div>
+            <div class="su-member-unknown">— Vacante / Por anunciar —</div>
+          </div>
+        </div>
+
+        <!-- HELPER -->
+        <div class="su-card rank-helper reveal">
+          <div class="su-header">
+            <div class="su-icon-wrap">🌟<span class="su-dot"></span></div>
+            <div class="su-rank-info">
+              <div class="su-rank-name">Helper</div>
+              <div class="su-rank-desc">Apoyo a jugadores nuevos y resolución de dudas</div>
+            </div>
+            <span class="su-lvl-badge">LVL 2</span>
+          </div>
+          <div class="su-members">
+            <div class="su-members-label">Miembros</div>
+            <div class="su-member-unknown">— Vacante / Por anunciar —</div>
+          </div>
+        </div>
+
+        <!-- SOPORTE STAFF -->
+        <div class="su-card rank-support reveal">
+          <div class="su-header">
+            <div class="su-icon-wrap">💬<span class="su-dot"></span></div>
+            <div class="su-rank-info">
+              <div class="su-rank-name">Soporte</div>
+              <div class="su-rank-desc">Tickets y atención al jugador en Discord</div>
+            </div>
+            <span class="su-lvl-badge">LVL 1</span>
+          </div>
+          <div class="su-members">
+            <div class="su-members-label">Miembros</div>
+            <div class="su-member-unknown">— Vacante / Por anunciar —</div>
+          </div>
+        </div>
+
+      </div><!-- /staff-unified-grid -->
+
+      <!-- ★ CTA STAFF ★ -->
+      <div class="staff-cta reveal">
+        <p class="staff-cta-text">¿Quieres ser parte de <span>nuestro staff</span>?</p>
+        <a href="https://discord.gg/HvcPfgXVHf" target="_blank" class="btn-apply">
+          <i class="fab fa-discord"></i> APLICAR AHORA
+        </a>
       </div>
-      <div class="hierarchy">
-        <div class="hier-item"><div class="hier-icon">👑</div><div><div class="hier-name">Owner</div><div class="hier-desc">Fundador y máxima autoridad del servidor</div></div><span class="hier-badge"><span class="staff-role role-owner">LVL 5</span></span></div>
-        <div class="hier-item"><div class="hier-icon">🛡️</div><div><div class="hier-name">Admin</div><div class="hier-desc">Gestión del servidor y decisiones clave</div></div><span class="hier-badge"><span class="staff-role role-admin">LVL 4</span></span></div>
-        <div class="hier-item"><div class="hier-icon">⚙️</div><div><div class="hier-name">Moderador</div><div class="hier-desc">Control de chat, sanciones y orden</div></div><span class="hier-badge"><span class="staff-role role-mod">LVL 3</span></span></div>
-        <div class="hier-item"><div class="hier-icon">🌟</div><div><div class="hier-name">Helper</div><div class="hier-desc">Apoyo a jugadores nuevos y resolución de dudas</div></div><span class="hier-badge"><span class="staff-role role-helper">LVL 2</span></span></div>
-        <div class="hier-item"><div class="hier-icon">💬</div><div><div class="hier-name">Soporte</div><div class="hier-desc">Tickets y atención al jugador en Discord</div></div><span class="hier-badge"><span class="staff-role role-support">LVL 1</span></span></div>
-      </div>
+
     </div>
   </section>
 
@@ -470,14 +738,12 @@
   <!-- ═══ TIENDA ═══ -->
   <section id="tienda" class="sec-wrap">
     <div class="container">
-      <div class="section-header">
+      <div class="section-header reveal">
         <p class="sec-title">// SHOP</p>
         <h2 class="sec-heading">Tienda del Servidor</h2>
         <p class="sec-desc">Obtén rangos exclusivos y mejora tu experiencia de juego.</p>
       </div>
-
-      <!-- ★ BANNER — ir a tienda externa ★ -->
-      <div class="shop-banner">
+      <div class="shop-banner reveal">
         <span class="shop-banner-planet">🪐</span>
         <div class="shop-banner-text">
           <strong>¿Buscas otro artículo?</strong>
@@ -487,41 +753,33 @@
           <i class="fas fa-rocket"></i> IR A LA TIENDA →
         </a>
       </div>
-
-      <!-- Rangos -->
       <div class="grid-3">
-        <div class="shop-card">
+        <div class="shop-card reveal">
           <span class="shop-badge new">✦ NUEVO</span>
           <div class="shop-name">Rango Veterano</div>
           <div class="shop-price">$3<small style="font-size:1rem">.99</small></div>
           <div class="shop-perks">
-            <span>Prefijo personalizado</span>
-            <span>5 homes</span>
-            <span>Kit básico mensual</span>
-            <span>Acceso a /fly en lobby</span>
+            <span>Prefijo personalizado</span><span>5 homes</span>
+            <span>Kit básico mensual</span><span>Acceso a /fly en lobby</span>
           </div>
           <a href="https://planet.tebex.io/" target="_blank" class="btn btn-shop" style="width:100%;justify-content:center">COMPRAR →</a>
         </div>
-        <div class="shop-card" style="border-color:rgba(255,170,0,.3)">
+        <div class="shop-card reveal" style="border-color:rgba(255,170,0,.3)">
           <span class="shop-badge popular">★ POPULAR</span>
           <div class="shop-name">Rango 2</div>
           <div class="shop-price" style="color:#ffaa00">$7<small style="font-size:1rem">.99</small></div>
           <div class="shop-perks">
-            <span>Partículas especiales</span>
-            <span>10 homes</span>
-            <span>Kit avanzado mensual</span>
+            <span>Partículas especiales</span><span>10 homes</span><span>Kit avanzado mensual</span>
           </div>
           <a href="https://planet.tebex.io/" target="_blank" class="btn" style="width:100%;justify-content:center;background:rgba(255,170,0,.12);border-color:rgba(255,170,0,.4);color:#ffaa00">COMPRAR →</a>
         </div>
-        <div class="shop-card" style="border-color:rgba(0,229,255,.25)">
+        <div class="shop-card reveal" style="border-color:rgba(0,229,255,.25)">
           <span class="shop-badge hot">🔥 TOP</span>
           <div class="shop-name">Rango 3</div>
           <div class="shop-price" style="color:var(--accent)">$14<small style="font-size:1rem">.99</small></div>
           <div class="shop-perks">
-            <span>Todo lo anterior</span>
-            <span>Aura galáctica única</span>
-            <span>Unlimited homes</span>
-            <span>Acceso VIP a eventos</span>
+            <span>Todo lo anterior</span><span>Aura galáctica única</span>
+            <span>Unlimited homes</span><span>Acceso VIP a eventos</span>
           </div>
           <a href="https://planet.tebex.io/" target="_blank" class="btn btn-primary" style="width:100%;justify-content:center">COMPRAR →</a>
         </div>
@@ -534,20 +792,20 @@
   <!-- ═══ NORMAS ═══ -->
   <section id="normas" class="sec-wrap">
     <div class="container">
-      <div class="section-header">
+      <div class="section-header reveal">
         <p class="sec-title">// REGLAMENTO</p>
         <h2 class="sec-heading">Normas del Servidor</h2>
         <p class="sec-desc">Cumplirlas garantiza una experiencia justa para todos.</p>
       </div>
       <ul class="rules-list">
-        <li><span class="rule-num">01.</span><span class="rule-text">Respeta a todos los jugadores y al staff en todo momento. El irrespeto resulta en sanción inmediata.</span></li>
-        <li><span class="rule-num">02.</span><span class="rule-text">Está prohibido el uso de hacks, cheats o cualquier modificación que otorgue ventaja injusta.</span></li>
-        <li><span class="rule-num">03.</span><span class="rule-text">No se permite el spam, publicidad de otros servidores o links maliciosos en el chat.</span></li>
-        <li><span class="rule-num">04.</span><span class="rule-text">El griefing (destrucción de construcciones ajenas) está estrictamente prohibido.</span></li>
-        <li><span class="rule-num">05.</span><span class="rule-text">No se permite el robo de ítems de otros jugadores, independientemente del contexto.</span></li>
-        <li><span class="rule-num">06.</span><span class="rule-text">Sigue las instrucciones del staff. Sus decisiones son finales dentro del servidor.</span></li>
-        <li><span class="rule-num">07.</span><span class="rule-text">El contenido inapropiado (lenguaje ofensivo, discriminación, acoso) es motivo de ban permanente.</span></li>
-        <li><span class="rule-num">08.</span><span class="rule-text">Reporta cualquier bug o glitch al staff en lugar de explotarlo a tu favor.</span></li>
+        <li class="reveal"><span class="rule-num">01.</span><span class="rule-text">Respeta a todos los jugadores y al staff en todo momento. El irrespeto resulta en sanción inmediata.</span></li>
+        <li class="reveal"><span class="rule-num">02.</span><span class="rule-text">Está prohibido el uso de hacks, cheats o cualquier modificación que otorgue ventaja injusta.</span></li>
+        <li class="reveal"><span class="rule-num">03.</span><span class="rule-text">No se permite el spam, publicidad de otros servidores o links maliciosos en el chat.</span></li>
+        <li class="reveal"><span class="rule-num">04.</span><span class="rule-text">El griefing (destrucción de construcciones ajenas) está estrictamente prohibido.</span></li>
+        <li class="reveal"><span class="rule-num">05.</span><span class="rule-text">No se permite el robo de ítems de otros jugadores, independientemente del contexto.</span></li>
+        <li class="reveal"><span class="rule-num">06.</span><span class="rule-text">Sigue las instrucciones del staff. Sus decisiones son finales dentro del servidor.</span></li>
+        <li class="reveal"><span class="rule-num">07.</span><span class="rule-text">El contenido inapropiado (lenguaje ofensivo, discriminación, acoso) es motivo de ban permanente.</span></li>
+        <li class="reveal"><span class="rule-num">08.</span><span class="rule-text">Reporta cualquier bug o glitch al staff en lugar de explotarlo a tu favor.</span></li>
       </ul>
     </div>
   </section>
@@ -557,7 +815,7 @@
   <!-- ═══ GUÍAS ═══ -->
   <section id="guias" class="sec-wrap">
     <div class="container">
-      <div class="section-header">
+      <div class="section-header reveal">
         <p class="sec-title">// DOCUMENTACIÓN</p>
         <h2 class="sec-heading">Guías del Servidor</h2>
         <p class="sec-desc">Todo lo que necesitas para comenzar tu aventura.</p>
@@ -569,7 +827,7 @@
       </div>
 
       <div class="tab-pane active" id="tab-jugar">
-        <div class="guide-step"><div class="step-num">01</div><div class="step-body"><h4>Copia la IP del servidor</h4><p>Usa el botón "COPIAR IP" en el inicio o escríbela manualmente: <code style="color:var(--accent);font-family:var(--mono)">planetmc.net</code></p></div></div>
+        <div class="guide-step"><div class="step-num">01</div><div class="step-body"><h4>Copia la IP del servidor</h4><p>Usa el botón "ÚNETE" en el inicio o escríbela manualmente: <code style="color:var(--accent);font-family:var(--mono)">planetmc.net</code></p></div></div>
         <div class="guide-step"><div class="step-num">02</div><div class="step-body"><h4>Conéctate al servidor</h4><p>Ve a Multijugador → Agregar Servidor → Pega la IP → Guardar → ¡Conectar!</p></div></div>
         <div class="guide-step"><div class="step-num">03</div><div class="step-body"><h4>Únete a Discord</h4><p>Entra a nuestro Discord para estar al tanto de eventos, actualizaciones y recibir ayuda del staff.</p></div></div>
       </div>
@@ -580,6 +838,11 @@
         <div class="guide-step"><div class="step-num">03</div><div class="step-body"><h4>Completa el formulario</h4><p>Responde todas las preguntas con honestidad. Incluye tu experiencia previa como staff si aplica.</p></div></div>
         <div class="guide-step"><div class="step-num">04</div><div class="step-body"><h4>Período de prueba</h4><p>Si eres aceptado, pasarás por un período de prueba de 2 semanas como Staff Trial.</p></div></div>
         <div class="guide-step"><div class="step-num">05</div><div class="step-body"><h4>Evaluación final</h4><p>El Owner y Admins evaluarán tu desempeño y confirmarán tu rango de Helper oficial.</p></div></div>
+        <div class="tab-cta">
+          <a href="https://forms.gle/po1fM57gG9oQtKCc7" target="_blank" class="btn-cta-postular">
+            <i class="fas fa-paper-plane"></i> POSTULAR AQUÍ
+          </a>
+        </div>
       </div>
 
       <div class="tab-pane" id="tab-rangos">
@@ -587,7 +850,7 @@
           <table class="ranks-table">
             <thead><tr><th>Rango</th><th>Obtención</th><th>Beneficios</th></tr></thead>
             <tbody>
-              <tr><td><span class="rank-tag" style="background:rgba(255,255,255,.07);color:#aaa;border:1px solid rgba(255,255,255,.15)">Usuario</span></td><td>Automático al unirse</td><td>2 homes y comandos basicos.</td></tr>
+              <tr><td><span class="rank-tag" style="background:rgba(255,255,255,.07);color:#aaa;border:1px solid rgba(255,255,255,.15)">Usuario</span></td><td>Automático al unirse</td><td>2 homes y comandos básicos.</td></tr>
               <tr><td><span class="rank-tag" style="background:rgba(0,229,255,.1);color:var(--accent);border:1px solid rgba(0,229,255,.3)">Veterano</span></td><td>1000 horas de juego</td><td>TAG exclusivo, 5 homes, /fly en lobby</td></tr>
               <tr><td><span class="rank-tag" style="background:rgba(124,58,237,.15);color:#a78bfa;border:1px solid rgba(124,58,237,.3)">Élite</span></td><td>1000 horas + 500 votes</td><td>TAG exclusivo, 10 homes, /fly en lobby</td></tr>
               <tr><td><span class="rank-tag" style="background:rgba(255,170,0,.12);color:#ffaa00;border:1px solid rgba(255,170,0,.3)">Meteoro</span></td><td>Tienda $5.99</td><td>Ventajas exclusivas...</td></tr>
@@ -595,6 +858,11 @@
               <tr><td><span class="rank-tag" style="background:rgba(0,229,255,.15);color:var(--accent);border:1px solid var(--accent);box-shadow:var(--glow)">Galaxia</span></td><td>Tienda $70.00</td><td>Ventajas exclusivas...</td></tr>
             </tbody>
           </table>
+        </div>
+        <div class="tab-cta">
+          <a href="https://planet.tebex.io/" target="_blank" class="btn-cta-rango">
+            <i class="fas fa-star"></i> ADQUIERE UN RANGO
+          </a>
         </div>
       </div>
     </div>
@@ -605,27 +873,27 @@
   <!-- ═══ SOPORTE ═══ -->
   <section id="soporte" class="sec-wrap">
     <div class="container">
-      <div class="section-header">
+      <div class="section-header reveal">
         <p class="sec-title">// AYUDA</p>
         <h2 class="sec-heading">Centro de Soporte</h2>
         <p class="sec-desc">¿Tienes algún problema? Estamos aquí para solucionarlo.</p>
       </div>
       <div class="support-options">
-        <a href="https://discord.gg/HvcPfgXVHf" target="_blank" class="support-card">
+        <a href="https://discord.gg/HvcPfgXVHf" target="_blank" class="support-card reveal">
           <div class="support-icon">💬</div>
           <div><div class="support-title">Ticket en Discord</div><div class="support-desc">Abre un ticket en nuestro servidor de Discord para soporte personalizado y rápido.</div></div>
         </a>
-        <a href="#" class="support-card">
+        <a href="https://discord.gg/HvcPfgXVHf" target="_blank" class="support-card reveal">
           <div class="support-icon">📋</div>
           <div><div class="support-title">Reportar Jugador</div><div class="support-desc">Reporta comportamientos que violen las normas del servidor con pruebas.</div></div>
         </a>
-        <a href="#" class="support-card">
+        <a href="https://discord.gg/HvcPfgXVHf" target="_blank" class="support-card reveal">
           <div class="support-icon">🐛</div>
           <div><div class="support-title">Reportar Bug</div><div class="support-desc">¿Encontraste un error o glitch? Repórtalo para que lo solucionemos.</div></div>
         </a>
-        <a href="https://planet.tebex.io/" target="_blank" class="support-card">
+        <a href="https://discord.gg/HvcPfgXVHf" target="_blank" class="support-card reveal">
           <div class="support-icon">💳</div>
-          <div><div class="support-title">Soporte de Compras</div><div class="support-desc">Problemas con tu pago o rango no entregado? Contáctanos con tu comprobante.</div></div>
+          <div><div class="support-title">Soporte de Compras</div><div class="support-desc">¿Problemas con tu pago o rango no entregado? Contáctanos con tu comprobante.</div></div>
         </a>
       </div>
     </div>
@@ -636,24 +904,16 @@
   <!-- ═══ REDES ═══ -->
   <section id="redes" class="sec-wrap">
     <div class="container">
-      <div class="section-header">
+      <div class="section-header reveal">
         <p class="sec-title">// COMUNIDAD</p>
         <h2 class="sec-heading">Redes Sociales</h2>
         <p class="sec-desc">Síguenos para estar al tanto de eventos, sorteos y novedades.</p>
       </div>
       <div class="social-grid">
-        <a href="https://discord.gg/HvcPfgXVHf" target="_blank" class="social-card discord">
-          <i class="fab fa-discord"></i><span>Discord</span><small>ÚNETE AL SERVER</small>
-        </a>
-        <a href="https://www.tiktok.com/@planetmc.net" target="_blank" class="social-card tiktok">
-          <i class="fab fa-tiktok"></i><span>TikTok</span><small>SÍGUENOS</small>
-        </a>
-        <a href="https://youtube.com/@" target="_blank" class="social-card youtube">
-          <i class="fab fa-youtube"></i><span>YouTube</span><small>SUSCRÍBETE</small>
-        </a>
-        <a href="https://twitter.com/" target="_blank" class="social-card twitter">
-          <i class="fab fa-twitter"></i><span>Twitter / X</span><small>SÍGUENOS</small>
-        </a>
+        <a href="https://discord.gg/HvcPfgXVHf" target="_blank" class="social-card discord reveal"><i class="fab fa-discord"></i><span>Discord</span><small>ÚNETE AL SERVER</small></a>
+        <a href="https://www.tiktok.com/@planetmc.net" target="_blank" class="social-card tiktok reveal"><i class="fab fa-tiktok"></i><span>TikTok</span><small>SÍGUENOS</small></a>
+        <a href="https://youtube.com/@" target="_blank" class="social-card youtube reveal"><i class="fab fa-youtube"></i><span>YouTube</span><small>SUSCRÍBETE</small></a>
+        <a href="https://twitter.com/" target="_blank" class="social-card twitter reveal"><i class="fab fa-twitter"></i><span>Twitter / X</span><small>SÍGUENOS</small></a>
       </div>
     </div>
   </section>
@@ -664,60 +924,75 @@
     <div class="foot-copy">2026 © PlanetMC</div>
   </footer>
 
-  <!-- Toast IP -->
   <div class="ip-toast" id="ipToast"><i class="fas fa-check" style="margin-right:8px"></i>IP copiada: planetmc.net</div>
 
   <script>
     /* ── Stars canvas ── */
     const canvas = document.getElementById('starCanvas');
-    const ctx = canvas.getContext('2d');
-    let stars = [];
+    const ctx    = canvas.getContext('2d');
+    let stars    = [];
+    let scrollY_ = 0;
+
     function resize() { canvas.width = innerWidth; canvas.height = innerHeight; }
     function initStars() {
-      stars = Array.from({length: 220}, () => ({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        r: Math.random() * 1.6,
-        alpha: Math.random(),
-        speed: Math.random() * .003 + .001
+      stars = Array.from({ length: 260 }, () => ({
+        x: Math.random() * canvas.width, y: Math.random() * canvas.height,
+        baseY: 0, r: Math.random() * 1.7 + 0.2, alpha: Math.random(),
+        speed: Math.random() * .004 + .001, dir: Math.random() > .5 ? 1 : -1,
+        depth: Math.random() * 0.4 + 0.05
       }));
+      stars.forEach(s => s.baseY = s.y);
     }
     function drawStars() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
+      const sf = scrollY_ * 0.05;
       stars.forEach(s => {
-        s.alpha += s.speed * (Math.random() > .5 ? 1 : -1);
-        s.alpha = Math.max(.05, Math.min(1, s.alpha));
+        s.alpha += s.speed * s.dir;
+        if (s.alpha >= 1)    { s.alpha = 1;    s.dir = -1; }
+        if (s.alpha <= 0.05) { s.alpha = 0.05; s.dir =  1; }
+        const py = (s.baseY - sf * s.depth + canvas.height) % canvas.height;
         ctx.beginPath();
-        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+        ctx.arc(s.x, py, s.r, 0, Math.PI * 2);
         ctx.fillStyle = `rgba(200,220,255,${s.alpha})`;
         ctx.fill();
       });
       requestAnimationFrame(drawStars);
     }
     window.addEventListener('resize', () => { resize(); initStars(); });
+    window.addEventListener('scroll', () => { scrollY_ = window.scrollY; }, { passive: true });
     resize(); initStars(); drawStars();
 
     /* ── Scroll progress bar ── */
     window.addEventListener('scroll', () => {
-      const pct = (scrollY / (document.body.scrollHeight - innerHeight)) * 100;
+      const pct = (window.scrollY / (document.body.scrollHeight - innerHeight)) * 100;
       document.getElementById('scrollLine').style.width = pct + '%';
     }, { passive: true });
 
-    /* ── Nav active link on scroll ── */
+    /* ── Reveal on scroll ── */
+    const revealObs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revealObs.unobserve(e.target); } });
+    }, { threshold: 0.10 });
+    document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+    /* ── Nav active on scroll ── */
     const sections = document.querySelectorAll('section[id]');
     const navAs    = document.querySelectorAll('.nav-links a');
     window.addEventListener('scroll', () => {
       let cur = '';
-      sections.forEach(s => { if (scrollY >= s.offsetTop - 100) cur = s.id; });
+      sections.forEach(s => { if (window.scrollY >= s.offsetTop - 100) cur = s.id; });
       navAs.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + cur));
     }, { passive: true });
 
-    /* ── Mobile nav toggle ── */
-    document.getElementById('navToggle').addEventListener('click', () => {
-      document.getElementById('navLinks').classList.toggle('open');
+    /* ── Mobile nav ── */
+    const navToggle = document.getElementById('navToggle');
+    const navLinks  = document.getElementById('navLinks');
+    navToggle.addEventListener('click', () => {
+      const open = navLinks.classList.toggle('open');
+      navToggle.innerHTML = open ? '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
     });
     navAs.forEach(a => a.addEventListener('click', () => {
-      document.getElementById('navLinks').classList.remove('open');
+      navLinks.classList.remove('open');
+      navToggle.innerHTML = '<i class="fas fa-bars"></i>';
     }));
 
     /* ── Copy IP ── */
