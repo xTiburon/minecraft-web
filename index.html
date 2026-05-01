@@ -4,13 +4,33 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>PlanetMC — Servidor Minecraft</title>
+
+  <!--
+  ════════════════════════════════════════════════════
+  FAVICON — CÓMO AGREGAR TU LOGO A LA PESTAÑA
+  ════════════════════════════════════════════════════
+  1. Prepara tu logo como imagen CUADRADA (recomendado: 512×512 px, PNG con fondo transparente).
+  2. Ve a https://realfavicongenerator.net/ y sube tu imagen.
+     El sitio genera automáticamente todos los tamaños necesarios.
+  3. Descarga el paquete ZIP, extrae los archivos y colócalos en la
+     MISMA CARPETA que este index.html.
+  4. Reemplaza las líneas de abajo con el código que te dé el generador.
+
+  OPCIÓN RÁPIDA (si solo tienes un logo.png):
+  Coloca tu logo.png en la misma carpeta y usa esta línea:
+  <link rel="icon" type="image/png" href="logo.png">
+  ════════════════════════════════════════════════════ -->
+  <link rel="icon"            type="image/png" sizes="32x32"  href="favicon-32x32.png">
+  <link rel="icon"            type="image/png" sizes="16x16"  href="favicon-16x16.png">
+  <link rel="apple-touch-icon"                 sizes="180x180" href="apple-touch-icon.png">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
   <style>
     :root {
       --bg:        #050810;
-      --bg2:       #080d1a;
       --panel:     #0b1020;
       --border:    #1a2540;
       --accent:    #00e5ff;
@@ -27,178 +47,132 @@
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     html { scroll-behavior: smooth; }
+    body { font-family: var(--body); background: var(--bg); color: var(--text); min-height: 100vh; overflow-x: hidden; }
 
-    body {
-      font-family: var(--body);
-      background: var(--bg);
-      color: var(--text);
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
-
-    /* ── STARS ── */
-    .stars { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
-    .stars canvas { width: 100%; height: 100%; }
-
-    /* ── NEBULA gradient blobs ── */
-    .nebula {
-      position: fixed; inset: 0; pointer-events: none; z-index: 0;
-      overflow: hidden;
-    }
+    /* ── NEBULA ── */
+    .nebula { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
     .nebula::before {
-      content: '';
-      position: absolute;
-      width: 700px; height: 700px;
-      border-radius: 50%;
+      content: ''; position: absolute; width: 700px; height: 700px; border-radius: 50%;
       background: radial-gradient(circle, rgba(124,58,237,.18) 0%, transparent 70%);
-      top: -200px; right: -200px;
-      animation: drift1 20s ease-in-out infinite alternate;
+      top: -200px; right: -200px; animation: drift1 20s ease-in-out infinite alternate;
     }
     .nebula::after {
-      content: '';
-      position: absolute;
-      width: 600px; height: 600px;
-      border-radius: 50%;
+      content: ''; position: absolute; width: 600px; height: 600px; border-radius: 50%;
       background: radial-gradient(circle, rgba(0,229,255,.12) 0%, transparent 70%);
-      bottom: -150px; left: -150px;
-      animation: drift2 25s ease-in-out infinite alternate;
+      bottom: -150px; left: -150px; animation: drift2 25s ease-in-out infinite alternate;
     }
-    @keyframes drift1 { to { transform: translate(60px, 80px) scale(1.1); } }
-    @keyframes drift2 { to { transform: translate(-40px, -60px) scale(1.08); } }
+
+    /* ── PLANET DECORATIONS (toque temático) ── */
+    .planet-deco {
+      position: fixed; pointer-events: none; z-index: 0;
+      top: 60px; right: -120px; width: 380px; height: 380px; border-radius: 50%;
+      background: radial-gradient(circle at 38% 42%, rgba(124,58,237,.06) 0%, rgba(0,229,255,.04) 40%, transparent 70%);
+      border: 1px solid rgba(124,58,237,.1);
+      box-shadow: 0 0 0 18px rgba(124,58,237,.04), 0 0 0 36px rgba(0,229,255,.025), 0 0 0 54px rgba(124,58,237,.015);
+      animation: rotatePlanet 60s linear infinite;
+    }
+    .planet-deco::before {
+      content: ''; position: absolute; inset: -30px; border-radius: 50%;
+      border: 1px solid rgba(0,229,255,.08); transform: rotateX(72deg) rotateZ(-20deg);
+      box-shadow: 0 0 0 6px rgba(0,229,255,.04);
+    }
+    .planet-deco::after {
+      content: ''; position: absolute; inset: -55px; border-radius: 50%;
+      border: 1px solid rgba(124,58,237,.05); transform: rotateX(72deg) rotateZ(-20deg);
+    }
+    .planet-deco-2 {
+      position: fixed; pointer-events: none; z-index: 0;
+      bottom: 80px; left: -80px; width: 220px; height: 220px; border-radius: 50%;
+      background: radial-gradient(circle at 55% 45%, rgba(34,211,165,.05) 0%, transparent 70%);
+      border: 1px solid rgba(34,211,165,.07);
+      box-shadow: 0 0 0 12px rgba(34,211,165,.025), 0 0 0 24px rgba(34,211,165,.01);
+      animation: rotatePlanet 90s linear infinite reverse;
+    }
+    @keyframes rotatePlanet { to { transform: rotate(360deg); } }
+    @keyframes drift1 { to { transform: translate(60px,80px) scale(1.1); } }
+    @keyframes drift2 { to { transform: translate(-40px,-60px) scale(1.08); } }
+
+    /* ── UI CHROME ── */
+    .scanlines {
+      position: fixed; inset: 0; pointer-events: none; z-index: 0;
+      background: repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(0,0,0,.04) 3px, rgba(0,0,0,.04) 4px);
+    }
+    .scroll-line {
+      position: fixed; top: 64px; left: 0; height: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      z-index: 99; width: 0%; transition: width .1s linear;
+    }
 
     /* ── LAYOUT ── */
     .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
     section { position: relative; z-index: 1; }
+    .sec-wrap { padding: 90px 0; }
+    .divider { height: 1px; background: linear-gradient(90deg, transparent, var(--border), transparent); margin: 0 40px; }
 
     /* ── NAV ── */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       display: flex; align-items: center; justify-content: space-between;
       padding: 0 40px; height: 64px;
-      background: rgba(5,8,16,.8);
-      backdrop-filter: blur(12px);
+      background: rgba(5,8,16,.85); backdrop-filter: blur(14px);
       border-bottom: 1px solid var(--border);
     }
     .nav-logo {
-      font-family: var(--head);
-      font-size: 1.2rem;
-      font-weight: 900;
-      color: var(--accent);
-      text-shadow: var(--glow);
-      letter-spacing: 2px;
-      display: flex; align-items: center; gap: 10px;
+      font-family: var(--head); font-size: 1.2rem; font-weight: 900;
+      color: var(--accent); text-shadow: var(--glow); letter-spacing: 2px;
+      display: flex; align-items: center; gap: 12px; text-decoration: none;
+    }
+    /* CSS planet icon */
+    .nav-planet { position: relative; width: 26px; height: 26px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .nav-planet .orb {
+      width: 20px; height: 20px; border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, rgba(0,229,255,.7), rgba(124,58,237,.9));
+      box-shadow: 0 0 10px rgba(0,229,255,.4);
+    }
+    .nav-planet .ring {
+      position: absolute; width: 34px; height: 34px; border-radius: 50%;
+      border: 1.5px solid rgba(0,229,255,.45); top: 50%; left: 50%;
+      transform: translate(-50%,-50%) rotateX(65deg) rotateZ(-15deg);
     }
     .nav-logo span { color: var(--text); }
     .nav-logo .dot { color: var(--accent2); }
-    .nav-logo i { font-size: .9rem; }
-
     .nav-links { display: flex; gap: 8px; list-style: none; }
     .nav-links a {
-      font-family: var(--mono);
-      font-size: .8rem;
-      color: var(--text-dim);
-      text-decoration: none;
-      padding: 6px 16px;
-      border: 1px solid transparent;
-      border-radius: var(--radius);
-      transition: all .25s;
-      letter-spacing: 1px;
+      font-family: var(--mono); font-size: .8rem; color: var(--text-dim);
+      text-decoration: none; padding: 6px 16px; border: 1px solid transparent;
+      border-radius: var(--radius); transition: all .25s; letter-spacing: 1px;
     }
-    .nav-links a:hover {
-      color: var(--accent);
-      border-color: var(--accent);
-      background: rgba(0,229,255,.06);
-      text-shadow: var(--glow);
-    }
-    .nav-links a.active {
-      color: var(--accent);
-      border-color: rgba(0,229,255,.4);
-      background: rgba(0,229,255,.08);
-    }
+    .nav-links a:hover { color: var(--accent); border-color: var(--accent); background: rgba(0,229,255,.06); text-shadow: var(--glow); }
+    .nav-links a.active { color: var(--accent); border-color: rgba(0,229,255,.4); background: rgba(0,229,255,.08); }
     .nav-toggle { display: none; background: none; border: none; color: var(--accent); font-size: 1.4rem; cursor: pointer; }
 
-    /* ── HERO ── */
-    #inicio {
-      min-height: 100vh;
-      display: flex; align-items: center; justify-content: center;
-      text-align: center;
-      padding: 100px 24px 60px;
-    }
-    .hero-inner { max-width: 800px; }
-
-    .hero-badge {
-      display: inline-flex; align-items: center; gap: 8px;
-      font-family: var(--mono); font-size: .75rem;
-      color: var(--accent3);
-      border: 1px solid rgba(34,211,165,.3);
-      background: rgba(34,211,165,.07);
-      padding: 6px 18px; border-radius: 99px;
-      margin-bottom: 32px;
-      letter-spacing: 1px;
-      animation: fadeDown .6s ease both;
-    }
-    .hero-badge .blink { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--accent3); animation: blink 1.4s infinite; }
-    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.2} }
-
-    .hero-title {
-      font-family: var(--head);
-      font-size: clamp(2.4rem, 6vw, 5rem);
-      font-weight: 900;
-      line-height: 1.05;
-      letter-spacing: -1px;
-      margin-bottom: 20px;
-      animation: fadeDown .7s .1s ease both;
-    }
-    .hero-title .hl { color: var(--accent); text-shadow: var(--glow); }
-    .hero-title .hl2 { color: var(--accent2); text-shadow: var(--glow2); }
-
-    .hero-sub {
-      font-size: 1.15rem;
-      color: var(--text-dim);
-      margin-bottom: 40px;
-      line-height: 1.7;
-      animation: fadeDown .7s .2s ease both;
-    }
-
-    .hero-btns {
-      display: flex; flex-wrap: wrap; gap: 14px; justify-content: center;
-      animation: fadeDown .7s .3s ease both;
-    }
-
+    /* ── BUTTONS ── */
     .btn {
       display: inline-flex; align-items: center; gap: 10px;
       font-family: var(--mono); font-size: .82rem; letter-spacing: 1px;
-      padding: 12px 26px; border-radius: var(--radius);
-      border: 1px solid;
-      cursor: pointer; text-decoration: none;
-      transition: all .25s; position: relative; overflow: hidden;
+      padding: 12px 26px; border-radius: var(--radius); border: 1px solid;
+      cursor: pointer; text-decoration: none; transition: all .25s; position: relative; overflow: hidden;
     }
     .btn::after {
       content: ''; position: absolute; inset: 0;
       background: linear-gradient(135deg, rgba(255,255,255,.06) 0%, transparent 60%);
       pointer-events: none;
     }
-    .btn-primary {
-      background: var(--accent); border-color: var(--accent);
-      color: var(--bg); font-weight: 700;
-      box-shadow: 0 0 24px rgba(0,229,255,.4);
-    }
+    .btn-primary { background: var(--accent); border-color: var(--accent); color: var(--bg); font-weight: 700; box-shadow: 0 0 24px rgba(0,229,255,.4); }
     .btn-primary:hover { box-shadow: 0 0 40px rgba(0,229,255,.7); transform: translateY(-2px); }
-
     .btn-discord { background: rgba(88,101,242,.15); border-color: rgba(88,101,242,.5); color: #7289da; }
     .btn-discord:hover { background: rgba(88,101,242,.25); box-shadow: 0 0 20px rgba(88,101,242,.3); transform: translateY(-2px); }
-
     .btn-tiktok { background: rgba(255,0,80,.1); border-color: rgba(255,0,80,.4); color: #ff0050; }
     .btn-tiktok:hover { background: rgba(255,0,80,.2); box-shadow: 0 0 20px rgba(255,0,80,.3); transform: translateY(-2px); }
-
     .btn-shop { background: rgba(124,58,237,.15); border-color: rgba(124,58,237,.5); color: #a78bfa; }
     .btn-shop:hover { background: rgba(124,58,237,.25); box-shadow: 0 0 20px rgba(124,58,237,.3); transform: translateY(-2px); }
-
     .btn-ip { background: rgba(34,211,165,.1); border-color: rgba(34,211,165,.4); color: var(--accent3); }
     .btn-ip:hover { background: rgba(34,211,165,.2); box-shadow: 0 0 20px rgba(34,211,165,.3); transform: translateY(-2px); }
+    .btn-outline { background: transparent; border-color: rgba(0,229,255,.4); color: var(--accent); }
+    .btn-outline:hover { background: rgba(0,229,255,.07); box-shadow: var(--glow); transform: translateY(-2px); }
 
+    /* ── IP TOAST ── */
     .ip-toast {
       position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(20px);
       background: var(--panel); border: 1px solid var(--accent3); color: var(--accent3);
@@ -208,113 +182,90 @@
     }
     .ip-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
-    /* ── SECTION TITLE ── */
-    .sec-title {
-      font-family: var(--mono); font-size: .7rem; letter-spacing: 3px;
-      color: var(--accent); text-transform: uppercase;
-      margin-bottom: 10px;
-    }
-    .sec-heading {
-      font-family: var(--head); font-size: clamp(1.6rem, 3vw, 2.4rem);
-      font-weight: 900; margin-bottom: 12px;
-    }
+    /* ── SECTION TITLES ── */
+    .sec-title { font-family: var(--mono); font-size: .7rem; letter-spacing: 3px; color: var(--accent); text-transform: uppercase; margin-bottom: 10px; }
+    .sec-heading { font-family: var(--head); font-size: clamp(1.6rem,3vw,2.4rem); font-weight: 900; margin-bottom: 12px; }
     .sec-desc { color: var(--text-dim); font-size: 1rem; max-width: 560px; line-height: 1.7; }
     .section-header { margin-bottom: 48px; }
 
-    /* ── CARDS GRID ── */
-    .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
-    .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 20px; }
-
-    .card {
-      background: var(--panel);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 28px;
-      transition: all .3s;
-      position: relative; overflow: hidden;
+    /* ── HERO ── */
+    #inicio { min-height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 100px 24px 60px; }
+    .hero-inner { max-width: 800px; }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: var(--mono); font-size: .75rem; color: var(--accent3);
+      border: 1px solid rgba(34,211,165,.3); background: rgba(34,211,165,.07);
+      padding: 6px 18px; border-radius: 99px; margin-bottom: 32px; letter-spacing: 1px;
+      animation: fadeDown .6s ease both;
     }
-    .card::before {
-      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
-      background: linear-gradient(90deg, transparent, var(--accent), transparent);
-      opacity: 0; transition: opacity .3s;
-    }
-    .card:hover { border-color: rgba(0,229,255,.25); transform: translateY(-3px); box-shadow: 0 8px 32px rgba(0,0,0,.4); }
-    .card:hover::before { opacity: 1; }
+    .hero-badge .blink { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--accent3); animation: blink 1.4s infinite; }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.2} }
+    .hero-title { font-family: var(--head); font-size: clamp(2.4rem,6vw,5rem); font-weight: 900; line-height: 1.05; letter-spacing: -1px; margin-bottom: 20px; animation: fadeDown .7s .1s ease both; }
+    .hero-title .hl  { color: var(--accent);  text-shadow: var(--glow); }
+    .hero-title .hl2 { color: var(--accent2); text-shadow: var(--glow2); }
+    .hero-sub { font-size: 1.15rem; color: var(--text-dim); margin-bottom: 40px; line-height: 1.7; animation: fadeDown .7s .2s ease both; }
+    .hero-btns { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; animation: fadeDown .7s .3s ease both; }
 
-    .card-icon { font-size: 1.6rem; margin-bottom: 14px; }
-    .card-title { font-family: var(--head); font-size: 1rem; font-weight: 700; margin-bottom: 8px; color: var(--accent); }
-    .card-desc { font-size: .9rem; color: var(--text-dim); line-height: 1.65; }
-    .card-arrow { position: absolute; top: 24px; right: 24px; color: var(--text-dim); font-size: .8rem; transition: .25s; }
-    .card:hover .card-arrow { color: var(--accent); transform: translate(2px,-2px); }
-
-    /* ── SECTION DIVIDER ── */
-    .sec-wrap { padding: 90px 0; }
-    .divider { height: 1px; background: linear-gradient(90deg, transparent, var(--border), transparent); margin: 0 40px; }
+    /* ── INFO STATS ── */
+    .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap: 16px; }
+    .info-stat { background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 28px 20px; text-align: center; transition: .3s; }
+    .info-stat:hover { border-color: rgba(0,229,255,.25); transform: translateY(-3px); }
+    .info-stat .val { font-family: var(--head); font-size: 2.2rem; font-weight: 900; color: var(--accent); }
+    .info-stat .lbl { font-family: var(--mono); font-size: .72rem; color: var(--text-dim); letter-spacing: 2px; text-transform: uppercase; margin-top: 6px; }
 
     /* ── STAFF ── */
-    .staff-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; }
-
-    .staff-card {
-      background: var(--panel); border: 1px solid var(--border);
-      border-radius: 10px; padding: 24px 16px; text-align: center;
-      transition: all .3s;
-    }
+    .staff-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px,1fr)); gap: 16px; }
+    .staff-card { background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 24px 16px; text-align: center; transition: all .3s; }
     .staff-card:hover { transform: translateY(-4px); box-shadow: 0 10px 30px rgba(0,0,0,.4); }
-    .staff-avatar {
-      width: 64px; height: 64px; border-radius: 50%;
-      background: linear-gradient(135deg, var(--accent2), var(--accent));
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.6rem; margin: 0 auto 14px;
-      border: 2px solid var(--border);
-      position: relative;
-    }
-    .staff-avatar .status-dot {
-      position: absolute; bottom: 2px; right: 2px;
-      width: 12px; height: 12px; border-radius: 50%;
-      background: var(--accent3); border: 2px solid var(--panel);
-    }
-    .staff-name { font-family: var(--head); font-size: .85rem; font-weight: 700; margin-bottom: 6px; }
-    .staff-role {
-      font-family: var(--mono); font-size: .7rem; letter-spacing: 1px;
-      padding: 3px 12px; border-radius: 99px; display: inline-block;
-    }
+    .staff-avatar { width: 64px; height: 64px; border-radius: 50%; background: linear-gradient(135deg,var(--accent2),var(--accent)); display: flex; align-items: center; justify-content: center; font-size: 1.6rem; margin: 0 auto 14px; border: 2px solid var(--border); position: relative; }
+    .staff-avatar .status-dot { position: absolute; bottom: 2px; right: 2px; width: 12px; height: 12px; border-radius: 50%; background: var(--accent3); border: 2px solid var(--panel); }
+    .staff-name { font-family: var(--head); font-size: .8rem; font-weight: 700; margin-bottom: 4px; }
+    .staff-role { font-family: var(--mono); font-size: .7rem; letter-spacing: 1px; padding: 3px 12px; border-radius: 99px; display: inline-block; margin-top: 8px; }
     .role-owner  { background: rgba(255,170,0,.12); color: #ffaa00; border: 1px solid rgba(255,170,0,.3); }
     .role-admin  { background: rgba(255,50,50,.12);  color: #ff4040; border: 1px solid rgba(255,50,50,.3); }
     .role-mod    { background: rgba(124,58,237,.15); color: #a78bfa; border: 1px solid rgba(124,58,237,.3); }
     .role-helper { background: rgba(34,211,165,.12); color: var(--accent3); border: 1px solid rgba(34,211,165,.3); }
     .role-support{ background: rgba(0,229,255,.1);   color: var(--accent); border: 1px solid rgba(0,229,255,.3); }
 
-    /* ── NORMAS ── */
-    .rules-list { list-style: none; display: grid; gap: 12px; }
-    .rules-list li {
-      display: flex; align-items: flex-start; gap: 16px;
-      background: var(--panel); border: 1px solid var(--border);
-      border-radius: 8px; padding: 16px 20px;
-      transition: border-color .25s;
-    }
-    .rules-list li:hover { border-color: rgba(0,229,255,.25); }
-    .rule-num {
-      font-family: var(--mono); font-size: .8rem; color: var(--accent);
-      min-width: 28px; padding-top: 2px;
-    }
-    .rule-text { font-size: .95rem; line-height: 1.6; color: var(--text); }
+    /* ── HIERARCHY ── */
+    .hierarchy { display: flex; flex-direction: column; gap: 0; max-width: 560px; }
+    .hier-item { display: flex; align-items: center; gap: 16px; padding: 14px 20px; border: 1px solid var(--border); background: var(--panel); transition: .25s; position: relative; }
+    .hier-item:first-child { border-radius: 10px 10px 0 0; }
+    .hier-item:last-child  { border-radius: 0 0 10px 10px; }
+    .hier-item:not(:last-child) { border-bottom: none; }
+    .hier-item:hover { background: rgba(0,229,255,.04); border-color: rgba(0,229,255,.2); z-index: 1; }
+    .hier-icon { font-size: 1.1rem; width: 32px; text-align: center; }
+    .hier-name { font-family: var(--head); font-size: .9rem; font-weight: 700; }
+    .hier-desc { font-size: .82rem; color: var(--text-dim); margin-top: 2px; }
+    .hier-badge { margin-left: auto; }
 
-    /* ── TIENDA ── */
-    .shop-card {
-      background: var(--panel); border: 1px solid var(--border);
-      border-radius: 10px; padding: 28px; text-align: center;
-      transition: all .3s; position: relative; overflow: hidden;
+    /* ── SHOP ── */
+    .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap: 20px; }
+
+    /* Banner "ir a tienda externa" */
+    .shop-banner {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 20px; flex-wrap: wrap;
+      background: linear-gradient(135deg, rgba(124,58,237,.11) 0%, rgba(0,229,255,.06) 100%);
+      border: 1px solid rgba(124,58,237,.35); border-radius: 10px;
+      padding: 22px 32px; margin-bottom: 36px;
+      position: relative; overflow: hidden;
     }
-    .shop-card::before {
-      content: ''; position: absolute; inset: 0;
-      background: linear-gradient(135deg, rgba(124,58,237,.06) 0%, transparent 60%);
+    .shop-banner::before { /* top accent line */
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, var(--accent2), var(--accent), var(--accent2));
     }
+    .shop-banner-planet { /* decorative planet glyph */
+      position: absolute; right: 80px; top: 50%; transform: translateY(-50%);
+      font-size: 4rem; opacity: .06; pointer-events: none; user-select: none;
+    }
+    .shop-banner-text strong { display: block; font-family: var(--head); font-size: 1rem; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+    .shop-banner-text span  { font-size: .88rem; color: var(--text-dim); }
+
+    .shop-card { background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 28px; text-align: center; transition: all .3s; position: relative; overflow: hidden; }
+    .shop-card::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg,rgba(124,58,237,.06) 0%,transparent 60%); pointer-events: none; }
     .shop-card:hover { border-color: rgba(124,58,237,.4); transform: translateY(-4px); box-shadow: 0 12px 40px rgba(124,58,237,.2); }
-    .shop-badge {
-      display: inline-flex; align-items: center; gap: 6px;
-      font-family: var(--mono); font-size: .7rem; letter-spacing: 1px;
-      padding: 4px 14px; border-radius: 99px; margin-bottom: 16px;
-    }
+    .shop-badge { display: inline-flex; align-items: center; gap: 6px; font-family: var(--mono); font-size: .7rem; letter-spacing: 1px; padding: 4px 14px; border-radius: 99px; margin-bottom: 16px; }
     .shop-badge.popular { background: rgba(255,170,0,.12); color: #ffaa00; border: 1px solid rgba(255,170,0,.3); }
     .shop-badge.new     { background: rgba(34,211,165,.12); color: var(--accent3); border: 1px solid rgba(34,211,165,.3); }
     .shop-badge.hot     { background: rgba(255,50,50,.12);  color: #ff6060; border: 1px solid rgba(255,50,50,.3); }
@@ -324,136 +275,61 @@
     .shop-perks span { display: block; }
     .shop-perks span::before { content: '✦ '; color: var(--accent); }
 
-    /* ── GUÍAS TABS ── */
+    /* ── NORMAS ── */
+    .rules-list { list-style: none; display: grid; gap: 12px; }
+    .rules-list li { display: flex; align-items: flex-start; gap: 16px; background: var(--panel); border: 1px solid var(--border); border-radius: 8px; padding: 16px 20px; transition: border-color .25s; }
+    .rules-list li:hover { border-color: rgba(0,229,255,.25); }
+    .rule-num { font-family: var(--mono); font-size: .8rem; color: var(--accent); min-width: 28px; padding-top: 2px; }
+    .rule-text { font-size: .95rem; line-height: 1.6; color: var(--text); }
+
+    /* ── GUIDES TABS ── */
     .tab-nav { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 28px; }
-    .tab-btn {
-      font-family: var(--mono); font-size: .78rem; letter-spacing: 1px;
-      padding: 8px 20px; border-radius: var(--radius);
-      border: 1px solid var(--border); background: var(--panel);
-      color: var(--text-dim); cursor: pointer; transition: all .25s;
-    }
+    .tab-btn { font-family: var(--mono); font-size: .78rem; letter-spacing: 1px; padding: 8px 20px; border-radius: var(--radius); border: 1px solid var(--border); background: var(--panel); color: var(--text-dim); cursor: pointer; transition: all .25s; }
     .tab-btn:hover { color: var(--accent); border-color: rgba(0,229,255,.3); }
     .tab-btn.active { color: var(--accent); border-color: var(--accent); background: rgba(0,229,255,.08); box-shadow: var(--glow); }
     .tab-pane { display: none; }
     .tab-pane.active { display: block; animation: fadeIn .3s ease; }
-
-    .guide-step {
-      display: flex; gap: 20px; align-items: flex-start;
-      background: var(--panel); border: 1px solid var(--border);
-      border-radius: 8px; padding: 20px 24px; margin-bottom: 12px;
-      transition: border-color .25s;
-    }
+    .guide-step { display: flex; gap: 20px; align-items: flex-start; background: var(--panel); border: 1px solid var(--border); border-radius: 8px; padding: 20px 24px; margin-bottom: 12px; transition: border-color .25s; }
     .guide-step:hover { border-color: rgba(0,229,255,.25); }
-    .step-num {
-      font-family: var(--head); font-size: 1.5rem; font-weight: 900;
-      color: rgba(0,229,255,.2); min-width: 40px; line-height: 1;
-    }
+    .step-num { font-family: var(--head); font-size: 1.5rem; font-weight: 900; color: rgba(0,229,255,.2); min-width: 40px; line-height: 1; }
     .step-body h4 { font-family: var(--head); font-size: .95rem; margin-bottom: 6px; color: var(--accent); }
     .step-body p  { font-size: .9rem; color: var(--text-dim); line-height: 1.65; }
 
-    /* ── RANGOS ── */
+    /* ── RANKS TABLE ── */
     .ranks-table { width: 100%; border-collapse: collapse; }
-    .ranks-table th {
-      font-family: var(--mono); font-size: .72rem; letter-spacing: 2px;
-      color: var(--text-dim); text-transform: uppercase;
-      padding: 14px 20px; text-align: left;
-      border-bottom: 1px solid var(--border);
-    }
-    .ranks-table td {
-      padding: 14px 20px; font-size: .9rem;
-      border-bottom: 1px solid rgba(26,37,64,.5);
-    }
+    .ranks-table th { font-family: var(--mono); font-size: .72rem; letter-spacing: 2px; color: var(--text-dim); text-transform: uppercase; padding: 14px 20px; text-align: left; border-bottom: 1px solid var(--border); }
+    .ranks-table td { padding: 14px 20px; font-size: .9rem; border-bottom: 1px solid rgba(26,37,64,.5); }
     .ranks-table tr:hover td { background: rgba(0,229,255,.03); }
-    .rank-tag {
-      font-family: var(--mono); font-size: .72rem;
-      padding: 3px 12px; border-radius: 99px; display: inline-block;
-    }
-
-    /* ── JERARQUÍA ── */
-    .hierarchy {
-      display: flex; flex-direction: column; gap: 0; max-width: 560px;
-    }
-    .hier-item {
-      display: flex; align-items: center; gap: 16px;
-      padding: 14px 20px; border: 1px solid var(--border);
-      background: var(--panel); transition: .25s;
-      position: relative;
-    }
-    .hier-item:first-child { border-radius: 10px 10px 0 0; }
-    .hier-item:last-child  { border-radius: 0 0 10px 10px; }
-    .hier-item:not(:last-child) { border-bottom: none; }
-    .hier-item:hover { background: rgba(0,229,255,.04); border-color: rgba(0,229,255,.2); z-index:1; }
-    .hier-icon { font-size: 1.1rem; width: 32px; text-align: center; }
-    .hier-name { font-family: var(--head); font-size: .9rem; font-weight: 700; }
-    .hier-desc { font-size: .82rem; color: var(--text-dim); margin-top: 2px; }
-    .hier-badge { margin-left: auto; }
-
-    /* ── REDES ── */
-    .social-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
-    .social-card {
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
-      gap: 12px; padding: 36px 20px; text-align: center;
-      background: var(--panel); border: 1px solid var(--border);
-      border-radius: 10px; text-decoration: none; color: var(--text);
-      transition: all .3s;
-    }
-    .social-card i { font-size: 2rem; }
-    .social-card span { font-family: var(--head); font-size: .95rem; font-weight: 700; }
-    .social-card small { font-family: var(--mono); font-size: .72rem; color: var(--text-dim); letter-spacing: 1px; }
-    .social-card.discord { --c: #7289da; }
-    .social-card.tiktok  { --c: #ff0050; }
-    .social-card.youtube { --c: #ff4040; }
-    .social-card.twitter { --c: #1da1f2; }
-    .social-card:hover {
-      border-color: var(--c); color: var(--c);
-      box-shadow: 0 8px 30px rgba(0,0,0,.4);
-      transform: translateY(-4px);
-    }
-    .social-card:hover i { filter: drop-shadow(0 0 8px var(--c)); }
-
-    /* ── INFO ── */
-    .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
-    .info-stat {
-      background: var(--panel); border: 1px solid var(--border);
-      border-radius: 10px; padding: 28px 20px; text-align: center;
-      transition: .3s;
-    }
-    .info-stat:hover { border-color: rgba(0,229,255,.25); transform: translateY(-3px); }
-    .info-stat .val { font-family: var(--head); font-size: 2.2rem; font-weight: 900; color: var(--accent); }
-    .info-stat .lbl { font-family: var(--mono); font-size: .72rem; color: var(--text-dim); letter-spacing: 2px; text-transform: uppercase; margin-top: 6px; }
+    .rank-tag { font-family: var(--mono); font-size: .72rem; padding: 3px 12px; border-radius: 99px; display: inline-block; }
 
     /* ── SOPORTE ── */
-    .support-options { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
-    .support-card {
-      display: flex; align-items: flex-start; gap: 16px;
-      background: var(--panel); border: 1px solid var(--border);
-      border-radius: 10px; padding: 24px 20px; text-decoration: none;
-      color: var(--text); transition: all .3s;
-    }
+    .support-options { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); gap: 16px; }
+    .support-card { display: flex; align-items: flex-start; gap: 16px; background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 24px 20px; text-decoration: none; color: var(--text); transition: all .3s; }
     .support-card:hover { border-color: rgba(0,229,255,.3); transform: translateY(-3px); }
     .support-icon { font-size: 1.6rem; padding-top: 2px; }
     .support-title { font-family: var(--head); font-size: .95rem; font-weight: 700; margin-bottom: 5px; color: var(--accent); }
     .support-desc { font-size: .85rem; color: var(--text-dim); line-height: 1.6; }
 
+    /* ── REDES ── */
+    .social-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap: 16px; }
+    .social-card { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; padding: 36px 20px; text-align: center; background: var(--panel); border: 1px solid var(--border); border-radius: 10px; text-decoration: none; color: var(--text); transition: all .3s; }
+    .social-card i { font-size: 2rem; }
+    .social-card span { font-family: var(--head); font-size: .95rem; font-weight: 700; }
+    .social-card small { font-family: var(--mono); font-size: .72rem; color: var(--text-dim); letter-spacing: 1px; }
+    .social-card.discord { --c: #7289da; } .social-card.tiktok { --c: #ff0050; }
+    .social-card.youtube { --c: #ff4040; } .social-card.twitter { --c: #1da1f2; }
+    .social-card:hover { border-color: var(--c); color: var(--c); box-shadow: 0 8px 30px rgba(0,0,0,.4); transform: translateY(-4px); }
+    .social-card:hover i { filter: drop-shadow(0 0 8px var(--c)); }
+
     /* ── FOOTER ── */
-    footer {
-      position: relative; z-index: 1;
-      border-top: 1px solid var(--border);
-      padding: 40px 40px 24px;
-      display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 20px;
-    }
-    .foot-logo { font-family: var(--head); font-size: 1rem; font-weight: 900; color: var(--accent); letter-spacing: 2px; }
+    footer { position: relative; z-index: 1; border-top: 1px solid var(--border); padding: 40px 40px 24px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 20px; }
+    .foot-logo { font-family: var(--head); font-size: 1rem; font-weight: 900; color: var(--accent); letter-spacing: 2px; display: flex; align-items: center; gap: 10px; }
+    .foot-orb { width: 18px; height: 18px; border-radius: 50%; background: radial-gradient(circle at 35% 35%, rgba(0,229,255,.7), rgba(124,58,237,1)); box-shadow: 0 0 8px rgba(0,229,255,.3); flex-shrink: 0; }
     .foot-copy { font-family: var(--mono); font-size: .72rem; color: var(--text-dim); letter-spacing: 1px; }
 
     /* ── ANIMATIONS ── */
-    @keyframes fadeDown {
-      from { opacity: 0; transform: translateY(-18px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
+    @keyframes fadeDown { from { opacity:0; transform:translateY(-18px); } to { opacity:1; transform:translateY(0); } }
+    @keyframes fadeIn   { from { opacity:0; transform:translateY(10px);  } to { opacity:1; transform:translateY(0); } }
 
     /* ── RESPONSIVE ── */
     @media (max-width: 768px) {
@@ -464,23 +340,12 @@
       .nav-links a { display: block; }
       .nav-toggle { display: block; }
       footer { flex-direction: column; text-align: center; padding: 30px 20px; }
+      .shop-banner { flex-direction: column; text-align: center; }
+      .planet-deco, .planet-deco-2 { display: none; }
     }
     @media (max-width: 480px) {
       .hero-btns { flex-direction: column; align-items: stretch; }
       .btn { justify-content: center; }
-    }
-
-    /* ── SCROLL INDICATOR ── */
-    .scroll-line {
-      position: fixed; top: 64px; left: 0; height: 2px;
-      background: linear-gradient(90deg, var(--accent), var(--accent2));
-      z-index: 99; width: 0%; transition: width .1s linear;
-    }
-
-    /* scanline overlay for depth */
-    .scanlines {
-      position: fixed; inset: 0; pointer-events: none; z-index: 0;
-      background: repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(0,0,0,.04) 3px, rgba(0,0,0,.04) 4px);
     }
   </style>
 </head>
@@ -488,18 +353,20 @@
 
   <!-- Background layers -->
   <div class="nebula"></div>
+  <div class="planet-deco"></div>
+  <div class="planet-deco-2"></div>
   <div class="scanlines"></div>
   <div class="scroll-line" id="scrollLine"></div>
   <canvas id="starCanvas" style="position:fixed;inset:0;z-index:0;pointer-events:none"></canvas>
 
-  <!-- NAV -->
+  <!-- ═══ NAV ═══ -->
   <nav>
-    <div class="nav-logo">
-      <i class="fas fa-meteor"></i>
+    <a href="#inicio" class="nav-logo">
+      <div class="nav-planet"><div class="orb"></div><div class="ring"></div></div>
       PLANET<span>MC</span><span class="dot">.</span>
-    </div>
+    </a>
     <ul class="nav-links" id="navLinks">
-      <li><a href="#inicio" class="active">INICIO</a></li>
+      <li><a href="#inicio"  class="active">INICIO</a></li>
       <li><a href="#guias">GUÍAS</a></li>
       <li><a href="#tienda">TIENDA</a></li>
       <li><a href="#redes">REDES</a></li>
@@ -507,7 +374,7 @@
     <button class="nav-toggle" id="navToggle" aria-label="Menu"><i class="fas fa-bars"></i></button>
   </nav>
 
-  <!-- HERO -->
+  <!-- ═══ HERO ═══ -->
   <section id="inicio">
     <div class="hero-inner">
       <div class="hero-badge"><span class="blink"></span> SERVIDOR EN LÍNEA · planetmc.net</div>
@@ -530,7 +397,8 @@
         <button class="btn btn-ip" onclick="copyIP()">
           <i class="fas fa-copy"></i> COPIAR IP
         </button>
-        <a href="https://planet.tebex.io/" target="_blank" class="btn btn-shop">
+        <!-- Scroll interno a la sección tienda -->
+        <a href="#tienda" class="btn btn-shop">
           <i class="fas fa-store"></i> TIENDA
         </a>
       </div>
@@ -539,26 +407,26 @@
 
   <div class="divider"></div>
 
-  <!-- INFORMACIÓN -->
+  <!-- ═══ INFORMACIÓN ═══ -->
   <section id="informacion" class="sec-wrap">
     <div class="container">
       <div class="section-header">
         <p class="sec-title">// ESTADÍSTICAS</p>
         <h2 class="sec-heading">Información del Servidor</h2>
-        <p class="sec-desc">Datos en tiempo real de nuestra comunidad galáctica.</p>
+        <p class="sec-desc">Datos de nuestra comunidad galáctica.</p>
       </div>
       <div class="info-grid">
-        <div class="info-stat"><div class="val">26.1</div><div class="lbl">Versión</div></div>
+        <div class="info-stat"><div class="val">1.21</div><div class="lbl">Versión</div></div>
         <div class="info-stat"><div class="val">24/7</div><div class="lbl">Online</div></div>
         <div class="info-stat"><div class="val">6</div><div class="lbl">Staff</div></div>
-        <div class="info-stat"><div class="val">Survival</div><div class="lbl">Modalidad Disponible</div></div>
+        <div class="info-stat"><div class="val">Survival</div><div class="lbl">Modalidad</div></div>
       </div>
     </div>
   </section>
 
   <div class="divider"></div>
 
-  <!-- STAFF -->
+  <!-- ═══ STAFF ═══ -->
   <section id="staff" class="sec-wrap">
     <div class="container">
       <div class="section-header">
@@ -602,44 +470,23 @@
         </div>
       </div>
 
-      <!-- JERARQUÍA -->
       <div class="section-header" style="margin-top:60px">
         <p class="sec-title">// ESTRUCTURA</p>
         <h2 class="sec-heading">Jerarquía del Servidor</h2>
       </div>
       <div class="hierarchy">
-        <div class="hier-item">
-          <div class="hier-icon">👑</div>
-          <div><div class="hier-name">Owner</div><div class="hier-desc">Fundador y máxima autoridad del servidor</div></div>
-          <span class="hier-badge"><span class="staff-role role-owner">LVL 5</span></span>
-        </div>
-        <div class="hier-item">
-          <div class="hier-icon">🛡️</div>
-          <div><div class="hier-name">Admin</div><div class="hier-desc">Gestión del servidor y decisiones clave</div></div>
-          <span class="hier-badge"><span class="staff-role role-admin">LVL 4</span></span>
-        </div>
-        <div class="hier-item">
-          <div class="hier-icon">⚙️</div>
-          <div><div class="hier-name">Moderador</div><div class="hier-desc">Control de chat, sanciones y orden</div></div>
-          <span class="hier-badge"><span class="staff-role role-mod">LVL 3</span></span>
-        </div>
-        <div class="hier-item">
-          <div class="hier-icon">🌟</div>
-          <div><div class="hier-name">Helper</div><div class="hier-desc">Apoyo a jugadores nuevos y resolución de dudas</div></div>
-          <span class="hier-badge"><span class="staff-role role-helper">LVL 2</span></span>
-        </div>
-        <div class="hier-item">
-          <div class="hier-icon">💬</div>
-          <div><div class="hier-name">Soporte</div><div class="hier-desc">Tickets y atención al jugador en Discord</div></div>
-          <span class="hier-badge"><span class="staff-role role-support">LVL 1</span></span>
-        </div>
+        <div class="hier-item"><div class="hier-icon">👑</div><div><div class="hier-name">Owner</div><div class="hier-desc">Fundador y máxima autoridad del servidor</div></div><span class="hier-badge"><span class="staff-role role-owner">LVL 5</span></span></div>
+        <div class="hier-item"><div class="hier-icon">🛡️</div><div><div class="hier-name">Admin</div><div class="hier-desc">Gestión del servidor y decisiones clave</div></div><span class="hier-badge"><span class="staff-role role-admin">LVL 4</span></span></div>
+        <div class="hier-item"><div class="hier-icon">⚙️</div><div><div class="hier-name">Moderador</div><div class="hier-desc">Control de chat, sanciones y orden</div></div><span class="hier-badge"><span class="staff-role role-mod">LVL 3</span></span></div>
+        <div class="hier-item"><div class="hier-icon">🌟</div><div><div class="hier-name">Helper</div><div class="hier-desc">Apoyo a jugadores nuevos y resolución de dudas</div></div><span class="hier-badge"><span class="staff-role role-helper">LVL 2</span></span></div>
+        <div class="hier-item"><div class="hier-icon">💬</div><div><div class="hier-name">Soporte</div><div class="hier-desc">Tickets y atención al jugador en Discord</div></div><span class="hier-badge"><span class="staff-role role-support">LVL 1</span></span></div>
       </div>
     </div>
   </section>
 
   <div class="divider"></div>
 
-  <!-- TIENDA -->
+  <!-- ═══ TIENDA ═══ -->
   <section id="tienda" class="sec-wrap">
     <div class="container">
       <div class="section-header">
@@ -647,6 +494,20 @@
         <h2 class="sec-heading">Tienda del Servidor</h2>
         <p class="sec-desc">Obtén rangos exclusivos y mejora tu experiencia de juego.</p>
       </div>
+
+      <!-- ★ BANNER — ir a tienda externa ★ -->
+      <div class="shop-banner">
+        <span class="shop-banner-planet">🪐</span>
+        <div class="shop-banner-text">
+          <strong>¿Buscas otro artículo?</strong>
+          <span>Explora el catálogo completo con todos los artículos disponibles en nuestra tienda.</span>
+        </div>
+        <a href="https://planet.tebex.io/" target="_blank" class="btn btn-outline" style="white-space:nowrap;flex-shrink:0">
+          <i class="fas fa-rocket"></i> IR A LA TIENDA →
+        </a>
+      </div>
+
+      <!-- Rangos -->
       <div class="grid-3">
         <div class="shop-card">
           <span class="shop-badge new">✦ NUEVO</span>
@@ -658,11 +519,11 @@
             <span>Kit básico mensual</span>
             <span>Acceso a /fly</span>
           </div>
-          <a href="#" class="btn btn-shop" style="width:100%;justify-content:center">COMPRAR →</a>
+          <a href="https://planet.tebex.io/" target="_blank" class="btn btn-shop" style="width:100%;justify-content:center">COMPRAR →</a>
         </div>
         <div class="shop-card" style="border-color:rgba(255,170,0,.3)">
           <span class="shop-badge popular">★ POPULAR</span>
-          <div class="shop-name">Rango Nebula</div>
+          <div class="shop-name">Rango Nébula</div>
           <div class="shop-price" style="color:#ffaa00">$7<small style="font-size:1rem">.99</small></div>
           <div class="shop-perks">
             <span>Todo lo del Meteoro</span>
@@ -670,7 +531,7 @@
             <span>10 homes</span>
             <span>Kit avanzado mensual</span>
           </div>
-          <a href="#" class="btn" style="width:100%;justify-content:center;background:rgba(255,170,0,.12);border-color:rgba(255,170,0,.4);color:#ffaa00">COMPRAR →</a>
+          <a href="https://planet.tebex.io/" target="_blank" class="btn" style="width:100%;justify-content:center;background:rgba(255,170,0,.12);border-color:rgba(255,170,0,.4);color:#ffaa00">COMPRAR →</a>
         </div>
         <div class="shop-card" style="border-color:rgba(0,229,255,.25)">
           <span class="shop-badge hot">🔥 TOP</span>
@@ -682,7 +543,7 @@
             <span>Unlimited homes</span>
             <span>Acceso VIP a eventos</span>
           </div>
-          <a href="#" class="btn btn-primary" style="width:100%;justify-content:center">COMPRAR →</a>
+          <a href="https://planet.tebex.io/" target="_blank" class="btn btn-primary" style="width:100%;justify-content:center">COMPRAR →</a>
         </div>
       </div>
     </div>
@@ -690,7 +551,7 @@
 
   <div class="divider"></div>
 
-  <!-- NORMAS -->
+  <!-- ═══ NORMAS ═══ -->
   <section id="normas" class="sec-wrap">
     <div class="container">
       <div class="section-header">
@@ -713,7 +574,7 @@
 
   <div class="divider"></div>
 
-  <!-- GUÍAS (Tabs) -->
+  <!-- ═══ GUÍAS ═══ -->
   <section id="guias" class="sec-wrap">
     <div class="container">
       <div class="section-header">
@@ -727,14 +588,12 @@
         <button class="tab-btn" data-tab="rangos">Rangos</button>
       </div>
 
-      <!-- Cómo Jugar -->
       <div class="tab-pane active" id="tab-jugar">
-        <div class="guide-step"><div class="step-num">01</div><div class="step-body"><h4>Copia la IP del servidor</h4><p>Usa el botón "COPIAR IP" en la página principal o escríbela manualmente: <code style="color:var(--accent);font-family:var(--mono)">planetmc.net</code></p></div></div>
+        <div class="guide-step"><div class="step-num">01</div><div class="step-body"><h4>Copia la IP del servidor</h4><p>Usa el botón "COPIAR IP" en el inicio o escríbela manualmente: <code style="color:var(--accent);font-family:var(--mono)">planetmc.net</code></p></div></div>
         <div class="guide-step"><div class="step-num">02</div><div class="step-body"><h4>Conéctate al servidor</h4><p>Ve a Multijugador → Agregar Servidor → Pega la IP → Guardar → ¡Conectar!</p></div></div>
         <div class="guide-step"><div class="step-num">03</div><div class="step-body"><h4>Únete a Discord</h4><p>Entra a nuestro Discord para estar al tanto de eventos, actualizaciones y recibir ayuda del staff.</p></div></div>
       </div>
 
-      <!-- Postulaciones -->
       <div class="tab-pane" id="tab-postulaciones">
         <div class="guide-step"><div class="step-num">01</div><div class="step-body"><h4>Requisitos mínimos</h4><p>Debes tener al menos 30 días en el servidor, buen historial y ser mayor de 14 años.</p></div></div>
         <div class="guide-step"><div class="step-num">02</div><div class="step-body"><h4>Abre un ticket en Discord</h4><p>Ve al canal <code style="color:var(--accent);font-family:var(--mono)">#postulaciones</code> en nuestro Discord y abre un ticket oficial.</p></div></div>
@@ -743,24 +602,17 @@
         <div class="guide-step"><div class="step-num">05</div><div class="step-body"><h4>Evaluación final</h4><p>El Owner y Admins evaluarán tu desempeño y confirmarán tu rango de Helper oficial.</p></div></div>
       </div>
 
-      <!-- Rangos -->
       <div class="tab-pane" id="tab-rangos">
         <div style="overflow-x:auto">
           <table class="ranks-table">
-            <thead>
-              <tr>
-                <th>Rango</th>
-                <th>Obtención</th>
-                <th>Beneficios</th>
-              </tr>
-            </thead>
+            <thead><tr><th>Rango</th><th>Obtención</th><th>Beneficios</th></tr></thead>
             <tbody>
               <tr><td><span class="rank-tag" style="background:rgba(255,255,255,.07);color:#aaa;border:1px solid rgba(255,255,255,.15)">Jugador</span></td><td>Automático al unirse</td><td>Acceso básico al servidor</td></tr>
               <tr><td><span class="rank-tag" style="background:rgba(34,211,165,.1);color:var(--accent3);border:1px solid rgba(34,211,165,.3)">Activo</span></td><td>50 horas de juego</td><td>3 homes, kit mensual</td></tr>
               <tr><td><span class="rank-tag" style="background:rgba(0,229,255,.1);color:var(--accent);border:1px solid rgba(0,229,255,.3)">Veterano</span></td><td>200 horas de juego</td><td>6 homes, /fly en lobby</td></tr>
               <tr><td><span class="rank-tag" style="background:rgba(124,58,237,.15);color:#a78bfa;border:1px solid rgba(124,58,237,.3)">Élite</span></td><td>500 horas + voto</td><td>10 homes, partículas</td></tr>
               <tr><td><span class="rank-tag" style="background:rgba(255,170,0,.12);color:#ffaa00;border:1px solid rgba(255,170,0,.3)">Meteoro</span></td><td>Tienda $3.99</td><td>Todo lo anterior + extras</td></tr>
-              <tr><td><span class="rank-tag" style="background:rgba(255,100,0,.12);color:#ff8c00;border:1px solid rgba(255,100,0,.3)">Nebula</span></td><td>Tienda $7.99</td><td>Partículas especiales</td></tr>
+              <tr><td><span class="rank-tag" style="background:rgba(255,100,0,.12);color:#ff8c00;border:1px solid rgba(255,100,0,.3)">Nébula</span></td><td>Tienda $7.99</td><td>Partículas especiales</td></tr>
               <tr><td><span class="rank-tag" style="background:rgba(0,229,255,.15);color:var(--accent);border:1px solid var(--accent);box-shadow:var(--glow)">Galaxia</span></td><td>Tienda $14.99</td><td>Máximos privilegios VIP</td></tr>
             </tbody>
           </table>
@@ -771,7 +623,7 @@
 
   <div class="divider"></div>
 
-  <!-- SOPORTE -->
+  <!-- ═══ SOPORTE ═══ -->
   <section id="soporte" class="sec-wrap">
     <div class="container">
       <div class="section-header">
@@ -780,7 +632,7 @@
         <p class="sec-desc">¿Tienes algún problema? Estamos aquí para solucionarlo.</p>
       </div>
       <div class="support-options">
-        <a href="https://discord.gg/TUENLACE" target="_blank" class="support-card">
+        <a href="https://discord.gg/HvcPfgXVHf" target="_blank" class="support-card">
           <div class="support-icon">💬</div>
           <div><div class="support-title">Ticket en Discord</div><div class="support-desc">Abre un ticket en nuestro servidor de Discord para soporte personalizado y rápido.</div></div>
         </a>
@@ -790,9 +642,9 @@
         </a>
         <a href="#" class="support-card">
           <div class="support-icon">🐛</div>
-          <div><div class="support-title">Reportar Bug</div><div class="support-desc">Encontraste un error o glitch en el servidor? Repórtalo para que lo solucionemos.</div></div>
+          <div><div class="support-title">Reportar Bug</div><div class="support-desc">¿Encontraste un error o glitch? Repórtalo para que lo solucionemos.</div></div>
         </a>
-        <a href="#" class="support-card">
+        <a href="https://planet.tebex.io/" target="_blank" class="support-card">
           <div class="support-icon">💳</div>
           <div><div class="support-title">Soporte de Compras</div><div class="support-desc">Problemas con tu pago o rango no entregado? Contáctanos con tu comprobante.</div></div>
         </a>
@@ -802,7 +654,7 @@
 
   <div class="divider"></div>
 
-  <!-- REDES SOCIALES -->
+  <!-- ═══ REDES ═══ -->
   <section id="redes" class="sec-wrap">
     <div class="container">
       <div class="section-header">
@@ -811,50 +663,42 @@
         <p class="sec-desc">Síguenos para estar al tanto de eventos, sorteos y novedades.</p>
       </div>
       <div class="social-grid">
-        <a href="https://discord.gg/TUENLACE" target="_blank" class="social-card discord">
-          <i class="fab fa-discord"></i>
-          <span>Discord</span>
-          <small>ÚNETE AL SERVER</small>
+        <a href="https://discord.gg/HvcPfgXVHf" target="_blank" class="social-card discord">
+          <i class="fab fa-discord"></i><span>Discord</span><small>ÚNETE AL SERVER</small>
         </a>
-        <a href="https://tiktok.com/@TUENLACE" target="_blank" class="social-card tiktok">
-          <i class="fab fa-tiktok"></i>
-          <span>TikTok</span>
-          <small>SÍGUENOS</small>
+        <a href="https://www.tiktok.com/@planetmc.net" target="_blank" class="social-card tiktok">
+          <i class="fab fa-tiktok"></i><span>TikTok</span><small>SÍGUENOS</small>
         </a>
         <a href="https://youtube.com/@TUENLACE" target="_blank" class="social-card youtube">
-          <i class="fab fa-youtube"></i>
-          <span>YouTube</span>
-          <small>SUSCRÍBETE</small>
+          <i class="fab fa-youtube"></i><span>YouTube</span><small>SUSCRÍBETE</small>
         </a>
         <a href="https://twitter.com/TUENLACE" target="_blank" class="social-card twitter">
-          <i class="fab fa-twitter"></i>
-          <span>Twitter / X</span>
-          <small>SÍGUENOS</small>
+          <i class="fab fa-twitter"></i><span>Twitter / X</span><small>SÍGUENOS</small>
         </a>
       </div>
     </div>
   </section>
 
-  <!-- FOOTER -->
+  <!-- ═══ FOOTER ═══ -->
   <footer>
-    <div class="foot-logo"><i class="fas fa-meteor" style="margin-right:8px"></i>PLANETMC</div>
+    <div class="foot-logo"><span class="foot-orb"></span>PLANETMC</div>
     <div class="foot-copy">© 2026 PlanetMC · Todos los derechos reservados · planetmc.net</div>
   </footer>
 
-  <!-- TOAST -->
+  <!-- Toast IP -->
   <div class="ip-toast" id="ipToast"><i class="fas fa-check" style="margin-right:8px"></i>IP copiada: planetmc.net</div>
 
   <script>
-    /* ── Stars ── */
+    /* ── Stars canvas ── */
     const canvas = document.getElementById('starCanvas');
     const ctx = canvas.getContext('2d');
     let stars = [];
     function resize() { canvas.width = innerWidth; canvas.height = innerHeight; }
     function initStars() {
-      stars = Array.from({length: 200}, () => ({
+      stars = Array.from({length: 220}, () => ({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
-        r: Math.random() * 1.5,
+        r: Math.random() * 1.6,
         alpha: Math.random(),
         speed: Math.random() * .003 + .001
       }));
@@ -874,27 +718,28 @@
     window.addEventListener('resize', () => { resize(); initStars(); });
     resize(); initStars(); drawStars();
 
-    /* ── Scroll Progress ── */
+    /* ── Scroll progress bar ── */
     window.addEventListener('scroll', () => {
       const pct = (scrollY / (document.body.scrollHeight - innerHeight)) * 100;
       document.getElementById('scrollLine').style.width = pct + '%';
-    });
+    }, { passive: true });
 
-    /* ── Nav active link ── */
+    /* ── Nav active link on scroll ── */
     const sections = document.querySelectorAll('section[id]');
-    const navAs = document.querySelectorAll('.nav-links a');
+    const navAs    = document.querySelectorAll('.nav-links a');
     window.addEventListener('scroll', () => {
       let cur = '';
       sections.forEach(s => { if (scrollY >= s.offsetTop - 100) cur = s.id; });
-      navAs.forEach(a => {
-        a.classList.toggle('active', a.getAttribute('href') === '#' + cur);
-      });
-    });
+      navAs.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + cur));
+    }, { passive: true });
 
-    /* ── Mobile toggle ── */
+    /* ── Mobile nav toggle ── */
     document.getElementById('navToggle').addEventListener('click', () => {
       document.getElementById('navLinks').classList.toggle('open');
     });
+    navAs.forEach(a => a.addEventListener('click', () => {
+      document.getElementById('navLinks').classList.remove('open');
+    }));
 
     /* ── Copy IP ── */
     function copyIP() {
@@ -914,11 +759,6 @@
         document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
       });
     });
-
-    /* ── Close nav on link click (mobile) ── */
-    navAs.forEach(a => a.addEventListener('click', () => {
-      document.getElementById('navLinks').classList.remove('open');
-    }));
   </script>
 </body>
 </html>
