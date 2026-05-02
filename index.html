@@ -125,7 +125,6 @@
     .nav-logo span { color: var(--text); }
     .nav-logo .dot { color: var(--accent2); }
 
-    /* Desktop nav links — scrollable row so all items fit */
     .nav-links {
       display: flex; gap: 2px; list-style: none;
       flex: 1; overflow-x: auto; justify-content: flex-end;
@@ -223,12 +222,122 @@
     .hero-btns-wrap      { display: flex; flex-direction: column; align-items: center; gap: 18px; animation: fadeDown .7s .3s ease both; }
     .hero-btns-secondary { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; }
 
-    /* ── INFO STATS ── */
-    .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap: 16px; }
-    .info-stat { background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 28px 20px; text-align: center; transition: .3s; }
-    .info-stat:hover { border-color: rgba(0,229,255,.25); transform: translateY(-3px); }
-    .info-stat .val { font-family: var(--head); font-size: 2.2rem; font-weight: 900; color: var(--accent); }
-    .info-stat .lbl { font-family: var(--mono); font-size: .72rem; color: var(--text-dim); letter-spacing: 2px; text-transform: uppercase; margin-top: 6px; }
+    /* ══════════════════════════════════════
+       ── VOTAR ──
+    ══════════════════════════════════════ */
+    #votar { }
+
+    .vote-hero {
+      text-align: center;
+      margin-bottom: 52px;
+    }
+    .vote-hero .vote-badge {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-family: var(--mono); font-size: .72rem; letter-spacing: 2px;
+      color: #ffaa00; border: 1px solid rgba(255,170,0,.3);
+      background: rgba(255,170,0,.07); padding: 6px 20px;
+      border-radius: 99px; margin-bottom: 20px;
+    }
+    .vote-hero .vote-badge .pulse {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: #ffaa00;
+      box-shadow: 0 0 0 0 rgba(255,170,0,.6);
+      animation: votePulse 1.6s infinite;
+    }
+    @keyframes votePulse {
+      0%   { box-shadow: 0 0 0 0 rgba(255,170,0,.6); }
+      70%  { box-shadow: 0 0 0 8px rgba(255,170,0,0); }
+      100% { box-shadow: 0 0 0 0 rgba(255,170,0,0); }
+    }
+    .vote-hero h3 {
+      font-family: var(--head); font-size: clamp(1.3rem,2.5vw,1.9rem); font-weight: 900;
+      margin-bottom: 10px; color: var(--text);
+    }
+    .vote-hero h3 span { color: #ffaa00; text-shadow: 0 0 16px rgba(255,170,0,.4); }
+    .vote-hero p {
+      color: var(--text-dim); font-size: .97rem; max-width: 520px; margin: 0 auto; line-height: 1.7;
+    }
+
+    .vote-perks {
+      display: flex; flex-wrap: wrap; justify-content: center; gap: 14px;
+      margin-bottom: 48px;
+    }
+    .vote-perk {
+      display: flex; align-items: center; gap: 8px;
+      background: rgba(255,170,0,.07); border: 1px solid rgba(255,170,0,.2);
+      border-radius: 99px; padding: 8px 18px;
+      font-family: var(--mono); font-size: .74rem; color: #ffcc55; letter-spacing: .5px;
+    }
+    .vote-perk i { color: #ffaa00; font-size: .85rem; }
+
+    .vote-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 18px;
+    }
+    .vote-card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 32px 28px;
+      text-align: center;
+      transition: all .3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .vote-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, #ffaa00, #ff6600);
+      border-radius: 12px 12px 0 0;
+    }
+    .vote-card::after {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 50% 0%, rgba(255,170,0,.06) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .vote-card:hover {
+      border-color: rgba(255,170,0,.4);
+      transform: translateY(-5px);
+      box-shadow: 0 16px 48px rgba(255,170,0,.12);
+    }
+    .vote-card-icon {
+      font-size: 2.4rem; margin-bottom: 14px;
+      filter: drop-shadow(0 0 10px rgba(255,170,0,.4));
+    }
+    .vote-card-num {
+      font-family: var(--mono); font-size: .65rem; letter-spacing: 3px;
+      color: rgba(255,170,0,.5); text-transform: uppercase; margin-bottom: 8px;
+    }
+    .vote-card-name {
+      font-family: var(--head); font-size: 1.05rem; font-weight: 900;
+      color: var(--text); margin-bottom: 6px;
+    }
+    .vote-card-desc {
+      font-size: .85rem; color: var(--text-dim); margin-bottom: 24px; line-height: 1.6;
+    }
+    .btn-vote {
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      width: 100%;
+      font-family: var(--mono); font-size: .8rem; font-weight: 700; letter-spacing: 1.5px;
+      padding: 13px 20px; border-radius: var(--radius);
+      border: 1px solid rgba(255,170,0,.5);
+      background: linear-gradient(135deg, rgba(255,170,0,.15) 0%, rgba(255,100,0,.08) 100%);
+      color: #ffaa00; cursor: pointer; text-decoration: none; transition: all .3s;
+      box-shadow: 0 0 16px rgba(255,170,0,.15);
+    }
+    .btn-vote:hover {
+      box-shadow: 0 0 32px rgba(255,170,0,.4);
+      transform: translateY(-2px);
+      border-color: rgba(255,170,0,.9);
+      color: #fff;
+      background: linear-gradient(135deg, rgba(255,170,0,.25) 0%, rgba(255,100,0,.15) 100%);
+    }
+    .vote-footer-note {
+      text-align: center; margin-top: 36px;
+      font-family: var(--mono); font-size: .72rem;
+      color: var(--text-dim); letter-spacing: 1px;
+    }
+    .vote-footer-note span { color: var(--accent3); }
 
     /* ══════════════════════════════════════
        ── STAFF UNIFICADO ──
@@ -239,7 +348,6 @@
       gap: 18px;
     }
 
-    /* base card */
     .su-card {
       background: var(--panel); border: 1px solid var(--border);
       border-radius: 12px; overflow: hidden;
@@ -248,13 +356,11 @@
     }
     .su-card:hover { transform: translateY(-4px); }
 
-    /* top accent stripe */
     .su-card::before {
       content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
       border-radius: 12px 12px 0 0;
     }
 
-    /* per-rank colours */
     .su-card.rank-owner  { border-color: rgba(255,170,0,.22); }
     .su-card.rank-owner::before  { background: linear-gradient(90deg,#ffaa00,#ff8c00); }
     .su-card.rank-owner:hover    { border-color: rgba(255,170,0,.5); box-shadow: 0 14px 40px rgba(255,170,0,.1); }
@@ -275,7 +381,6 @@
     .su-card.rank-support::before{ background: linear-gradient(90deg,#00e5ff,#22d3a5); }
     .su-card.rank-support:hover  { border-color: rgba(0,229,255,.45); box-shadow: 0 14px 40px rgba(0,229,255,.09); }
 
-    /* header row */
     .su-header {
       display: flex; align-items: center; gap: 14px;
       padding: 22px 22px 16px;
@@ -318,7 +423,6 @@
     .rank-helper  .su-lvl-badge { background: rgba(34,211,165,.12); color: var(--accent3); border: 1px solid rgba(34,211,165,.3); }
     .rank-support .su-lvl-badge { background: rgba(0,229,255,.1);   color: var(--accent); border: 1px solid rgba(0,229,255,.3); }
 
-    /* members area */
     .su-members { padding: 16px 22px 22px; display: flex; flex-direction: column; gap: 8px; }
     .su-members-label {
       font-family: var(--mono); font-size: .65rem; letter-spacing: 2px;
@@ -427,7 +531,6 @@
     .step-body h4   { font-family: var(--head); font-size: .95rem; margin-bottom: 6px; color: var(--accent); }
     .step-body p    { font-size: .9rem; color: var(--text-dim); line-height: 1.65; }
 
-    /* Tab CTAs */
     .tab-cta { display: flex; justify-content: center; margin-top: 28px; }
     .btn-cta-postular {
       display: inline-flex; align-items: center; gap: 10px;
@@ -496,7 +599,6 @@
     }
     @media (max-width: 768px) {
       nav { padding: 0 20px; }
-      /* Mobile nav */
       .nav-links {
         display: none; flex-direction: column; gap: 0;
         position: absolute; top: 64px; left: 0; right: 0;
@@ -522,6 +624,7 @@
       .btn-join-server { max-width: 100%; padding: 16px 24px; font-size: .85rem; }
       .btn-join-server .join-text { align-items: center; }
       .staff-unified-grid { grid-template-columns: 1fr; }
+      .vote-grid { grid-template-columns: 1fr; }
     }
     @media (max-width: 480px) {
       .hero-btns-secondary { flex-direction: column; align-items: stretch; }
@@ -545,14 +648,14 @@
       <div class="nav-planet"><div class="orb"></div><div class="ring"></div></div>
       PLANET<span>MC</span><span class="dot">.</span>
     </a>
-    <!-- Desktop + Mobile links -->
     <ul class="nav-links" id="navLinks">
       <li><a href="#inicio"   class="active">INICIO</a></li>
-      <li><a href="#staff">EQUIPO</a></li>
-      <li><a href="#normas">NORMAS</a></li>
-      <li><a href="#guias">GUÍAS</a></li>
       <li><a href="#tienda">TIENDA</a></li>
+      <li><a href="#votar">VOTAR</a></li>
       <li><a href="#soporte">SOPORTE</a></li>
+      <li><a href="#guias">GUÍAS</a></li>
+      <li><a href="#normas">NORMAS</a></li>
+      <li><a href="#jerarquia">JERARQUÍA</a></li>
       <li><a href="#redes">REDES</a></li>
     </ul>
     <button class="nav-toggle" id="navToggle" aria-label="Menú"><i class="fas fa-bars"></i></button>
@@ -590,27 +693,238 @@
 
   <div class="divider"></div>
 
-  <!-- ═══ INFORMACIÓN ═══ -->
-  <section id="informacion" class="sec-wrap">
+  <!-- ═══ TIENDA ═══ -->
+  <section id="tienda" class="sec-wrap">
     <div class="container">
       <div class="section-header reveal">
-        <p class="sec-title">// ESTADÍSTICAS</p>
-        <h2 class="sec-heading">Información del Servidor</h2>
-        <p class="sec-desc">Datos de nuestra comunidad galáctica.</p>
+        <p class="sec-title">// SHOP</p>
+        <h2 class="sec-heading">Tienda del Servidor</h2>
+        <p class="sec-desc">Obtén rangos exclusivos y mejora tu experiencia de juego.</p>
       </div>
-      <div class="info-grid">
-        <div class="info-stat reveal"><div class="val">21.2</div><div class="lbl">Versión</div></div>
-        <div class="info-stat reveal"><div class="val">24/7</div><div class="lbl">Online</div></div>
-        <div class="info-stat reveal"><div class="val">6</div><div class="lbl">Staff</div></div>
-        <div class="info-stat reveal"><div class="val">Survival</div><div class="lbl">Modalidad</div></div>
+      <div class="shop-banner reveal">
+        <span class="shop-banner-planet">🪐</span>
+        <div class="shop-banner-text">
+          <strong>¿Buscas otro artículo?</strong>
+          <span>Explora el catálogo completo con todos los artículos disponibles en nuestra tienda.</span>
+        </div>
+        <a href="https://planet.tebex.io/" target="_blank" class="btn btn-outline" style="white-space:nowrap;flex-shrink:0">
+          <i class="fas fa-rocket"></i> IR A LA TIENDA →
+        </a>
+      </div>
+      <div class="grid-3">
+        <div class="shop-card reveal">
+          <span class="shop-badge new">✦ NUEVO</span>
+          <div class="shop-name">Rango 1</div>
+          <div class="shop-price">$9<small style="font-size:1rem">.99</small></div>
+          <div class="shop-perks">
+            <span>Muy pronto..</span><span>Muy pronto..</span>
+            <span>Muy pronto..</span><span>Muy pronto..</span>
+          </div>
+          <a href="https://planet.tebex.io/" target="_blank" class="btn btn-shop" style="width:100%;justify-content:center">COMPRAR →</a>
+        </div>
+        <div class="shop-card reveal" style="border-color:rgba(255,170,0,.3)">
+          <span class="shop-badge popular">★ POPULAR</span>
+          <div class="shop-name">Rango 2</div>
+          <div class="shop-price" style="color:#ffaa00">$29<small style="font-size:1rem">.99</small></div>
+          <div class="shop-perks">
+            <span>Muy pronto..</span><span>Muy pronto..</span><span>Muy pronto..</span>
+          </div>
+          <a href="https://planet.tebex.io/" target="_blank" class="btn" style="width:100%;justify-content:center;background:rgba(255,170,0,.12);border-color:rgba(255,170,0,.4);color:#ffaa00">COMPRAR →</a>
+        </div>
+        <div class="shop-card reveal" style="border-color:rgba(0,229,255,.25)">
+          <span class="shop-badge hot">🔥 TOP</span>
+          <div class="shop-name">Rango 3</div>
+          <div class="shop-price" style="color:var(--accent)">$59<small style="font-size:1rem">.99</small></div>
+          <div class="shop-perks">
+            <span>Todos los kits disponibles</span><span>Fly disponible en cuaquier mapa</span>
+            <span>Muy pronto..</span><span>Muy pronto..</span>
+          </div>
+          <a href="https://planet.tebex.io/" target="_blank" class="btn btn-primary" style="width:100%;justify-content:center">COMPRAR →</a>
+        </div>
       </div>
     </div>
   </section>
 
   <div class="divider"></div>
 
-  <!-- ═══ STAFF UNIFICADO ═══ -->
-  <section id="staff" class="sec-wrap">
+  <!-- ═══ VOTAR ═══ -->
+  <section id="votar" class="sec-wrap">
+    <div class="container">
+
+      <div class="section-header reveal">
+        <p class="sec-title">// COMUNIDAD</p>
+        <h2 class="sec-heading">Vota por el Servidor</h2>
+        <p class="sec-desc">Tu voto nos ayuda a crecer y a llegar a más jugadores.</p>
+      </div>
+
+      <div class="vote-hero reveal">
+        <div class="vote-badge">
+          <span class="pulse"></span>
+          VOTACIONES ABIERTAS · VOTA CADA 24H
+        </div>
+        <h3>Apoya a <span>PlanetMC</span> votando en los rankings</h3>
+        <p>Cada voto nos hace subir en las listas de servidores y ayuda a que más jugadores nos descubran. Además, ¡obtienes recompensas exclusivas en el servidor!</p>
+      </div>
+
+      <div class="vote-perks reveal">
+        <div class="vote-perk"><i class="fas fa-gift"></i> Recompensas en juego</div>
+        <div class="vote-perk"><i class="fas fa-coins"></i> Monedas bonus</div>
+        <div class="vote-perk"><i class="fas fa-trophy"></i> Keys especiales</div>
+        <div class="vote-perk"><i class="fas fa-chart-line"></i> Subimos en rankings</div>
+        <div class="vote-perk"><i class="fas fa-users"></i> Más jugadores nos encuentran</div>
+      </div>
+
+      <div class="vote-grid">
+        <div class="vote-card reveal">
+          <div class="vote-card-icon">🗳️</div>
+          <div class="vote-card-num">// SITIO 01</div>
+          <div class="vote-card-name">Lista de Servidores 1</div>
+          <div class="vote-card-desc">Vota en este ranking para ayudarnos a ganar visibilidad. ¡Recompensa automática al votar!</div>
+          <a href="#" class="btn-vote">
+            <i class="fas fa-star"></i> VOTAR AHORA
+          </a>
+        </div>
+        <div class="vote-card reveal">
+          <div class="vote-card-icon">⭐</div>
+          <div class="vote-card-num">// SITIO 02</div>
+          <div class="vote-card-name">Lista de Servidores 2</div>
+          <div class="vote-card-desc">Otro gran ranking donde tu voto cuenta doble los fines de semana. ¡No te lo pierdas!</div>
+          <a href="#" class="btn-vote">
+            <i class="fas fa-star"></i> VOTAR AHORA
+          </a>
+        </div>
+        <div class="vote-card reveal">
+          <div class="vote-card-icon">🚀</div>
+          <div class="vote-card-num">// SITIO 03</div>
+          <div class="vote-card-name">Lista de Servidores 3</div>
+          <div class="vote-card-desc">El ranking más grande de habla hispana. ¡Cada voto nos acerca al top 10!</div>
+          <a href="#" class="btn-vote">
+            <i class="fas fa-star"></i> VOTAR AHORA
+          </a>
+        </div>
+      </div>
+
+      <p class="vote-footer-note reveal">Puedes votar en cada sitio <span>cada 24 horas</span> · Las recompensas se entregan automáticamente en el servidor</p>
+
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ═══ SOPORTE ═══ -->
+  <section id="soporte" class="sec-wrap">
+    <div class="container">
+      <div class="section-header reveal">
+        <p class="sec-title">// AYUDA</p>
+        <h2 class="sec-heading">Centro de Soporte</h2>
+        <p class="sec-desc">¿Tienes algún problema? Estamos aquí para solucionarlo.</p>
+      </div>
+      <div class="support-options">
+        <a href="https://discord.gg/HvcPfgXVHf" target="_blank" class="support-card reveal">
+          <div class="support-icon">💬</div>
+          <div><div class="support-title">Ticket en Discord</div><div class="support-desc">Abre un ticket en nuestro servidor de Discord para soporte personalizado y rápido.</div></div>
+        </a>
+        <a href="https://discord.gg/HvcPfgXVHf" target="_blank" class="support-card reveal">
+          <div class="support-icon">📋</div>
+          <div><div class="support-title">Reportar Jugador</div><div class="support-desc">Reporta comportamientos que violen las normas del servidor con pruebas.</div></div>
+        </a>
+        <a href="https://discord.gg/HvcPfgXVHf" target="_blank" class="support-card reveal">
+          <div class="support-icon">🐛</div>
+          <div><div class="support-title">Reportar Bug</div><div class="support-desc">¿Encontraste un error o glitch? Repórtalo para que lo solucionemos.</div></div>
+        </a>
+        <a href="https://discord.gg/HvcPfgXVHf" target="_blank" class="support-card reveal">
+          <div class="support-icon">💳</div>
+          <div><div class="support-title">Soporte de Compras</div><div class="support-desc">¿Problemas con tu pago o rango no entregado? Contáctanos con tu comprobante.</div></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ═══ GUÍAS ═══ -->
+  <section id="guias" class="sec-wrap">
+    <div class="container">
+      <div class="section-header reveal">
+        <p class="sec-title">// DOCUMENTACIÓN</p>
+        <h2 class="sec-heading">Guías del Servidor</h2>
+        <p class="sec-desc">Todo lo que necesitas para comenzar tu aventura.</p>
+      </div>
+      <div class="tab-nav">
+        <button class="tab-btn active" data-tab="jugar">Cómo Jugar</button>
+        <button class="tab-btn" data-tab="postulaciones">Postulaciones</button>
+        <button class="tab-btn" data-tab="rangos">Rangos</button>
+      </div>
+
+      <div class="tab-pane active" id="tab-jugar">
+        <div class="guide-step"><div class="step-num">01</div><div class="step-body"><h4>Copia la IP del servidor</h4><p>Usa el botón "ÚNETE" en el inicio o escríbela manualmente: <code style="color:var(--accent);font-family:var(--mono)">planetmc.net</code></p></div></div>
+        <div class="guide-step"><div class="step-num">02</div><div class="step-body"><h4>Conéctate al servidor</h4><p>Ve a Multijugador → Agregar Servidor → Pega la IP → Guardar → ¡Conectar!</p></div></div>
+        <div class="guide-step"><div class="step-num">03</div><div class="step-body"><h4>Únete a Discord</h4><p>Entra a nuestro Discord para estar al tanto de eventos, actualizaciones y recibir ayuda del staff.</p></div></div>
+      </div>
+
+      <div class="tab-pane" id="tab-postulaciones">
+        <div class="guide-step"><div class="step-num">01</div><div class="step-body"><h4>Requisitos mínimos</h4><p>Debes tener al menos 30 días en el servidor, buen historial y ser mayor de 14 años.</p></div></div>
+        <div class="guide-step"><div class="step-num">02</div><div class="step-body"><h4>Abre un ticket en Discord</h4><p>Ve al canal <code style="color:var(--accent);font-family:var(--mono)">#postulaciones</code> en nuestro Discord y abre un ticket oficial.</p></div></div>
+        <div class="guide-step"><div class="step-num">03</div><div class="step-body"><h4>Completa el formulario</h4><p>Responde todas las preguntas con honestidad. Incluye tu experiencia previa como staff si aplica.</p></div></div>
+        <div class="guide-step"><div class="step-num">04</div><div class="step-body"><h4>Período de prueba</h4><p>Si eres aceptado, pasarás por un período de prueba de 2 semanas como Staff Trial.</p></div></div>
+        <div class="guide-step"><div class="step-num">05</div><div class="step-body"><h4>Evaluación final</h4><p>El Owner y Admins evaluarán tu desempeño y confirmarán tu rango de Helper oficial.</p></div></div>
+        <div class="tab-cta">
+          <a href="https://forms.gle/po1fM57gG9oQtKCc7" target="_blank" class="btn-cta-postular">
+            <i class="fas fa-paper-plane"></i> POSTULAR AQUÍ
+          </a>
+        </div>
+      </div>
+
+      <div class="tab-pane" id="tab-rangos">
+        <div style="overflow-x:auto">
+          <table class="ranks-table">
+            <thead><tr><th>Rango</th><th>Obtención</th><th>Beneficios</th></tr></thead>
+            <tbody>
+              <tr><td><span class="rank-tag" style="background:rgba(255,255,255,.07);color:#aaa;border:1px solid rgba(255,255,255,.15)">Usuario</span></td><td>Automático al unirse</td><td>2 homes y comandos básicos.</td></tr>
+              <tr><td><span class="rank-tag" style="background:rgba(0,229,255,.1);color:var(--accent);border:1px solid rgba(0,229,255,.3)">Planet</span></td><td>1000 horas de juego</td><td>TAG exclusivo, 5 homes, /fly en lobby</td></tr>
+              <tr><td><span class="rank-tag" style="background:rgba(124,58,237,.15);color:#a78bfa;border:1px solid rgba(124,58,237,.3)">Veterano</span></td><td>1000 horas + 500 votes</td><td>TAG exclusivo, 10 homes, /fly en lobby</td></tr>
+              <tr><td><span class="rank-tag" style="background:rgba(255,170,0,.12);color:#ffaa00;border:1px solid rgba(255,170,0,.3)">Rango 1</span></td><td>Tienda $5.99</td><td>Ventajas exclusivas...</td></tr>
+              <tr><td><span class="rank-tag" style="background:rgba(255,100,0,.12);color:#ff8c00;border:1px solid rgba(255,100,0,.3)">Rango 2</span></td><td>Tienda $20.99</td><td>Ventajas exclusivas...</td></tr>
+              <tr><td><span class="rank-tag" style="background:rgba(0,229,255,.15);color:var(--accent);border:1px solid var(--accent);box-shadow:var(--glow)">Rango 3</span></td><td>Tienda $70.00</td><td>Ventajas exclusivas...</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="tab-cta">
+          <a href="https://planet.tebex.io/" target="_blank" class="btn-cta-rango">
+            <i class="fas fa-star"></i> ADQUIERE UN RANGO
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ═══ NORMAS ═══ -->
+  <section id="normas" class="sec-wrap">
+    <div class="container">
+      <div class="section-header reveal">
+        <p class="sec-title">// REGLAMENTO</p>
+        <h2 class="sec-heading">Normas del Servidor</h2>
+        <p class="sec-desc">Cumplirlas garantiza una experiencia justa para todos.</p>
+      </div>
+      <ul class="rules-list">
+        <li class="reveal"><span class="rule-num">01.</span><span class="rule-text">Respeta a todos los jugadores y al staff en todo momento. El irrespeto resulta en sanción inmediata.</span></li>
+        <li class="reveal"><span class="rule-num">02.</span><span class="rule-text">Está prohibido el uso de hacks, cheats o cualquier modificación que otorgue ventaja injusta.</span></li>
+        <li class="reveal"><span class="rule-num">03.</span><span class="rule-text">No se permite el spam, publicidad de otros servidores o links maliciosos en el chat.</span></li>
+        <li class="reveal"><span class="rule-num">04.</span><span class="rule-text">El griefing (destrucción de construcciones ajenas) está estrictamente prohibido.</span></li>
+        <li class="reveal"><span class="rule-num">05.</span><span class="rule-text">No se permite el robo de ítems de otros jugadores, independientemente del contexto.</span></li>
+        <li class="reveal"><span class="rule-num">06.</span><span class="rule-text">Sigue las instrucciones del staff. Sus decisiones son finales dentro del servidor.</span></li>
+        <li class="reveal"><span class="rule-num">07.</span><span class="rule-text">El contenido inapropiado (lenguaje ofensivo, discriminación, acoso) es motivo de ban permanente.</span></li>
+        <li class="reveal"><span class="rule-num">08.</span><span class="rule-text">Reporta cualquier bug o glitch al staff en lugar de explotarlo a tu favor.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ═══ JERARQUÍA (antes: STAFF) ═══ -->
+  <section id="jerarquia" class="sec-wrap">
     <div class="container">
 
       <div class="section-header reveal">
@@ -730,172 +1044,6 @@
         </a>
       </div>
 
-    </div>
-  </section>
-
-  <div class="divider"></div>
-
-  <!-- ═══ TIENDA ═══ -->
-  <section id="tienda" class="sec-wrap">
-    <div class="container">
-      <div class="section-header reveal">
-        <p class="sec-title">// SHOP</p>
-        <h2 class="sec-heading">Tienda del Servidor</h2>
-        <p class="sec-desc">Obtén rangos exclusivos y mejora tu experiencia de juego.</p>
-      </div>
-      <div class="shop-banner reveal">
-        <span class="shop-banner-planet">🪐</span>
-        <div class="shop-banner-text">
-          <strong>¿Buscas otro artículo?</strong>
-          <span>Explora el catálogo completo con todos los artículos disponibles en nuestra tienda.</span>
-        </div>
-        <a href="https://planet.tebex.io/" target="_blank" class="btn btn-outline" style="white-space:nowrap;flex-shrink:0">
-          <i class="fas fa-rocket"></i> IR A LA TIENDA →
-        </a>
-      </div>
-      <div class="grid-3">
-        <div class="shop-card reveal">
-          <span class="shop-badge new">✦ NUEVO</span>
-          <div class="shop-name">Rango 1</div>
-          <div class="shop-price">$9<small style="font-size:1rem">.99</small></div>
-          <div class="shop-perks">
-            <span>Muy pronto..</span><span>Muy pronto..</span>
-            <span>Muy pronto..</span><span>Muy pronto..</span>
-          </div>
-          <a href="https://planet.tebex.io/" target="_blank" class="btn btn-shop" style="width:100%;justify-content:center">COMPRAR →</a>
-        </div>
-        <div class="shop-card reveal" style="border-color:rgba(255,170,0,.3)">
-          <span class="shop-badge popular">★ POPULAR</span>
-          <div class="shop-name">Rango 2</div>
-          <div class="shop-price" style="color:#ffaa00">$29<small style="font-size:1rem">.99</small></div>
-          <div class="shop-perks">
-            <span>Muy pronto..</span><span>Muy pronto..</span><span>Muy pronto..</span>
-          </div>
-          <a href="https://planet.tebex.io/" target="_blank" class="btn" style="width:100%;justify-content:center;background:rgba(255,170,0,.12);border-color:rgba(255,170,0,.4);color:#ffaa00">COMPRAR →</a>
-        </div>
-        <div class="shop-card reveal" style="border-color:rgba(0,229,255,.25)">
-          <span class="shop-badge hot">🔥 TOP</span>
-          <div class="shop-name">Rango 3</div>
-          <div class="shop-price" style="color:var(--accent)">$59<small style="font-size:1rem">.99</small></div>
-          <div class="shop-perks">
-            <span>Todos los kits disponibles</span><span>Fly disponible en cuaquier mapa</span>
-            <span>Muy pronto..</span><span>Muy pronto..</span>
-          </div>
-          <a href="https://planet.tebex.io/" target="_blank" class="btn btn-primary" style="width:100%;justify-content:center">COMPRAR →</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <div class="divider"></div>
-
-  <!-- ═══ NORMAS ═══ -->
-  <section id="normas" class="sec-wrap">
-    <div class="container">
-      <div class="section-header reveal">
-        <p class="sec-title">// REGLAMENTO</p>
-        <h2 class="sec-heading">Normas del Servidor</h2>
-        <p class="sec-desc">Cumplirlas garantiza una experiencia justa para todos.</p>
-      </div>
-      <ul class="rules-list">
-        <li class="reveal"><span class="rule-num">01.</span><span class="rule-text">Respeta a todos los jugadores y al staff en todo momento. El irrespeto resulta en sanción inmediata.</span></li>
-        <li class="reveal"><span class="rule-num">02.</span><span class="rule-text">Está prohibido el uso de hacks, cheats o cualquier modificación que otorgue ventaja injusta.</span></li>
-        <li class="reveal"><span class="rule-num">03.</span><span class="rule-text">No se permite el spam, publicidad de otros servidores o links maliciosos en el chat.</span></li>
-        <li class="reveal"><span class="rule-num">04.</span><span class="rule-text">El griefing (destrucción de construcciones ajenas) está estrictamente prohibido.</span></li>
-        <li class="reveal"><span class="rule-num">05.</span><span class="rule-text">No se permite el robo de ítems de otros jugadores, independientemente del contexto.</span></li>
-        <li class="reveal"><span class="rule-num">06.</span><span class="rule-text">Sigue las instrucciones del staff. Sus decisiones son finales dentro del servidor.</span></li>
-        <li class="reveal"><span class="rule-num">07.</span><span class="rule-text">El contenido inapropiado (lenguaje ofensivo, discriminación, acoso) es motivo de ban permanente.</span></li>
-        <li class="reveal"><span class="rule-num">08.</span><span class="rule-text">Reporta cualquier bug o glitch al staff en lugar de explotarlo a tu favor.</span></li>
-      </ul>
-    </div>
-  </section>
-
-  <div class="divider"></div>
-
-  <!-- ═══ GUÍAS ═══ -->
-  <section id="guias" class="sec-wrap">
-    <div class="container">
-      <div class="section-header reveal">
-        <p class="sec-title">// DOCUMENTACIÓN</p>
-        <h2 class="sec-heading">Guías del Servidor</h2>
-        <p class="sec-desc">Todo lo que necesitas para comenzar tu aventura.</p>
-      </div>
-      <div class="tab-nav">
-        <button class="tab-btn active" data-tab="jugar">Cómo Jugar</button>
-        <button class="tab-btn" data-tab="postulaciones">Postulaciones</button>
-        <button class="tab-btn" data-tab="rangos">Rangos</button>
-      </div>
-
-      <div class="tab-pane active" id="tab-jugar">
-        <div class="guide-step"><div class="step-num">01</div><div class="step-body"><h4>Copia la IP del servidor</h4><p>Usa el botón "ÚNETE" en el inicio o escríbela manualmente: <code style="color:var(--accent);font-family:var(--mono)">planetmc.net</code></p></div></div>
-        <div class="guide-step"><div class="step-num">02</div><div class="step-body"><h4>Conéctate al servidor</h4><p>Ve a Multijugador → Agregar Servidor → Pega la IP → Guardar → ¡Conectar!</p></div></div>
-        <div class="guide-step"><div class="step-num">03</div><div class="step-body"><h4>Únete a Discord</h4><p>Entra a nuestro Discord para estar al tanto de eventos, actualizaciones y recibir ayuda del staff.</p></div></div>
-      </div>
-
-      <div class="tab-pane" id="tab-postulaciones">
-        <div class="guide-step"><div class="step-num">01</div><div class="step-body"><h4>Requisitos mínimos</h4><p>Debes tener al menos 30 días en el servidor, buen historial y ser mayor de 14 años.</p></div></div>
-        <div class="guide-step"><div class="step-num">02</div><div class="step-body"><h4>Abre un ticket en Discord</h4><p>Ve al canal <code style="color:var(--accent);font-family:var(--mono)">#postulaciones</code> en nuestro Discord y abre un ticket oficial.</p></div></div>
-        <div class="guide-step"><div class="step-num">03</div><div class="step-body"><h4>Completa el formulario</h4><p>Responde todas las preguntas con honestidad. Incluye tu experiencia previa como staff si aplica.</p></div></div>
-        <div class="guide-step"><div class="step-num">04</div><div class="step-body"><h4>Período de prueba</h4><p>Si eres aceptado, pasarás por un período de prueba de 2 semanas como Staff Trial.</p></div></div>
-        <div class="guide-step"><div class="step-num">05</div><div class="step-body"><h4>Evaluación final</h4><p>El Owner y Admins evaluarán tu desempeño y confirmarán tu rango de Helper oficial.</p></div></div>
-        <div class="tab-cta">
-          <a href="https://forms.gle/po1fM57gG9oQtKCc7" target="_blank" class="btn-cta-postular">
-            <i class="fas fa-paper-plane"></i> POSTULAR AQUÍ
-          </a>
-        </div>
-      </div>
-
-      <div class="tab-pane" id="tab-rangos">
-        <div style="overflow-x:auto">
-          <table class="ranks-table">
-            <thead><tr><th>Rango</th><th>Obtención</th><th>Beneficios</th></tr></thead>
-            <tbody>
-              <tr><td><span class="rank-tag" style="background:rgba(255,255,255,.07);color:#aaa;border:1px solid rgba(255,255,255,.15)">Usuario</span></td><td>Automático al unirse</td><td>2 homes y comandos básicos.</td></tr>
-              <tr><td><span class="rank-tag" style="background:rgba(0,229,255,.1);color:var(--accent);border:1px solid rgba(0,229,255,.3)">Planet</span></td><td>1000 horas de juego</td><td>TAG exclusivo, 5 homes, /fly en lobby</td></tr>
-              <tr><td><span class="rank-tag" style="background:rgba(124,58,237,.15);color:#a78bfa;border:1px solid rgba(124,58,237,.3)">Veterano</span></td><td>1000 horas + 500 votes</td><td>TAG exclusivo, 10 homes, /fly en lobby</td></tr>
-              <tr><td><span class="rank-tag" style="background:rgba(255,170,0,.12);color:#ffaa00;border:1px solid rgba(255,170,0,.3)">Rango 1</span></td><td>Tienda $5.99</td><td>Ventajas exclusivas...</td></tr>
-              <tr><td><span class="rank-tag" style="background:rgba(255,100,0,.12);color:#ff8c00;border:1px solid rgba(255,100,0,.3)">Rango 2</span></td><td>Tienda $20.99</td><td>Ventajas exclusivas...</td></tr>
-              <tr><td><span class="rank-tag" style="background:rgba(0,229,255,.15);color:var(--accent);border:1px solid var(--accent);box-shadow:var(--glow)">Rango 3</span></td><td>Tienda $70.00</td><td>Ventajas exclusivas...</td></tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="tab-cta">
-          <a href="https://planet.tebex.io/" target="_blank" class="btn-cta-rango">
-            <i class="fas fa-star"></i> ADQUIERE UN RANGO
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <div class="divider"></div>
-
-  <!-- ═══ SOPORTE ═══ -->
-  <section id="soporte" class="sec-wrap">
-    <div class="container">
-      <div class="section-header reveal">
-        <p class="sec-title">// AYUDA</p>
-        <h2 class="sec-heading">Centro de Soporte</h2>
-        <p class="sec-desc">¿Tienes algún problema? Estamos aquí para solucionarlo.</p>
-      </div>
-      <div class="support-options">
-        <a href="https://discord.gg/HvcPfgXVHf" target="_blank" class="support-card reveal">
-          <div class="support-icon">💬</div>
-          <div><div class="support-title">Ticket en Discord</div><div class="support-desc">Abre un ticket en nuestro servidor de Discord para soporte personalizado y rápido.</div></div>
-        </a>
-        <a href="https://discord.gg/HvcPfgXVHf" target="_blank" class="support-card reveal">
-          <div class="support-icon">📋</div>
-          <div><div class="support-title">Reportar Jugador</div><div class="support-desc">Reporta comportamientos que violen las normas del servidor con pruebas.</div></div>
-        </a>
-        <a href="https://discord.gg/HvcPfgXVHf" target="_blank" class="support-card reveal">
-          <div class="support-icon">🐛</div>
-          <div><div class="support-title">Reportar Bug</div><div class="support-desc">¿Encontraste un error o glitch? Repórtalo para que lo solucionemos.</div></div>
-        </a>
-        <a href="https://discord.gg/HvcPfgXVHf" target="_blank" class="support-card reveal">
-          <div class="support-icon">💳</div>
-          <div><div class="support-title">Soporte de Compras</div><div class="support-desc">¿Problemas con tu pago o rango no entregado? Contáctanos con tu comprobante.</div></div>
-        </a>
-      </div>
     </div>
   </section>
 
