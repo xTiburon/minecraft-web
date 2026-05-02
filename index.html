@@ -593,9 +593,166 @@
     @keyframes fadeDown { from { opacity:0; transform:translateY(-18px); } to { opacity:1; transform:translateY(0); } }
     @keyframes fadeIn   { from { opacity:0; transform:translateY(10px);  } to { opacity:1; transform:translateY(0); } }
 
+    /* ══════════════════════════════════════════════════════
+       ▓▓ NUEVAS MEJORAS VISUALES ▓▓
+       Destiny + Minecraft aesthetic enhancements
+    ══════════════════════════════════════════════════════ */
+
+    /* ── DESTINY DOT-GRID OVERLAY ── */
+    .destiny-grid {
+      position: fixed; inset: 0; pointer-events: none; z-index: 0;
+      background-image:
+        radial-gradient(circle, rgba(0,229,255,.07) 1px, transparent 1px),
+        radial-gradient(circle, rgba(124,58,237,.04) 1px, transparent 1px);
+      background-size: 48px 48px, 96px 96px;
+      background-position: 0 0, 24px 24px;
+    }
+
+    /* ── HUD CORNER BRACKETS (Destiny-style) ── */
+    .hud-corners {
+      position: absolute; inset: 0; pointer-events: none;
+    }
+    .hud-corners::before,
+    .hud-corners::after,
+    .hud-corner-br,
+    .hud-corner-bl {
+      content: '';
+      position: absolute;
+      width: 18px; height: 18px;
+      border-style: solid;
+      border-color: rgba(0,229,255,.22);
+    }
+    .hud-corners::before { top: 0;    left: 0;  border-width: 2px 0 0 2px; }
+    .hud-corners::after  { top: 0;    right: 0; border-width: 2px 2px 0 0; }
+    .hud-corner-br { bottom: 0; right: 0; border-width: 0 2px 2px 0; }
+    .hud-corner-bl { bottom: 0; left: 0;  border-width: 0 0 2px 2px; }
+
+    /* ── HERO HUD FRAME ── */
+    .hero-hud {
+      position: relative;
+      display: inline-block; padding: 28px 36px;
+      border: 1px solid rgba(0,229,255,.08);
+      border-radius: 4px;
+    }
+    .hero-hud .hud-corners::before,
+    .hero-hud .hud-corners::after,
+    .hero-hud .hud-corner-br,
+    .hero-hud .hud-corner-bl {
+      border-color: rgba(0,229,255,.3);
+      width: 22px; height: 22px;
+    }
+
+    /* ── DESTINY SECTION LABEL BAR ── */
+    .sec-title {
+      display: inline-flex; align-items: center; gap: 10px;
+    }
+    .sec-title::before {
+      content: '';
+      display: inline-block;
+      width: 24px; height: 2px;
+      background: linear-gradient(90deg, var(--accent), transparent);
+    }
+    .sec-title::after {
+      content: '';
+      display: inline-block;
+      width: 8px; height: 8px;
+      border: 1px solid rgba(0,229,255,.5);
+      transform: rotate(45deg);
+      flex-shrink: 0;
+    }
+
+    /* ── MINECRAFT MOB SPRITES ── */
+    .mc-mob-wrap {
+      position: fixed;
+      pointer-events: none;
+      z-index: 2;
+      transition: opacity .4s;
+    }
+    .mc-mob-wrap canvas {
+      image-rendering: pixelated;
+      image-rendering: crisp-edges;
+      display: block;
+    }
+
+    /* Positioning */
+    .mc-chick-wrap {
+      bottom: 110px; right: 22px;
+      animation: mobFloat 3.8s ease-in-out infinite;
+      filter: drop-shadow(0 0 8px rgba(255,215,0,.55)) drop-shadow(0 0 20px rgba(255,180,0,.2));
+    }
+    .mc-axolotl-wrap {
+      top: 42%; right: 18px;
+      animation: mobFloat 4.5s ease-in-out infinite 0.7s;
+      filter: drop-shadow(0 0 8px rgba(255,100,170,.5)) drop-shadow(0 0 20px rgba(200,50,130,.2));
+    }
+    .mc-turtle-wrap {
+      bottom: 80px; left: 18px;
+      animation: mobFloat 5.2s ease-in-out infinite 1.4s;
+      filter: drop-shadow(0 0 8px rgba(34,211,165,.5)) drop-shadow(0 0 20px rgba(0,180,120,.2));
+    }
+
+    @keyframes mobFloat {
+      0%,100% { transform: translateY(0px); }
+      50%      { transform: translateY(-9px); }
+    }
+
+    /* Tooltip on hover */
+    .mc-mob-wrap .mob-label {
+      position: absolute;
+      bottom: 100%; left: 50%; transform: translateX(-50%) translateY(-4px);
+      font-family: var(--mono); font-size: .62rem; letter-spacing: 1.5px;
+      color: var(--text-dim); white-space: nowrap;
+      opacity: 0; transition: opacity .3s;
+      pointer-events: none;
+    }
+    .mc-mob-wrap:hover .mob-label { opacity: 1; }
+
+    /* ── ENHANCED DIVIDER ── */
+    .divider-mc {
+      position: relative; height: 1px; margin: 0 40px;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+      overflow: visible;
+    }
+    .divider-mc::before {
+      content: '⬛';
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: .6rem; opacity: .2;
+      text-shadow: -12px 0 0 rgba(0,229,255,.15), 12px 0 0 rgba(0,229,255,.15);
+    }
+
+    /* ── HERO SCAN SWEEP ── */
+    .hero-scan {
+      position: absolute; inset: 0; pointer-events: none; overflow: hidden; border-radius: 4px;
+    }
+    .hero-scan::after {
+      content: '';
+      position: absolute; top: -100%; left: 0; right: 0; height: 200%;
+      background: linear-gradient(180deg,
+        transparent 0%,
+        rgba(0,229,255,.025) 48%,
+        rgba(0,229,255,.06)  50%,
+        rgba(0,229,255,.025) 52%,
+        transparent 100%
+      );
+      animation: scanSweep 8s ease-in-out infinite;
+    }
+    @keyframes scanSweep {
+      0%   { transform: translateY(0%); opacity: 0; }
+      10%  { opacity: 1; }
+      90%  { opacity: 1; }
+      100% { transform: translateY(50%); opacity: 0; }
+    }
+
+    /* ── FLOATING DUST PARTICLES ── */
+    .dust-canvas {
+      position: fixed; inset: 0; pointer-events: none; z-index: 0;
+    }
+
     /* ── RESPONSIVE ── */
     @media (max-width: 900px) {
       .staff-unified-grid { grid-template-columns: 1fr 1fr; }
+      .mc-mob-wrap { display: none; }
     }
     @media (max-width: 768px) {
       nav { padding: 0 20px; }
@@ -625,6 +782,7 @@
       .btn-join-server .join-text { align-items: center; }
       .staff-unified-grid { grid-template-columns: 1fr; }
       .vote-grid { grid-template-columns: 1fr; }
+      .hero-hud { padding: 16px 20px; }
     }
     @media (max-width: 480px) {
       .hero-btns-secondary { flex-direction: column; align-items: stretch; }
@@ -639,8 +797,28 @@
   <div class="planet-deco"></div>
   <div class="planet-deco-2"></div>
   <div class="scanlines"></div>
-  <div class="scroll-line" id="scrollLine"></div>
+  <div class="destiny-grid"></div>
+
+  <!-- Stars canvas (original) -->
   <canvas id="starCanvas" style="position:fixed;inset:0;z-index:0;pointer-events:none"></canvas>
+  <!-- Dust particles canvas (new) -->
+  <canvas class="dust-canvas" id="dustCanvas"></canvas>
+
+  <!-- ═══ MINECRAFT MOB SPRITES ═══ -->
+  <div class="mc-mob-wrap mc-chick-wrap">
+    <canvas id="mc-chick" width="50" height="50"></canvas>
+    <span class="mob-label">POLLITO</span>
+  </div>
+  <div class="mc-mob-wrap mc-axolotl-wrap">
+    <canvas id="mc-axolotl" width="90" height="45"></canvas>
+    <span class="mob-label">AXOLOTE</span>
+  </div>
+  <div class="mc-mob-wrap mc-turtle-wrap">
+    <canvas id="mc-turtle" width="70" height="45"></canvas>
+    <span class="mob-label">TORTUGA</span>
+  </div>
+
+  <div class="scroll-line" id="scrollLine"></div>
 
   <!-- ═══ NAV ═══ -->
   <nav>
@@ -665,16 +843,25 @@
   <section id="inicio">
     <div class="hero-inner">
       <div class="hero-badge"><span class="blink"></span> SERVIDOR EN LÍNEA · planetmc.net</div>
-      <h1 class="hero-title">
-        Explora un<br>
-        universo <span class="hl">sin límites</span><br>
-        en <span class="hl2">Minecraft</span>.
-      </h1>
-      <p class="hero-sub">
-        Únete a la comunidad más épica. Aventuras, rangos, eventos y mucho más<br>
-        te esperan en el servidor.
-      </p>
-      <div class="hero-btns-wrap">
+
+      <div class="hero-hud">
+        <div class="hud-corners">
+          <span class="hud-corner-br"></span>
+          <span class="hud-corner-bl"></span>
+        </div>
+        <div class="hero-scan"></div>
+        <h1 class="hero-title">
+          Explora un<br>
+          universo <span class="hl">sin límites</span><br>
+          en <span class="hl2">Minecraft</span>.
+        </h1>
+        <p class="hero-sub">
+          Únete a la comunidad más épica. Aventuras, rangos, eventos y mucho más<br>
+          te esperan en el servidor.
+        </p>
+      </div>
+
+      <div class="hero-btns-wrap" style="margin-top:28px">
         <button class="btn-join-server" onclick="copyIP()">
           <span class="join-icon"><i class="fas fa-satellite-dish"></i></span>
           <span class="join-text">
@@ -691,12 +878,12 @@
     </div>
   </section>
 
-  <div class="divider"></div>
+  <div class="divider-mc"></div>
 
   <!-- ═══ TIENDA ═══ -->
   <section id="tienda" class="sec-wrap">
     <div class="container">
-      <div class="section-header reveal">
+      <div class="section-header reveal" style="position:relative">
         <p class="sec-title">// SHOP</p>
         <h2 class="sec-heading">Tienda del Servidor</h2>
         <p class="sec-desc">Obtén rangos exclusivos y mejora tu experiencia de juego.</p>
@@ -745,7 +932,7 @@
     </div>
   </section>
 
-  <div class="divider"></div>
+  <div class="divider-mc"></div>
 
   <!-- ═══ VOTAR ═══ -->
   <section id="votar" class="sec-wrap">
@@ -807,7 +994,7 @@
     </div>
   </section>
 
-  <div class="divider"></div>
+  <div class="divider-mc"></div>
 
   <!-- ═══ SOPORTE ═══ -->
   <section id="soporte" class="sec-wrap">
@@ -838,7 +1025,7 @@
     </div>
   </section>
 
-  <div class="divider"></div>
+  <div class="divider-mc"></div>
 
   <!-- ═══ GUÍAS ═══ -->
   <section id="guias" class="sec-wrap">
@@ -896,7 +1083,7 @@
     </div>
   </section>
 
-  <div class="divider"></div>
+  <div class="divider-mc"></div>
 
   <!-- ═══ NORMAS ═══ -->
   <section id="normas" class="sec-wrap">
@@ -919,9 +1106,9 @@
     </div>
   </section>
 
-  <div class="divider"></div>
+  <div class="divider-mc"></div>
 
-  <!-- ═══ JERARQUÍA (antes: STAFF) ═══ -->
+  <!-- ═══ JERARQUÍA ═══ -->
   <section id="jerarquia" class="sec-wrap">
     <div class="container">
 
@@ -933,7 +1120,6 @@
 
       <div class="staff-unified-grid">
 
-        <!-- OWNER -->
         <div class="su-card rank-owner reveal">
           <div class="su-header">
             <div class="su-icon-wrap">👑<span class="su-dot"></span></div>
@@ -968,7 +1154,6 @@
           </div>
         </div>
 
-        <!-- ADMIN -->
         <div class="su-card rank-admin reveal">
           <div class="su-header">
             <div class="su-icon-wrap">🛡️<span class="su-dot"></span></div>
@@ -984,7 +1169,6 @@
           </div>
         </div>
 
-        <!-- MODERADOR -->
         <div class="su-card rank-mod reveal">
           <div class="su-header">
             <div class="su-icon-wrap">⚙️<span class="su-dot"></span></div>
@@ -1000,7 +1184,6 @@
           </div>
         </div>
 
-        <!-- HELPER -->
         <div class="su-card rank-helper reveal">
           <div class="su-header">
             <div class="su-icon-wrap">🌟<span class="su-dot"></span></div>
@@ -1016,7 +1199,6 @@
           </div>
         </div>
 
-        <!-- SOPORTE STAFF -->
         <div class="su-card rank-support reveal">
           <div class="su-header">
             <div class="su-icon-wrap">💬<span class="su-dot"></span></div>
@@ -1032,9 +1214,8 @@
           </div>
         </div>
 
-      </div><!-- /staff-unified-grid -->
+      </div>
 
-      <!-- ★ CTA STAFF ★ -->
       <div class="staff-cta reveal">
         <p class="staff-cta-text">¿Quieres ser parte de <span>nuestro staff</span>?</p>
         <a href="https://discord.gg/HvcPfgXVHf" target="_blank" class="btn-apply">
@@ -1045,7 +1226,7 @@
     </div>
   </section>
 
-  <div class="divider"></div>
+  <div class="divider-mc"></div>
 
   <!-- ═══ REDES ═══ -->
   <section id="redes" class="sec-wrap">
@@ -1073,7 +1254,7 @@
   <div class="ip-toast" id="ipToast"><i class="fas fa-check" style="margin-right:8px"></i>IP copiada: planetmc.net</div>
 
   <script>
-    /* ── Stars canvas ── */
+    /* ── Stars canvas (original) ── */
     const canvas = document.getElementById('starCanvas');
     const ctx    = canvas.getContext('2d');
     let stars    = [];
@@ -1104,7 +1285,7 @@
       });
       requestAnimationFrame(drawStars);
     }
-    window.addEventListener('resize', () => { resize(); initStars(); });
+    window.addEventListener('resize', () => { resize(); initStars(); resizeDust(); });
     window.addEventListener('scroll', () => { scrollY_ = window.scrollY; }, { passive: true });
     resize(); initStars(); drawStars();
 
@@ -1159,6 +1340,116 @@
         document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
       });
     });
+
+    /* ═══════════════════════════════════════════════
+       ▓▓ DUST PARTICLES (floating cosmic dust) ▓▓
+    ═══════════════════════════════════════════════ */
+    const dustCv  = document.getElementById('dustCanvas');
+    const dustCtx = dustCv.getContext('2d');
+    let   dustPts = [];
+
+    function resizeDust() { dustCv.width = innerWidth; dustCv.height = innerHeight; }
+    function initDust() {
+      dustPts = Array.from({ length: 55 }, () => ({
+        x: Math.random() * dustCv.width,
+        y: Math.random() * dustCv.height,
+        vx: (Math.random() - 0.5) * 0.18,
+        vy: (Math.random() - 0.5) * 0.18 - 0.04,
+        r: Math.random() * 1.4 + 0.3,
+        alpha: Math.random() * 0.35 + 0.05,
+        hue: Math.random() > 0.5 ? '180,240,255' : '180,140,255'
+      }));
+    }
+    function drawDust() {
+      dustCtx.clearRect(0, 0, dustCv.width, dustCv.height);
+      dustPts.forEach(p => {
+        p.x += p.vx; p.y += p.vy;
+        if (p.x < 0)            p.x = dustCv.width;
+        if (p.x > dustCv.width) p.x = 0;
+        if (p.y < 0)            p.y = dustCv.height;
+        if (p.y > dustCv.height) p.y = 0;
+        const grad = dustCtx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r * 2.5);
+        grad.addColorStop(0, `rgba(${p.hue},${p.alpha})`);
+        grad.addColorStop(1, `rgba(${p.hue},0)`);
+        dustCtx.beginPath();
+        dustCtx.arc(p.x, p.y, p.r * 2.5, 0, Math.PI * 2);
+        dustCtx.fillStyle = grad;
+        dustCtx.fill();
+      });
+      requestAnimationFrame(drawDust);
+    }
+    resizeDust(); initDust(); drawDust();
+
+    /* ═══════════════════════════════════════════════
+       ▓▓ MINECRAFT PIXEL ART SPRITES ▓▓
+       Drawn via Canvas API - pixel-perfect
+    ═══════════════════════════════════════════════ */
+    function drawSprite(id, data, scale) {
+      const cv = document.getElementById(id);
+      if (!cv) return;
+      const cx = cv.getContext('2d');
+      cx.imageSmoothingEnabled = false;
+      cx.clearRect(0, 0, cv.width, cv.height);
+      data.forEach((row, y) => {
+        row.forEach((col, x) => {
+          if (!col) return;
+          cx.fillStyle = col;
+          cx.fillRect(x * scale, y * scale, scale, scale);
+        });
+      });
+    }
+
+    /* ── Color palettes ── */
+    const _ = null;
+
+    /* ── Baby Chick (10×10, scale=5 → 50×50px) ── */
+    const YB='#FFD700', YD='#D4AF00', OC='#FF7A00', ED='#1A0800', HW='#FFFACC', FS='#FF9500';
+    const chickData = [
+      [_, _, YB, YB, YB, YB, YB, _, _, _],
+      [_, YB, YB, YB, YB, YB, YB, YB, _, _],
+      [_, YB, HW, ED, YB, YB, YB, YB, _, _],
+      [_, YB, YB, OC, OC, YB, YB, YB, _, _],
+      [_, YB, YB, YB, YB, YB, YB, YB, _, _],
+      [_, _, YB, YD, YD, YD, YB, _, _, _],
+      [_, _, YB, YD, YD, YD, YB, _, _, _],
+      [_, _, _, YB, YB, YB, _, _, _, _],
+      [_, _, _, FS, _, FS, _, _, _, _],
+      [_, _, _, FS, _, FS, _, _, _, _],
+    ];
+
+    /* ── Axolotl (18×9, scale=5 → 90×45px) ── */
+    const AP='#FF6B9D', AL='#FFC0D8', AG='#CC2266', AE='#180007', AT='#FF3380', AO='#FFB0CC';
+    const axolotlData = [
+      [_, AG, _, AG, _, AG, _, _, _, _, _, _, _, _, _, _, _, _],
+      [_, AG, AG, AG, AG, AG, AG, _, _, _, _, _, _, _, _, _, _, _],
+      [AP, AP, AP, AP, AP, AP, AP, AP, AP, _, _, _, _, _, _, _, _, _],
+      [AP, AP, AE, AP, AL, AL, AP, AP, AP, AP, AP, _, _, _, _, _, _, _],
+      [AP, AP, AP, AL, AL, AL, AL, AP, AP, AP, AP, AP, _, _, _, _, _, _],
+      [AP, AP, AL, AL, AL, AL, AP, AP, AP, AP, AP, AP, AP, _, _, _, _, _],
+      [_, AP, AP, AP, AP, AP, AP, AP, AP, AP, AP, AP, AP, AP, _, _, _, _],
+      [_, _, _, _, AP, AP, AP, AP, AP, AP, AP, AP, AP, AP, AT, _, _, _],
+      [_, _, _, _, _, _, AP, AP, AP, AP, AT, AT, _, _, _, _, _, _],
+    ];
+
+    /* ── Baby Turtle (14×9, scale=5 → 70×45px) ── */
+    const TG='#3CB54E', TD='#1E6B2A', TM='#2B8F3C', TW='#92E8A0', TE='#0D1A0D', TL='#72D480';
+    const turtleData = [
+      [_, _, _, TD, TD, TD, TD, TD, TD, TD, _, _, _, _],
+      [_, _, TD, TG, TM, TD, TM, TD, TM, TG, TD, _, _, _],
+      [TG, TG, TG, TM, TD, TM, TD, TM, TD, TM, TG, TG, TG, _],
+      [TG, TE, TG, TG, TG, TG, TG, TG, TG, TG, TG, TG, TG, TG],
+      [TG, TG, TW, TW, TW, TW, TW, TW, TW, TW, TW, TG, TG, _],
+      [_, TG, TW, TW, TW, TW, TW, TW, TW, TW, TG, _, _, _],
+      [_, TG, TL, TL, _, TL, TL, _, _, TL, TG, _, _, _],
+      [_, _, TG, TG, _, TG, TG, _, _, TG, _, _, _, _],
+      [_, _, TG, _, _, TG, _, _, _, _, _, _, _, _],
+    ];
+
+    /* Draw all sprites */
+    drawSprite('mc-chick',   chickData,    5);
+    drawSprite('mc-axolotl', axolotlData,  5);
+    drawSprite('mc-turtle',  turtleData,   5);
+
   </script>
 </body>
 </html>
