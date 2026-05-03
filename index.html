@@ -416,6 +416,20 @@
     }
     @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.2} }
 
+    /* ── PILL: MANTENIMIENTO (rojo) ── */
+    .ip-maintenance-pill {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: var(--mono); font-size: .72rem; color: #ff4d4d;
+      border: 1px solid rgba(255,77,77,.4); background: rgba(255,77,77,.08);
+      padding: 5px 16px; border-radius: 99px; letter-spacing: 1px;
+    }
+    .ip-maintenance-pill .blink-red {
+      display: inline-block; width: 7px; height: 7px; border-radius: 50%;
+      background: #ff4d4d; box-shadow: 0 0 6px rgba(255,77,77,.8);
+      animation: blinkRed 1s infinite;
+    }
+    @keyframes blinkRed { 0%,100%{opacity:1} 50%{opacity:.15} }
+
     /* ══ IP BLOCKS ══ */
     .ip-blocks-wrap { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
 
@@ -836,11 +850,21 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
         <div class="hero-btns-wrap">
 
-          <!-- STATUS -->
+          <!-- ══════════════════════════════════════════════
+               ESTADO DEL SERVIDOR — TOGGLE
+               ─────────────────────────────────────────────
+               ✅ ONLINE:       deja la línea SIN comentar  (activo por defecto)
+               🔧 MANTENIMIENTO: comenta la línea ONLINE y
+                                 descomenta la línea MANTENIMIENTO
+               ══════════════════════════════════════════════ -->
           <div class="ip-online-row">
-            <span class="ip-online-pill" role="status" aria-live="polite">
-              <span class="blink" aria-hidden="true"></span> SERVIDOR EN LÍNEA
-            </span>
+
+            <!-- ✅ LÍNEA ONLINE — para desactivar, pon  /*  al inicio y  */  al final -->
+            <span class="ip-online-pill" role="status" aria-live="polite"><span class="blink" aria-hidden="true"></span> SERVIDOR EN LÍNEA</span>
+
+            <!-- 🔧 LÍNEA MANTENIMIENTO — para activar, quita los símbolos  /*  y  */  -->
+            <!--<span class="ip-maintenance-pill" role="status" aria-live="polite"><span class="blink-red" aria-hidden="true"></span> SERVIDOR EN MANTENIMIENTO</span>-->
+
           </div>
 
           <!-- IP BLOCKS -->
@@ -885,58 +909,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <!-- ══ EDITION CARDS ══ -->
           <div class="edition-cards-wrap" role="group" aria-label="Ediciones de Minecraft compatibles">
 
-            <!-- BEDROCK EDITION -->
-            <div class="edition-card bedrock-card" onclick="copyText('planetmc.net','IP Bedrock copiada: planetmc.net')" role="button" tabindex="0" aria-label="Edición Bedrock — Copiar IP">
-              <div class="edition-card-header">
-                <div class="edition-card-icon-wrap" aria-hidden="true">
-                  <!-- Bedrock-style cube SVG icon -->
-                  <svg class="edition-card-icon" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                    <path d="M16 4L28 10V22L16 28L4 22V10L16 4Z" fill="rgba(34,197,94,0.2)" stroke="#22c55e" stroke-width="1.5" stroke-linejoin="round"/>
-                    <path d="M16 4L28 10L16 16L4 10L16 4Z" fill="rgba(34,197,94,0.35)" stroke="#22c55e" stroke-width="1.5" stroke-linejoin="round"/>
-                    <path d="M16 16V28M4 10V22L16 28M28 10V22L16 28" stroke="#22c55e" stroke-width="1.5" stroke-linejoin="round" opacity="0.6"/>
-                  </svg>
-                </div>
-                <div>
-                  <div class="edition-card-title">BEDROCK</div>
-                  <div class="edition-card-sub">Edición para consolas y móviles</div>
-                </div>
-              </div>
-              <div class="platform-icons" aria-label="Plataformas compatibles">
-                <div class="platform-badge" title="Xbox">
-                  <i class="fab fa-xbox" aria-hidden="true"></i> XBOX
-                </div>
-                <div class="platform-badge" title="PlayStation">
-                  <i class="fab fa-playstation" aria-hidden="true"></i> PS
-                </div>
-                <div class="platform-badge" title="Nintendo Switch">
-                  <!-- Custom Switch icon -->
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#e4000f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                    <rect x="4" y="3" width="16" height="18" rx="3"/>
-                    <rect x="8" y="3" width="8" height="18" rx="1" fill="rgba(228,0,15,0.1)" stroke="rgba(228,0,15,0.5)" stroke-width="1"/>
-                    <circle cx="7" cy="8" r="1.5" fill="#e4000f"/>
-                    <circle cx="17" cy="14" r="1.5" fill="#e4000f"/>
-                  </svg>
-                  SWITCH
-                </div>
-                <div class="platform-badge" title="Android">
-                  <i class="fab fa-android" aria-hidden="true"></i> ANDROID
-                </div>
-                <div class="platform-badge" title="iOS / iPhone">
-                  <i class="fab fa-apple" aria-hidden="true"></i> iOS
-                </div>
-              </div>
-              <div class="edition-card-ip">
-                <span class="ip-val">planetmc.net</span>
-                <span class="port-tag">PUERTO 19132</span>
-                <svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="var(--accent3)" stroke-width="2" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-              </div>
-            </div>
-
-            <!-- JAVA EDITION -->
+            <!-- JAVA EDITION (izquierda) -->
             <div class="edition-card java-card" onclick="copyText('planetmc.net','IP Java copiada: planetmc.net')" role="button" tabindex="0" aria-label="Edición Java — Copiar IP">
               <div class="edition-card-header">
                 <div class="edition-card-icon-wrap" aria-hidden="true">
-                  <!-- Java diamond/pick SVG icon -->
                   <svg class="edition-card-icon" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                     <path d="M16 3L29 11V21L16 29L3 21V11L16 3Z" fill="rgba(232,124,42,0.2)" stroke="#e87c2a" stroke-width="1.5" stroke-linejoin="round"/>
                     <path d="M16 3L29 11L16 16L3 11L16 3Z" fill="rgba(232,124,42,0.35)" stroke="#e87c2a" stroke-width="1.5" stroke-linejoin="round"/>
@@ -962,8 +938,52 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               </div>
               <div class="edition-card-ip">
                 <span class="ip-val">planetmc.net</span>
-                <span class="port-tag">PUERTO 25565</span>
                 <svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="var(--java)" stroke-width="2" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              </div>
+            </div>
+
+            <!-- BEDROCK EDITION (derecha) -->
+            <div class="edition-card bedrock-card" onclick="copyText('planetmc.net','IP Bedrock copiada: planetmc.net')" role="button" tabindex="0" aria-label="Edición Bedrock — Copiar IP">
+              <div class="edition-card-header">
+                <div class="edition-card-icon-wrap" aria-hidden="true">
+                  <svg class="edition-card-icon" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path d="M16 4L28 10V22L16 28L4 22V10L16 4Z" fill="rgba(34,197,94,0.2)" stroke="#22c55e" stroke-width="1.5" stroke-linejoin="round"/>
+                    <path d="M16 4L28 10L16 16L4 10L16 4Z" fill="rgba(34,197,94,0.35)" stroke="#22c55e" stroke-width="1.5" stroke-linejoin="round"/>
+                    <path d="M16 16V28M4 10V22L16 28M28 10V22L16 28" stroke="#22c55e" stroke-width="1.5" stroke-linejoin="round" opacity="0.6"/>
+                  </svg>
+                </div>
+                <div>
+                  <div class="edition-card-title">BEDROCK</div>
+                  <div class="edition-card-sub">Edición para consolas y móviles</div>
+                </div>
+              </div>
+              <div class="platform-icons" aria-label="Plataformas compatibles">
+                <div class="platform-badge" title="Xbox">
+                  <i class="fab fa-xbox" aria-hidden="true"></i> XBOX
+                </div>
+                <div class="platform-badge" title="PlayStation">
+                  <i class="fab fa-playstation" aria-hidden="true"></i> PS
+                </div>
+                <div class="platform-badge" title="Nintendo Switch">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#e4000f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <rect x="4" y="3" width="16" height="18" rx="3"/>
+                    <rect x="8" y="3" width="8" height="18" rx="1" fill="rgba(228,0,15,0.1)" stroke="rgba(228,0,15,0.5)" stroke-width="1"/>
+                    <circle cx="7" cy="8" r="1.5" fill="#e4000f"/>
+                    <circle cx="17" cy="14" r="1.5" fill="#e4000f"/>
+                  </svg>
+                  SWITCH
+                </div>
+                <div class="platform-badge" title="Android">
+                  <i class="fab fa-android" aria-hidden="true"></i> ANDROID
+                </div>
+                <div class="platform-badge" title="iOS / iPhone">
+                  <i class="fab fa-apple" aria-hidden="true"></i> iOS
+                </div>
+              </div>
+              <div class="edition-card-ip">
+                <span class="ip-val">planetmc.net</span>
+                <span class="port-tag">PUERTO 19132</span>
+                <svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="var(--accent3)" stroke-width="2" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
               </div>
             </div>
 
