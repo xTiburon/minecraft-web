@@ -51,12 +51,13 @@
   <link rel="manifest" href="/site.webmanifest" />
 
   <!-- ════ OPEN GRAPH ════ -->
+  <!-- PATCH: og:image actualizado a banner 1200x630 para preview al compartir -->
   <meta property="og:title" content="PlanetMC — Servidor Minecraft Java & Bedrock">
   <meta property="og:description" content="El mejor servidor de Minecraft en español. Survival, eventos, rangos exclusivos y comunidad activa. Compatible con Java y Bedrock, Premium y No Premium.">
-  <meta property="og:image" content="https://planetmc.net/logo.png">
-  <meta property="og:image:width" content="512">
-  <meta property="og:image:height" content="512">
-  <meta property="og:image:alt" content="PlanetMC Logo - Servidor Minecraft">
+  <meta property="og:image" content="https://planetmc.net/assets/img/banner.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="PlanetMC — Servidor Minecraft Java & Bedrock">
   <meta property="og:url" content="https://planetmc.net">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="PlanetMC">
@@ -65,11 +66,12 @@
   <meta property="og:locale:alternate" content="pt_BR">
 
   <!-- ════ TWITTER CARD ════ -->
+  <!-- PATCH: twitter:image actualizado al mismo banner -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="PlanetMC — Servidor Minecraft Java & Bedrock">
   <meta name="twitter:description" content="El mejor servidor de Minecraft en español. Survival, eventos y rangos exclusivos. ¡Únete gratis!">
-  <meta name="twitter:image" content="https://planetmc.net/logo.png">
-  <meta name="twitter:image:alt" content="PlanetMC Logo">
+  <meta name="twitter:image" content="https://planetmc.net/assets/img/banner.png">
+  <meta name="twitter:image:alt" content="PlanetMC Banner">
   <meta name="twitter:site" content="@Planetmcnet_">
   <meta name="twitter:creator" content="@Planetmcnet_">
 
@@ -82,7 +84,7 @@
     "url": "https://planetmc.net",
     "description": "El mejor servidor de Minecraft para Java y Bedrock en español. Survival, eventos, rangos exclusivos y comunidad activa.",
     "logo": "https://planetmc.net/logo.png",
-    "image": "https://planetmc.net/logo.png",
+    "image": "https://planetmc.net/assets/img/banner.png",
     "inLanguage": ["es","en","pt"],
     "applicationCategory": "Game",
     "operatingSystem": "Windows, macOS, Linux, Android, iOS",
@@ -818,7 +820,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <li><a href="#inicio" class="active" data-i18n="nav_inicio">INICIO</a></li>
       <li><a href="#soporte" data-i18n="nav_soporte">SOPORTE</a></li>
     </ul>
-    <a href="#" data-link="staff" target="_blank" rel="noopener noreferrer" class="nav-staff-btn" aria-label="Aplicar al staff de PlanetMC en Discord">
+    <!-- PATCH: staff href ahora apunta al formulario de Google Forms -->
+    <a href="https://forms.gle/po1fM57gG9oQtKCc7" data-link="staff" target="_blank" rel="noopener noreferrer" class="nav-staff-btn" aria-label="Aplicar al staff de PlanetMC">
       <i class="fas fa-star" aria-hidden="true"></i> <span data-i18n="nav_staff">ÚNETE AL STAFF</span>
     </a>
     <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="navLinks">
@@ -949,7 +952,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <span class="card-name" data-i18n="cta_shop_name">TIENDA</span>
               <span class="card-desc" data-i18n="cta_shop">Artículos y beneficios exclusivos</span>
             </a>
-            <a href="#" data-link="wiki" target="_blank" rel="noopener noreferrer" class="hero-cta-card wiki" aria-label="Visitar la Wiki de PlanetMC" role="listitem">
+            <!-- PATCH: Wiki link corregido — ahora apunta a https://wiki.planetmc.net/ -->
+            <a href="https://wiki.planetmc.net/" data-link="wiki" target="_blank" rel="noopener noreferrer" class="hero-cta-card wiki" aria-label="Visitar la Wiki de PlanetMC" role="listitem">
               <span class="card-icon">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                   <path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/>
@@ -1065,10 +1069,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
        ✏️  CONFIGURACIÓN DE LINKS — EDITA AQUÍ
        ════════════════════════════════════════════════ */
     const CONFIG = {
-      discord:   'https://discord.gg/HvcPfgXVHf',   // 💬 Link del Discord (tickets, reportes, soporte)
-      shop:      'https://planet.tebex.io/',          // 🛒 Link de la Tienda
-      wiki:      'https://wiki.planetmc.net/',                                 // 📖 Link de la Wiki
-      staff:     'https://discord.gg/HvcPfgXVHf',    // ⭐ Link del formulario para unirse al Staff
+      discord:   'https://discord.gg/HvcPfgXVHf',           // 💬 Link del Discord
+      shop:      'https://planet.tebex.io/',                  // 🛒 Link de la Tienda
+      wiki:      'https://wiki.planetmc.net/',                // 📖 Link de la Wiki
+      staff:     'https://forms.gle/po1fM57gG9oQtKCc7',      // ⭐ Link del formulario para unirse al Staff — PATCH: actualizado a Google Forms
     };
     /* ════════════════════════════════════════════════ */
 
