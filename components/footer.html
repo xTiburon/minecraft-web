@@ -1,0 +1,26 @@
+<!-- PlanetMC — components/footer.html -->
+<!-- Standalone footer component. Loaded via JS or copied into index.html. -->
+<footer>
+  <a href="#inicio" class="foot-logo" aria-label="PlanetMC - Volver al inicio">
+    <img src="/assets/img/logo.png" alt="PlanetMC" class="foot-logo-img"
+         onerror="this.style.display='none'" width="32" height="32">
+    PLANET<span>MC</span>
+  </a>
+  <div class="foot-copy">Copyright 2026 &copy; PlanetMC &mdash; planetmc.net</div>
+
+  <!-- Language Switcher -->
+  <div class="foot-lang" role="group" aria-label="Cambiar idioma">
+    <span class="foot-lang-label">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+           stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <circle cx="12" cy="12" r="10"/>
+        <line x1="2" y1="12" x2="22" y2="12"/>
+        <path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/>
+      </svg>
+      LANG:
+    </span>
+    <button class="lang-btn active" data-lang="es" onclick="setLang('es')" aria-label="Español">ES</button>
+    <button class="lang-btn"        data-lang="en" onclick="setLang('en')" aria-label="English">EN</button>
+    <button class="lang-btn"        data-lang="pt" onclick="setLang('pt')" aria-label="Português">PT</button>
+  </div>
+</footer>
