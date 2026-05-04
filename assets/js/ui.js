@@ -1,175 +1,203 @@
 /**
- * PlanetMC — assets/js/animations.js
- * Canvas animations: stars, dust particles, Minecraft mob sprites.
+ * PlanetMC — assets/js/ui.js
+ * UI interactions: nav, scroll, reveal, copy IP, language switcher.
  */
 
-/* ════ STARS ════ */
-(function initStarCanvas() {
-  const canvas = document.getElementById('starCanvas');
-  if (!canvas) return;
-  const ctx = canvas.getContext('2d');
-  let stars = [], scrollY_ = 0;
+/* ════ SCROLL PROGRESS BAR ════ */
+window.addEventListener('scroll', () => {
+  const pct = (window.scrollY / (document.body.scrollHeight - innerHeight)) * 100;
+  const line = document.getElementById('scrollLine');
+  if (line) line.style.width = pct + '%';
+}, { passive: true });
 
-  function resize() {
-    canvas.width  = innerWidth;
-    canvas.height = innerHeight;
-  }
 
-  function initStars() {
-    const count = (typeof SETTINGS !== 'undefined') ? SETTINGS.starCount : 260;
-    stars = Array.from({ length: count }, () => ({
-      x:     Math.random() * canvas.width,
-      y:     Math.random() * canvas.height,
-      baseY: 0,
-      r:     Math.random() * 1.7 + 0.2,
-      alpha: Math.random(),
-      speed: Math.random() * .004 + .001,
-      dir:   Math.random() > .5 ? 1 : -1,
-      depth: Math.random() * .4 + .05,
-    }));
-    stars.forEach(s => s.baseY = s.y);
-  }
-
-  function drawStars() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    const sf = scrollY_ * .05;
-    stars.forEach(s => {
-      s.alpha += s.speed * s.dir;
-      if (s.alpha >= 1)    { s.alpha = 1;    s.dir = -1; }
-      if (s.alpha <= 0.05) { s.alpha = 0.05; s.dir =  1; }
-      const py = (s.baseY - sf * s.depth + canvas.height) % canvas.height;
-      ctx.beginPath();
-      ctx.arc(s.x, py, s.r, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(200,220,255,${s.alpha})`;
-      ctx.fill();
+/* ════ SCROLL REVEAL ════ */
+(function initReveal() {
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        obs.unobserve(e.target);
+      }
     });
-    requestAnimationFrame(drawStars);
-  }
-
-  window.addEventListener('resize', () => { resize(); initStars(); }, { passive: true });
-  window.addEventListener('scroll', () => { scrollY_ = window.scrollY; }, { passive: true });
-
-  resize();
-  initStars();
-  drawStars();
+  }, { threshold: .10 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 })();
 
 
-/* ════ DUST PARTICLES ════ */
-(function initDustCanvas() {
-  const dustCv  = document.getElementById('dustCanvas');
-  if (!dustCv) return;
-  const dustCtx = dustCv.getContext('2d');
-  let dustPts   = [];
+/* ════ NAV ACTIVE LINK ════ */
+(function initNavActive() {
+  const sections = document.querySelectorAll('section[id]');
+  const navAs    = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let cur = '';
+    sections.forEach(s => { if (window.scrollY >= s.offsetTop - 100) cur = s.id; });
+    navAs.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + cur));
+  }, { passive: true });
+})();
 
-  function resizeDust() {
-    dustCv.width  = innerWidth;
-    dustCv.height = innerHeight;
-  }
 
-  function initDust() {
-    const count = (typeof SETTINGS !== 'undefined') ? SETTINGS.dustCount : 55;
-    dustPts = Array.from({ length: count }, () => ({
-      x:    Math.random() * dustCv.width,
-      y:    Math.random() * dustCv.height,
-      vx:   (Math.random() - .5) * .18,
-      vy:   (Math.random() - .5) * .18 - .04,
-      r:    Math.random() * 1.4 + .3,
-      alpha: Math.random() * .35 + .05,
-      hue:  Math.random() > .5 ? '180,240,255' : '180,140,255',
-    }));
-  }
+/* ════ MOBILE NAV TOGGLE ════ */
+(function initMobileNav() {
+  const navToggle = document.getElementById('navToggle');
+  const navLinks  = document.getElementById('navLinks');
+  if (!navToggle || !navLinks) return;
 
-  function drawDust() {
-    dustCtx.clearRect(0, 0, dustCv.width, dustCv.height);
-    dustPts.forEach(p => {
-      p.x += p.vx; p.y += p.vy;
-      if (p.x < 0)            p.x = dustCv.width;
-      if (p.x > dustCv.width) p.x = 0;
-      if (p.y < 0)            p.y = dustCv.height;
-      if (p.y > dustCv.height) p.y = 0;
-      const g = dustCtx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r * 2.5);
-      g.addColorStop(0, `rgba(${p.hue},${p.alpha})`);
-      g.addColorStop(1, `rgba(${p.hue},0)`);
-      dustCtx.beginPath();
-      dustCtx.arc(p.x, p.y, p.r * 2.5, 0, Math.PI * 2);
-      dustCtx.fillStyle = g;
-      dustCtx.fill();
+  navToggle.addEventListener('click', () => {
+    const open = navLinks.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    navToggle.innerHTML = open
+      ? '<i class="fas fa-times" aria-hidden="true"></i>'
+      : '<i class="fas fa-bars" aria-hidden="true"></i>';
+  });
+
+  document.querySelectorAll('.nav-links a').forEach(a =>
+    a.addEventListener('click', () => {
+      navLinks.classList.remove('open');
+      navToggle.setAttribute('aria-expanded', 'false');
+      navToggle.innerHTML = '<i class="fas fa-bars" aria-hidden="true"></i>';
+    })
+  );
+})();
+
+
+/* ════ COPY IP ════ */
+function copyText(text, message) {
+  const showToast = () => {
+    const t = document.getElementById('ipToast');
+    if (!t) return;
+    t.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>${message}`;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2500);
+  };
+
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).then(showToast).catch(() => {
+      fallbackCopy(text); showToast();
     });
-    requestAnimationFrame(drawDust);
+  } else {
+    fallbackCopy(text); showToast();
   }
+}
 
-  window.addEventListener('resize', () => { resizeDust(); }, { passive: true });
+function fallbackCopy(text) {
+  const ta = document.createElement('textarea');
+  ta.value = text;
+  ta.style.cssText = 'position:fixed;opacity:0;top:0;left:0;';
+  document.body.appendChild(ta);
+  ta.focus(); ta.select();
+  try { document.execCommand('copy'); } catch (e) { /* silent fail */ }
+  document.body.removeChild(ta);
+}
 
-  resizeDust();
-  initDust();
-  drawDust();
-})();
+/* Keyboard access for clickable blocks */
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.ip-block, .edition-card').forEach(b => {
+    b.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); b.click(); }
+    });
+  });
+});
 
 
-/* ════ MINECRAFT PIXEL SPRITES ════ */
-(function drawMobSprites() {
-  function drawSprite(id, data, scale) {
-    const cv = document.getElementById(id);
-    if (!cv) return;
-    const cx = cv.getContext('2d');
-    cx.imageSmoothingEnabled = false;
-    cx.clearRect(0, 0, cv.width, cv.height);
-    data.forEach((row, y) =>
-      row.forEach((col, x) => {
-        if (!col) return;
-        cx.fillStyle = col;
-        cx.fillRect(x * scale, y * scale, scale, scale);
-      })
-    );
-  }
+/* ════ i18n LANGUAGE SWITCHER ════ */
+const translations = {
+  es: {
+    intro_tagline:        'Servidor Minecraft Java & Bedrock',
+    nav_inicio:           'INICIO',
+    nav_soporte:          'SOPORTE',
+    nav_staff:            'ÚNETE AL STAFF',
+    hero_sub:             'Únete a la comunidad más épica. Aventuras, rangos, eventos y mucho más te esperan en el servidor.',
+    status_online:        'SERVIDOR EN LÍNEA',
+    status_maintenance:   'SERVIDOR EN MANTENIMIENTO',
+    java_sub:             'Edición para PC y escritorio',
+    bedrock_sub:          'Edición para consolas y móviles',
+    cta_discord:          'Únete a nuestra comunidad',
+    cta_shop_name:        'TIENDA',
+    cta_shop:             'Artículos y beneficios exclusivos',
+    cta_wiki:             'Normas y guías del servidor',
+    support_label:        'AYUDA',
+    support_heading:      'Centro de Soporte',
+    support_desc:         '¿Tienes algún problema? Estamos aquí para solucionarlo.',
+    s1_title:             'Ticket en Discord',
+    s1_desc:              'Abre un ticket en nuestro servidor de Discord para soporte personalizado y rápido.',
+    s2_title:             'Reportar Jugador',
+    s2_desc:              'Reporta comportamientos que violen las normas del servidor con pruebas.',
+    s3_title:             'Reportar Bug',
+    s3_desc:              '¿Encontraste un error o glitch? Repórtalo para que lo solucionemos.',
+    s4_title:             'Soporte de Compras',
+    s4_desc:              '¿Problemas con tu pago o rango no entregado? Contáctanos con tu comprobante.',
+  },
+  en: {
+    intro_tagline:        'Minecraft Java & Bedrock Server',
+    nav_inicio:           'HOME',
+    nav_soporte:          'SUPPORT',
+    nav_staff:            'JOIN THE STAFF',
+    hero_sub:             'Join the most epic community. Adventures, ranks, events and much more await you on the server.',
+    status_online:        'SERVER ONLINE',
+    status_maintenance:   'SERVER UNDER MAINTENANCE',
+    java_sub:             'Edition for PC and desktop',
+    bedrock_sub:          'Edition for consoles and mobile',
+    cta_discord:          'Join our community',
+    cta_shop_name:        'SHOP',
+    cta_shop:             'Exclusive items and benefits',
+    cta_wiki:             'Server rules and guides',
+    support_label:        'HELP',
+    support_heading:      'Support Center',
+    support_desc:         'Having a problem? We are here to solve it.',
+    s1_title:             'Discord Ticket',
+    s1_desc:              'Open a ticket on our Discord server for personalized and fast support.',
+    s2_title:             'Report Player',
+    s2_desc:              'Report behavior that violates server rules with evidence.',
+    s3_title:             'Report Bug',
+    s3_desc:              'Found an error or glitch? Report it so we can fix it.',
+    s4_title:             'Purchase Support',
+    s4_desc:              'Problems with your payment or rank not delivered? Contact us with your receipt.',
+  },
+  pt: {
+    intro_tagline:        'Servidor Minecraft Java & Bedrock',
+    nav_inicio:           'INÍCIO',
+    nav_soporte:          'SUPORTE',
+    nav_staff:            'JUNTE-SE AO STAFF',
+    hero_sub:             'Junte-se à comunidade mais épica. Aventuras, ranks, eventos e muito mais te esperam no servidor.',
+    status_online:        'SERVIDOR ONLINE',
+    status_maintenance:   'SERVIDOR EM MANUTENÇÃO',
+    java_sub:             'Edição para PC e desktop',
+    bedrock_sub:          'Edição para consoles e mobile',
+    cta_discord:          'Entre em nossa comunidade',
+    cta_shop_name:        'LOJA',
+    cta_shop:             'Itens e benefícios exclusivos',
+    cta_wiki:             'Regras e guias do servidor',
+    support_label:        'AJUDA',
+    support_heading:      'Central de Suporte',
+    support_desc:         'Tem algum problema? Estamos aqui para resolvê-lo.',
+    s1_title:             'Ticket no Discord',
+    s1_desc:              'Abra um ticket em nosso servidor do Discord para suporte personalizado e rápido.',
+    s2_title:             'Reportar Jogador',
+    s2_desc:              'Reporte comportamentos que violem as regras do servidor com evidências.',
+    s3_title:             'Reportar Bug',
+    s3_desc:              'Encontrou um erro ou glitch? Reporte para que possamos corrigir.',
+    s4_title:             'Suporte de Compras',
+    s4_desc:              'Problemas com seu pagamento ou rank não entregue? Entre em contato com seu comprovante.',
+  },
+};
 
-  const _ = null;
+let currentLang = localStorage.getItem('pmc_lang')
+  || (typeof SETTINGS !== 'undefined' ? SETTINGS.defaultLang : 'es');
 
-  /* Chick */
-  const YB='#FFD700', YD='#D4AF00', OC='#FF7A00', ED='#1A0800', HW='#FFFACC', FS='#FF9500';
-  const chickData = [
-    [_,_,YB,YB,YB,YB,YB,_,_,_],
-    [_,YB,YB,YB,YB,YB,YB,YB,_,_],
-    [_,YB,HW,ED,YB,YB,YB,YB,_,_],
-    [_,YB,YB,OC,OC,YB,YB,YB,_,_],
-    [_,YB,YB,YB,YB,YB,YB,YB,_,_],
-    [_,_,YB,YD,YD,YD,YB,_,_,_],
-    [_,_,YB,YD,YD,YD,YB,_,_,_],
-    [_,_,_,YB,YB,YB,_,_,_,_],
-    [_,_,_,FS,_,FS,_,_,_,_],
-    [_,_,_,FS,_,FS,_,_,_,_],
-  ];
+function setLang(lang) {
+  currentLang = lang;
+  localStorage.setItem('pmc_lang', lang);
+  document.documentElement.lang = lang;
+  const t = translations[lang];
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (t[key] !== undefined) el.textContent = t[key];
+  });
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
+  });
+}
 
-  /* Axolotl */
-  const AP='#FF6B9D', AL='#FFC0D8', AG='#CC2266', AE='#180007', AT='#FF3380';
-  const axolotlData = [
-    [_,AG,_,AG,_,AG,_,_,_,_,_,_,_,_,_,_,_,_],
-    [_,AG,AG,AG,AG,AG,AG,_,_,_,_,_,_,_,_,_,_,_],
-    [AP,AP,AP,AP,AP,AP,AP,AP,AP,_,_,_,_,_,_,_,_,_],
-    [AP,AP,AE,AP,AL,AL,AP,AP,AP,AP,AP,_,_,_,_,_,_,_],
-    [AP,AP,AP,AL,AL,AL,AL,AP,AP,AP,AP,AP,_,_,_,_,_,_],
-    [AP,AP,AL,AL,AL,AL,AP,AP,AP,AP,AP,AP,AP,_,_,_,_,_],
-    [_,AP,AP,AP,AP,AP,AP,AP,AP,AP,AP,AP,AP,AP,_,_,_,_],
-    [_,_,_,_,AP,AP,AP,AP,AP,AP,AP,AP,AP,AP,AT,_,_,_],
-    [_,_,_,_,_,_,AP,AP,AP,AP,AT,AT,_,_,_,_,_,_],
-  ];
-
-  /* Turtle */
-  const TG='#3CB54E', TD='#1E6B2A', TM='#2B8F3C', TW='#92E8A0', TE='#0D1A0D', TL='#72D480';
-  const turtleData = [
-    [_,_,_,TD,TD,TD,TD,TD,TD,TD,_,_,_,_],
-    [_,_,TD,TG,TM,TD,TM,TD,TM,TG,TD,_,_,_],
-    [TG,TG,TG,TM,TD,TM,TD,TM,TD,TM,TG,TG,TG,_],
-    [TG,TE,TG,TG,TG,TG,TG,TG,TG,TG,TG,TG,TG,TG],
-    [TG,TG,TW,TW,TW,TW,TW,TW,TW,TW,TW,TG,TG,_],
-    [_,TG,TW,TW,TW,TW,TW,TW,TW,TW,TG,_,_,_],
-    [_,TG,TL,TL,_,TL,TL,_,_,TL,TG,_,_,_],
-    [_,_,TG,TG,_,TG,TG,_,_,TG,_,_,_,_],
-    [_,_,TG,_,_,TG,_,_,_,_,_,_,_,_],
-  ];
-
-  drawSprite('mc-chick',   chickData,   5);
-  drawSprite('mc-axolotl', axolotlData, 5);
-  drawSprite('mc-turtle',  turtleData,  5);
-})();
+/* Apply on load */
+document.addEventListener('DOMContentLoaded', () => setLang(currentLang));
