@@ -1,0 +1,21 @@
+{
+  "server": {
+    "ip": "planetmc.net",
+    "port_bedrock": 19132,
+    "status": "online"
+  },
+  "links": {
+    "discord":          "https://discord.gg/HvcPfgXVHf",
+    "discord-ticket":   "https://discord.gg/HvcPfgXVHf",
+    "shop":             "https://planet.tebex.io/",
+    "wiki":             "https://wiki.planetmc.net/",
+    "staff":            "https://forms.gle/po1fM57gG9oQtKCc7"
+  },
+  "analytics": {
+    "gtm_id": "GTM-M62PP28N",
+    "ga_id":  "G-Q0E6MBKTMR"
+  },
+  "intro": {
+    "hide_delay_ms": 2650
+  }
+}
