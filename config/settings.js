@@ -16,7 +16,7 @@ const SETTINGS = {
    * Set to 'online' or 'maintenance'.
    * The page will show the appropriate pill automatically.
    */
-  serverStatus: 'online', // 'online' | 'maintenance'
+  serverStatus: 'maintenance', // 'online' | 'maintenance'
 
   /** Default language — 'es' | 'en' | 'pt' */
   defaultLang: 'es',
