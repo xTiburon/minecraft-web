@@ -1,15 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+        xmlns:xhtml="http://www.w3.org/1999/xhtml"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
 
+  <!-- ════ PÁGINA PRINCIPAL — Español (canónica) ════ -->
   <url>
     <loc>https://planetmc.net/</loc>
-    <lastmod>2026-05-03</lastmod>
+    <lastmod>2026-05-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
-    <xhtml:link rel="alternate" hreflang="es"      href="https://planetmc.net/"/>
-    <xhtml:link rel="alternate" hreflang="en"      href="https://planetmc.net/en/"/>
-    <xhtml:link rel="alternate" hreflang="pt"      href="https://planetmc.net/pt/"/>
+
+    <!-- Hreflang: versiones por idioma -->
+    <xhtml:link rel="alternate" hreflang="es"        href="https://planetmc.net/"/>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://planetmc.net/en/"/>
+    <xhtml:link rel="alternate" hreflang="pt"        href="https://planetmc.net/pt/"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR"     href="https://planetmc.net/pt/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://planetmc.net/"/>
+
+    <!-- Imágenes indexables por Google -->
+    <image:image>
+      <image:loc>https://planetmc.net/logo.png</image:loc>
+      <image:title>PlanetMC — Logo oficial del servidor</image:title>
+      <image:caption>Logo de PlanetMC, servidor de Minecraft Java y Bedrock</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://planetmc.net/assets/img/banner.png</image:loc>
+      <image:title>PlanetMC — Banner del servidor Minecraft</image:title>
+      <image:caption>Banner oficial de PlanetMC, servidor Minecraft Java y Bedrock en español</image:caption>
+    </image:image>
+  </url>
+
+  <!-- ════ VERSIÓN EN INGLÉS ════ -->
+  <url>
+    <loc>https://planetmc.net/en/</loc>
+    <lastmod>2026-05-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+
+    <xhtml:link rel="alternate" hreflang="es"        href="https://planetmc.net/"/>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://planetmc.net/en/"/>
+    <xhtml:link rel="alternate" hreflang="pt"        href="https://planetmc.net/pt/"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR"     href="https://planetmc.net/pt/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://planetmc.net/"/>
+  </url>
+
+  <!-- ════ VERSIÓN EN PORTUGUÉS ════ -->
+  <url>
+    <loc>https://planetmc.net/pt/</loc>
+    <lastmod>2026-05-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+
+    <xhtml:link rel="alternate" hreflang="es"        href="https://planetmc.net/"/>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://planetmc.net/en/"/>
+    <xhtml:link rel="alternate" hreflang="pt"        href="https://planetmc.net/pt/"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR"     href="https://planetmc.net/pt/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://planetmc.net/"/>
   </url>
 
