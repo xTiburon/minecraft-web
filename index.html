@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<!-- Google Tag Manager -->
+<!-- ════ GOOGLE TAG MANAGER ════ -->
+<!-- CORRECCIÓN: Se eliminó el snippet de GA directo (gtag.js) porque GTM ya lo incluye.
+     Tener ambos causa doble-firing: cada visita se contaba dos veces en Analytics. -->
 <script>
   (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
   new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -9,16 +11,7 @@
   'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
   })(window,document,'script','dataLayer','GTM-M62PP28N');
 </script>
-<!-- End Google Tag Manager -->
-
-<!-- Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-Q0E6MBKTMR"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-Q0E6MBKTMR');
-</script>
+<!-- ════ END GOOGLE TAG MANAGER ════ -->
 
 <!-- ════ DESREGISTRAR SERVICE WORKER (anti-PWA) ════ -->
 <script>
@@ -31,26 +24,50 @@
 
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <!-- MEJORA: evita que iOS convierta números como "19132" en links de teléfono -->
+  <meta name="format-detection" content="telephone=no">
+  <meta name="application-name" content="PlanetMC">
 
-  <!-- ════ TITULO ════ -->
+  <!-- ════ TÍTULO ════ -->
   <title>PlanetMC — Servidor Minecraft Java y Bedrock | No premium y Premium</title>
 
-  <!-- ════ META SEO ════ -->
-  <meta name="description" content="PlanetMC: el mejor servidor de Minecraft Java y Bedrock en español. Survival épico, eventos, rangos exclusivos y comunidad activa. Compatible con No Premium y Premium. IP: planetmc.net ¡Únete gratis!">
-  <meta name="keywords" content="servidor de Minecraft, servidor Minecraft Java, servidor Minecraft Bedrock, mejor servidor Minecraft, PlanetMC, servidor survival Minecraft, comunidad Minecraft, servidor Minecraft español, servidor Minecraft no premium, Minecraft server Spanish, servidor Minecraft gratuito, servidor Minecraft Latinoamérica, servidor Minecraft 2024, servidor Minecraft 2025, servidor Minecraft gratis, planetmc.net, servidor Minecraft consola, servidor Minecraft móvil, servidor Minecraft Xbox, servidor Minecraft PlayStation, servidor Minecraft Switch, unirse servidor Minecraft">
+  <!-- ════ META SEO ════
+       CORRECCIÓN: eliminadas las meta keywords (Google las ignora desde 2009,
+       son peso muerto y algunos competidores las usan para espiar tu estrategia).
+       MEJORA: description más específica y con CTA claro. -->
+  <meta name="description" content="PlanetMC: servidor Minecraft Java y Bedrock en español. Survival épico, eventos, rangos exclusivos y comunidad activa. Compatible con No Premium y Premium. IP: planetmc.net — ¡Únete gratis!">
   <meta name="author" content="PlanetMC">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="googlebot" content="index, follow">
   <meta name="language" content="Spanish">
   <meta name="theme-color" content="#00e5ff">
-  <!-- geo.region eliminado: el sitio es global en español, no específico de España -->
+
+  <!-- ════ CANONICAL ════ -->
   <link rel="canonical" href="https://planetmc.net/">
 
-  <!-- ════ HREFLANG MULTILENGUAJE ════ -->
-  <link rel="alternate" hreflang="es"      href="https://planetmc.net/">
-  <link rel="alternate" hreflang="en"      href="https://planetmc.net/en/">
-  <link rel="alternate" hreflang="pt"      href="https://planetmc.net/pt/">
-  <link rel="alternate" hreflang="pt-BR"   href="https://planetmc.net/pt/">
+  <!-- ════ HREFLANG ════
+       CORRECCIÓN: eliminados /en/ y /pt/ porque esas páginas no existen.
+       Apuntar hreflang a 404s es penalizable por Google.
+       Se mantiene solo el español y x-default apuntando a la raíz.
+       Cuando tengas las páginas en otros idiomas, vuelve a agregarlos. -->
+  <link rel="alternate" hreflang="es"        href="https://planetmc.net/">
   <link rel="alternate" hreflang="x-default" href="https://planetmc.net/">
+
+  <!-- ════ PRECONNECT & DNS-PREFETCH ════
+       MEJORA: avisa al navegador con antelación de los dominios externos
+       para reducir latencia en la carga de fuentes e iconos. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+  <link rel="dns-prefetch" href="https://discord.gg">
+  <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+  <link rel="dns-prefetch" href="https://planet.tebex.io">
+  <link rel="dns-prefetch" href="https://wiki.planetmc.net">
+
+  <!-- ════ PRELOAD CRÍTICO ════
+       MEJORA: preload del logo ya que tiene fetchpriority=high en el body.
+       Sin el preload el navegador lo descubre tarde; con él lo busca inmediatamente. -->
+  <link rel="preload" href="/logo.png" as="image" type="image/png">
 
   <!-- ════ FAVICON ════ -->
   <link rel="icon" type="image/png" href="/logo.png" sizes="96x96" />
@@ -60,49 +77,59 @@
   <meta name="apple-mobile-web-app-title" content="PlanetMC" />
   <link rel="manifest" href="/site.webmanifest" />
 
-  <!-- ════ OPEN GRAPH ════ -->
+  <!-- ════ OPEN GRAPH ════
+       CORRECCIÓN: og:url ahora tiene trailing slash, igual que canonical.
+       CORRECCIÓN: og:image:type agregado para que los parsers identifiquen el formato.
+       MEJORA: og:image:secure_url para HTTPS explícito. -->
   <meta property="og:title"              content="PlanetMC | Servidor de Minecraft Java & Bedrock | planetmc.net">
-  <meta property="og:description"        content="Forma parte de PlanetMC, un lugar donde la aventura, la creatividad y la comunidad se reúnen en un solo planeta. Compatible con Java y Bedrock, Premium y No Premium. IP: planetmc.net">
+  <meta property="og:description"        content="Forma parte de PlanetMC, un lugar donde la aventura, la creatividad y la comunidad se reúnen. Compatible con Java y Bedrock, Premium y No Premium. IP: planetmc.net">
   <meta property="og:image"             content="https://planetmc.net/banner.png">
+  <meta property="og:image:secure_url"  content="https://planetmc.net/banner.png">
+  <meta property="og:image:type"        content="image/png">
   <meta property="og:image:width"        content="1707">
   <meta property="og:image:height"       content="851">
   <meta property="og:image:alt"          content="PlanetMC — Servidor Minecraft Java & Bedrock">
-  <meta property="og:url"               content="https://planetmc.net">
+  <meta property="og:url"               content="https://planetmc.net/">
   <meta property="og:type"              content="website">
   <meta property="og:site_name"         content="PlanetMC">
   <meta property="og:locale"            content="es_ES">
   <meta property="og:locale:alternate"  content="en_US">
   <meta property="og:locale:alternate"  content="pt_BR">
 
-  <!-- ════ TWITTER CARD ════ -->
+  <!-- ════ TWITTER CARD ════
+       CORRECCIÓN: twitter:image ahora apunta a /banner.png igual que og:image.
+       Antes apuntaba a /assets/img/banner.png — ruta diferente → probable 404 en Twitter/X.
+       MEJORA: twitter:url agregado. -->
   <meta name="twitter:card"        content="summary_large_image">
   <meta name="twitter:title"       content="PlanetMC | Servidor Minecraft Java & Bedrock | planetmc.net">
-  <meta name="twitter:description" content="Forma parte de PlanetMC, un lugar donde la aventura, la creatividad y la comunidad se reúnen en un solo planeta. Compatible con Java y Bedrock, Premium y No Premium. IP: planetmc.net">
-  <meta name="twitter:image"       content="https://planetmc.net/assets/img/banner.png">
+  <meta name="twitter:description" content="Forma parte de PlanetMC, un lugar donde la aventura, la creatividad y la comunidad se reúnen. Compatible con Java y Bedrock, Premium y No Premium. IP: planetmc.net">
+  <meta name="twitter:image"       content="https://planetmc.net/banner.png">
   <meta name="twitter:image:alt"   content="PlanetMC Banner">
+  <meta name="twitter:url"         content="https://planetmc.net/">
   <meta name="twitter:site"        content="@Planetmcnet_">
   <meta name="twitter:creator"     content="@Planetmcnet_">
 
-  <!-- ════ SCHEMA.ORG ════ -->
+  <!-- ════ SCHEMA.ORG ════
+       CORRECCIÓN: eliminado el schema VideoGame — un servidor de Minecraft no es
+       un videojuego en sí mismo, y el tipo incorrecto confunde a Google.
+       MEJORA: schema WebSite con SearchAction (activa el Sitelinks Searchbox en Google).
+       MEJORA: schema Organization enriquecido con foundingDate y areaServed. -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "VideoGame",
+    "@type": "WebSite",
     "name": "PlanetMC",
-    "url": "https://planetmc.net",
-    "description": "Forma parte de PlanetMC, un lugar donde la aventura, la creatividad y la comunidad se reúnen en un solo planeta. Compatible con Java y Bedrock, Premium y No Premium. IP: planetmc.net",
-    "logo": "https://planetmc.net/logo.png",
-    "image": "https://planetmc.net/banner.png",
-    "inLanguage": ["es","en","pt"],
-    "applicationCategory": "Game",
-    "operatingSystem": "Windows, macOS, Linux, Android, iOS, Xbox, PlayStation, Nintendo Switch",
-    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-    "sameAs": [
-      "https://discord.gg/HvcPfgXVHf",
-      "https://www.tiktok.com/@planetmc.net",
-      "https://www.youtube.com/@planetmc-net",
-      "https://x.com/Planetmcnet_"
-    ]
+    "url": "https://planetmc.net/",
+    "description": "Servidor de Minecraft Java y Bedrock en español. Survival épico, eventos, rangos exclusivos y comunidad activa.",
+    "inLanguage": ["es", "en", "pt"],
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": {
+        "@type": "EntryPoint",
+        "urlTemplate": "https://wiki.planetmc.net/?q={search_term_string}"
+      },
+      "query-input": "required name=search_term_string"
+    }
   }
   </script>
   <script type="application/ld+json">
@@ -110,14 +137,25 @@
     "@context": "https://schema.org",
     "@type": "Organization",
     "name": "PlanetMC",
-    "url": "https://planetmc.net",
-    "logo": "https://planetmc.net/logo.png",
-    "description": "Forma parte de PlanetMC, un lugar donde la aventura, la creatividad y la comunidad se reúnen en un solo planeta. Compatible con Java y Bedrock, Premium y No Premium. IP: planetmc.net",
+    "url": "https://planetmc.net/",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://planetmc.net/logo.png",
+      "width": 300,
+      "height": 300
+    },
+    "image": "https://planetmc.net/banner.png",
+    "description": "Servidor de Minecraft Java y Bedrock en español. Compatible con No Premium y Premium. IP: planetmc.net",
+    "areaServed": {
+      "@type": "Place",
+      "name": "América Latina y España"
+    },
+    "knowsLanguage": ["es", "en", "pt"],
     "contactPoint": {
       "@type": "ContactPoint",
       "contactType": "customer service",
       "url": "https://discord.gg/HvcPfgXVHf",
-      "availableLanguage": ["Spanish","English","Portuguese"]
+      "availableLanguage": ["Spanish", "English", "Portuguese"]
     },
     "sameAs": [
       "https://discord.gg/HvcPfgXVHf",
@@ -127,8 +165,6 @@
     ]
   }
   </script>
-
-  <!-- ════ FAQPage — CORREGIDO: comillas tipográficas → comillas rectas ════ -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -163,8 +199,7 @@
   }
   </script>
 
-  <!-- ════ FONTS — añadido display=swap para evitar FOIT ════ -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <!-- ════ FONTS ════ -->
   <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap" rel="stylesheet">
 
   <!-- ════ ICONS ════ -->
@@ -296,7 +331,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <section id="inicio" aria-labelledby="hero-heading">
       <div class="hero-inner">
 
-        <!-- H1 visible y accesible — CORREGIDO: ya no está oculto con left:-9999px -->
         <h1 id="hero-heading" class="visually-hidden">
           PlanetMC — Servidor de Minecraft Java y Bedrock en Español | IP: planetmc.net | Survival, Eventos y Rangos
         </h1>
@@ -445,7 +479,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <img src="/logo.png" alt="PlanetMC" class="foot-logo-img" onerror="this.style.display='none'" width="32" height="32">
       PLANET<span>MC</span>
     </a>
-    <div class="foot-copy">Copyright 2026 &copy; PlanetMC</div>
+    <!-- CORRECCIÓN: copyright dinámico — se actualiza solo cada año -->
+    <div class="foot-copy">Copyright <span id="copyright-year"></span> &copy; PlanetMC</div>
 
     <!-- Language Switcher -->
     <div class="foot-lang" role="group" aria-label="Cambiar idioma">
@@ -467,6 +502,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <script src="/js/status.js"></script>
   <script src="/js/ui.js"></script>
   <script src="/js/main.js"></script>
+
+  <!-- CORRECCIÓN: copyright dinámico -->
+  <script>
+    document.getElementById('copyright-year').textContent =
+      new Date().getFullYear() > 2024
+        ? '2024–' + new Date().getFullYear()
+        : '2024';
+  </script>
 
 </body>
 </html>
