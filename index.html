@@ -22,6 +22,161 @@
   }
 </script>
 
+<!-- ════ PROTECCIÓN ANTI-DEVTOOLS ════ -->
+<script>
+(function() {
+  'use strict';
+
+  // ── 1. Deshabilitar clic derecho ──────────────────────────────────────────
+  document.addEventListener('contextmenu', function(e) {
+    e.preventDefault();
+    return false;
+  });
+
+  // ── 2. Bloquear atajos de teclado del inspector ───────────────────────────
+  document.addEventListener('keydown', function(e) {
+    var key = e.key || e.keyCode;
+
+    // F12
+    if (key === 'F12' || e.keyCode === 123) {
+      e.preventDefault(); e.stopPropagation(); return false;
+    }
+    // Ctrl+Shift+I  (DevTools)
+    if (e.ctrlKey && e.shiftKey && (key === 'I' || key === 'i' || e.keyCode === 73)) {
+      e.preventDefault(); e.stopPropagation(); return false;
+    }
+    // Ctrl+Shift+J  (Consola)
+    if (e.ctrlKey && e.shiftKey && (key === 'J' || key === 'j' || e.keyCode === 74)) {
+      e.preventDefault(); e.stopPropagation(); return false;
+    }
+    // Ctrl+Shift+C  (Inspector de elemento)
+    if (e.ctrlKey && e.shiftKey && (key === 'C' || key === 'c' || e.keyCode === 67)) {
+      e.preventDefault(); e.stopPropagation(); return false;
+    }
+    // Ctrl+U  (Ver código fuente)
+    if (e.ctrlKey && (key === 'U' || key === 'u' || e.keyCode === 85)) {
+      e.preventDefault(); e.stopPropagation(); return false;
+    }
+    // Ctrl+S  (Guardar página)
+    if (e.ctrlKey && (key === 'S' || key === 's' || e.keyCode === 83)) {
+      e.preventDefault(); e.stopPropagation(); return false;
+    }
+    // Ctrl+A  (Seleccionar todo)
+    if (e.ctrlKey && (key === 'A' || key === 'a' || e.keyCode === 65)) {
+      e.preventDefault(); e.stopPropagation(); return false;
+    }
+    // Ctrl+P  (Imprimir / también expone el DOM)
+    if (e.ctrlKey && (key === 'P' || key === 'p' || e.keyCode === 80)) {
+      e.preventDefault(); e.stopPropagation(); return false;
+    }
+    // Ctrl+Shift+K  (Firefox DevTools)
+    if (e.ctrlKey && e.shiftKey && (key === 'K' || key === 'k' || e.keyCode === 75)) {
+      e.preventDefault(); e.stopPropagation(); return false;
+    }
+    // Cmd+Option+I  (macOS Chrome/Safari)
+    if (e.metaKey && e.altKey && (key === 'I' || key === 'i' || e.keyCode === 73)) {
+      e.preventDefault(); e.stopPropagation(); return false;
+    }
+    // Cmd+Option+J  (macOS Chrome Consola)
+    if (e.metaKey && e.altKey && (key === 'J' || key === 'j' || e.keyCode === 74)) {
+      e.preventDefault(); e.stopPropagation(); return false;
+    }
+    // Cmd+Option+C  (macOS Inspector)
+    if (e.metaKey && e.altKey && (key === 'C' || key === 'c' || e.keyCode === 67)) {
+      e.preventDefault(); e.stopPropagation(); return false;
+    }
+    // Cmd+U  (macOS ver fuente)
+    if (e.metaKey && (key === 'U' || key === 'u' || e.keyCode === 85)) {
+      e.preventDefault(); e.stopPropagation(); return false;
+    }
+  }, true);
+
+  // ── 3. Deshabilitar selección de texto ────────────────────────────────────
+  document.addEventListener('selectstart', function(e) {
+    e.preventDefault();
+    return false;
+  });
+
+  // ── 4. Deshabilitar drag de imágenes/elementos ────────────────────────────
+  document.addEventListener('dragstart', function(e) {
+    e.preventDefault();
+    return false;
+  });
+
+  // ── 5. Trampa de consola — mensaje de advertencia ─────────────────────────
+  var _warnStyle = [
+    'color:#ff4444',
+    'font-size:24px',
+    'font-weight:bold',
+    'text-shadow: 0 0 8px #ff0000'
+  ].join(';');
+  var _infoStyle = [
+    'color:#00e5ff',
+    'font-size:13px'
+  ].join(';');
+  setTimeout(function() {
+    console.clear();
+    console.log('%c⚠ STOP!', _warnStyle);
+    console.log(
+      '%cEsta es una herramienta para desarrolladores. Si alguien te dijo que\npegues algo aquí, es un intento de fraude (Self-XSS).\nPlanetMC no autorizará nunca el acceso a esta consola.',
+      _infoStyle
+    );
+    console.log('%c— Equipo de PlanetMC', 'color:#7c3aed;font-size:11px;font-style:italic');
+  }, 500);
+
+  // ── 6. Detección de DevTools abierto (método de tamaño de ventana) ────────
+  var _devtoolsOpen = false;
+  var _threshold = 160;
+
+  function _checkDevTools() {
+    var widthDiff  = window.outerWidth  - window.innerWidth;
+    var heightDiff = window.outerHeight - window.innerHeight;
+
+    if (widthDiff > _threshold || heightDiff > _threshold) {
+      if (!_devtoolsOpen) {
+        _devtoolsOpen = true;
+        _onDevToolsOpen();
+      }
+    } else {
+      _devtoolsOpen = false;
+    }
+  }
+
+  function _onDevToolsOpen() {
+    // Limpiar la consola constantemente para dificultar la lectura
+    console.clear();
+    // Redirigir a una página en blanco (máxima protección)
+    document.documentElement.innerHTML = '';
+    window.location.replace('about:blank');
+  }
+
+  setInterval(_checkDevTools, 1000);
+
+  // ── 7. Debugger loop — congela el inspector si se abre ───────────────────
+  // Se ejecuta solo si alguien ya abrió el DevTools
+  setInterval(function() {
+    if (_devtoolsOpen) {
+      (function() { debugger; })();
+    }
+  }, 50);
+
+  // ── 8. Detección por timing del debugger (método alternativo) ────────────
+  var _dtStart, _dtCheck;
+  _dtCheck = function() {
+    _dtStart = new Date();
+    debugger;  // Si DevTools está abierto, este "debugger" pausa y tarda ms
+    if (new Date() - _dtStart > 100) {
+      _onDevToolsOpen();
+    }
+    setTimeout(_dtCheck, 3000);
+  };
+  // Solo se activa si el usuario ya tiene DevTools (no afecta rendimiento normal)
+  setTimeout(_dtCheck, 3000);
+
+})();
+</script>
+<!-- ════ END PROTECCIÓN ANTI-DEVTOOLS ════ -->
+
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <!-- MEJORA: evita que iOS convierta números como "19132" en links de teléfono -->
@@ -208,6 +363,33 @@
   <!-- ════ STYLES ════ -->
   <link rel="stylesheet" href="/css/main.css">
   <link rel="stylesheet" href="/css/animations.css">
+
+  <!-- ════ CSS ANTI-SELECCIÓN ════ -->
+  <style>
+    /* Deshabilitar selección de texto en toda la página */
+    * {
+      -webkit-user-select: none !important;
+         -moz-user-select: none !important;
+          -ms-user-select: none !important;
+              user-select: none !important;
+      -webkit-touch-callout: none !important;
+    }
+    /* Deshabilitar highlight táctil en móviles */
+    * {
+      -webkit-tap-highlight-color: transparent !important;
+    }
+    /* Deshabilitar drag de imágenes */
+    img {
+      -webkit-user-drag: none !important;
+      pointer-events: none !important;
+    }
+    /* Permitir pointer-events en botones y links para que sigan funcionando */
+    a, button, [role="button"], [tabindex], input, textarea, select,
+    .edition-card, .hero-cta-card, .nav-logo, .nav-ticket-btn,
+    .nav-staff-btn, .nav-toggle, .lang-btn, .foot-logo {
+      pointer-events: auto !important;
+    }
+  </style>
 
 </head>
 <body>
