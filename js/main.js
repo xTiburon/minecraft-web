@@ -1,16 +1,3 @@
-/* ════════════════════════════════════════════════
-   main.js — Inicialización general
-   PlanetMC
-   ════════════════════════════════════════════════
-   Orden de carga:
-     1. Carga config.json  → aplica links
-     2. Inicia i18n        → traducciones
-     3. Inicia status      → estado del servidor
-     4. Inicia UI          → canvas, sprites, nav
-     5. Inicia intro       → oculta loading screen
-   ════════════════════════════════════════════════ */
-
-/* ════ APPLY LINKS FROM config.json ════ */
 async function loadAndApplyConfig() {
   try {
     const res    = await fetch('/data/config.json');
