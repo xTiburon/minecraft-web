@@ -1,13 +1,3 @@
-/* ════════════════════════════════════════════════
-   status.js — Estado del servidor / Lógica dinámica
-   PlanetMC
-   ════════════════════════════════════════════════ */
-
-/**
- * Inicializa el estado del servidor leyendo config.json.
- * Si el status es 'maintenance', muestra la pill de mantenimiento.
- * Si es cualquier otro valor, muestra la pill de online.
- */
 async function initServerStatus() {
   try {
     const res = await fetch('/data/config.json');
