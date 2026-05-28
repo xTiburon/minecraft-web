@@ -1,8 +1,3 @@
-/* ════════════════════════════════════════════════
-   i18n.js — Internacionalización / Traducciones
-   PlanetMC
-   ════════════════════════════════════════════════ */
-
 let translations = {};
 let currentLang = localStorage.getItem('pmc_lang') || 'es';
 
