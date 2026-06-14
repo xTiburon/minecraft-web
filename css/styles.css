@@ -61,39 +61,11 @@ body {
 }
 .nebula::after { display: none; }
 
-.planet-deco {
-  position: fixed; pointer-events: none; z-index: 0;
-  top: 0; right: 0; width: 320px; height: 320px;
-  opacity: .06;
-  background-image:
-    repeating-linear-gradient(0deg, #5b9bd5 0px, #5b9bd5 1px, transparent 1px, transparent 32px),
-    repeating-linear-gradient(90deg, #5b9bd5 0px, #5b9bd5 1px, transparent 1px, transparent 32px);
-}
-.planet-deco::before, .planet-deco::after { display: none; }
+.planet-deco,
+.planet-deco-2,
+.scanlines,
+.destiny-grid { display: none; }
 
-.planet-deco-2 {
-  position: fixed; pointer-events: none; z-index: 0;
-  bottom: 0; left: 0; width: 220px; height: 220px;
-  opacity: .04;
-  background-image:
-    repeating-linear-gradient(0deg, #3dba4e 0px, #3dba4e 1px, transparent 1px, transparent 32px),
-    repeating-linear-gradient(90deg, #3dba4e 0px, #3dba4e 1px, transparent 1px, transparent 32px);
-}
-
-.scanlines {
-  position: fixed; inset: 0; pointer-events: none; z-index: 0;
-  background: repeating-linear-gradient(
-    0deg, transparent, transparent 2px,
-    rgba(0,0,0,.08) 2px, rgba(0,0,0,.08) 3px
-  );
-}
-.destiny-grid {
-  position: fixed; inset: 0; pointer-events: none; z-index: 0;
-  background-image:
-    repeating-linear-gradient(0deg, transparent, transparent 31px, rgba(255,255,255,.015) 31px, rgba(255,255,255,.015) 32px),
-    repeating-linear-gradient(90deg, transparent, transparent 31px, rgba(255,255,255,.015) 31px, rgba(255,255,255,.015) 32px);
-  background-size: 32px 32px;
-}
 .dust-canvas { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
 
 /* ════ LAYOUT ════ */
@@ -109,18 +81,7 @@ nav {
   border-bottom: 2px solid #333333;
   gap: 16px;
 }
-nav::before {
-  content: '';
-  position: absolute; top: 0; left: 0; right: 0; height: 3px;
-  background: repeating-linear-gradient(
-    90deg,
-    #3dba4e 0px, #3dba4e 8px,
-    #000 8px, #000 9px,
-    #5b9bd5 9px, #5b9bd5 17px,
-    #000 17px, #000 18px
-  );
-  opacity: .6;
-}
+nav::before { display: none; }
 
 .nav-logo {
   font-family: var(--head); font-size: .75rem;
@@ -279,9 +240,9 @@ nav::before {
 
 .edition-card.java-card    { background: #1c1410; border-color: #8a5a2a; }
 .edition-card.java-card::after    { background: var(--java); }
-.edition-card.java-card:hover     { border-color: #e87c2a; }
 .edition-card.bedrock-card { background: #101c12; border-color: #2a6e38; }
 .edition-card.bedrock-card::after { background: var(--bedrock); }
+.edition-card.java-card:hover     { border-color: #e87c2a; }
 .edition-card.bedrock-card:hover  { border-color: #3dba4e; }
 
 .edition-card-header { display: flex; align-items: center; gap: 14px; }
@@ -371,18 +332,7 @@ footer {
   justify-content: space-between; align-items: center; gap: 20px;
   background: #111111;
 }
-footer::before {
-  content: '';
-  position: absolute; top: 0; left: 0; right: 0; height: 3px;
-  background: repeating-linear-gradient(
-    90deg,
-    #3dba4e 0px, #3dba4e 8px,
-    #000 8px, #000 9px,
-    #5b9bd5 9px, #5b9bd5 17px,
-    #000 17px, #000 18px
-  );
-  opacity: .4;
-}
+footer::before { display: none; }
 .foot-logo {
   font-family: var(--head); font-size: .72rem;
   color: var(--text-bright); text-shadow: var(--pixel-shadow);
@@ -412,21 +362,6 @@ footer::before {
   text-shadow: -16px 0 0 rgba(91,155,213,.2), 16px 0 0 rgba(91,155,213,.2);
 }
 
-/* ════ MINECRAFT MOBS ════ */
-.mc-mob-wrap { position: fixed; pointer-events: none; z-index: 2; }
-.mc-mob-wrap canvas { image-rendering: pixelated; image-rendering: crisp-edges; display: block; }
-.mc-chick-wrap   { bottom: 110px; right: 22px; filter: drop-shadow(2px 2px 0px rgba(0,0,0,.8)); }
-.mc-axolotl-wrap { top: 42%;      right: 18px; filter: drop-shadow(2px 2px 0px rgba(0,0,0,.8)); }
-.mc-turtle-wrap  { bottom: 80px;  left: 18px;  filter: drop-shadow(2px 2px 0px rgba(0,0,0,.8)); }
-.mc-mob-wrap .mob-label {
-  position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%) translateY(-4px);
-  font-family: var(--head); font-size: .45rem; letter-spacing: 1px; color: var(--text-dim);
-  white-space: nowrap; opacity: 0; transition: opacity .3s; pointer-events: none;
-  text-shadow: var(--pixel-shadow);
-  background: rgba(0,0,0,.8); border: 1px solid #333; padding: 4px 8px;
-}
-.mc-mob-wrap:hover .mob-label { opacity: 1; }
-
 /* ════ ANIMATIONS ════ */
 @keyframes logoPulse {
   0%,100% { transform: scale(1);    filter: drop-shadow(4px 4px 0px #000); }
@@ -444,10 +379,6 @@ footer::before {
   0%,100% { opacity: 1;   }
   50%      { opacity: .15; }
 }
-@keyframes mobFloat {
-  0%,100% { transform: translateY(0); }
-  50%      { transform: translateY(-9px); }
-}
 
 .hero-logo-img,
 .hero-logo-fallback   { animation: fadeDown .6s ease both, logoPulse 4s ease-in-out 1s infinite; }
@@ -457,16 +388,11 @@ footer::before {
 .ip-online-pill .blink          { animation: blink    1.4s infinite; }
 .ip-maintenance-pill .blink-red { animation: blinkRed 1s   infinite; }
 
-.mc-chick-wrap   { animation: mobFloat 3.8s ease-in-out infinite; }
-.mc-axolotl-wrap { animation: mobFloat 4.5s ease-in-out infinite 0.7s; }
-.mc-turtle-wrap  { animation: mobFloat 5.2s ease-in-out infinite 1.4s; }
-
 /* ════ SCROLL REVEAL ════ */
 .reveal { opacity: 0; transform: translateY(22px); transition: opacity .6s ease, transform .6s ease; }
 .reveal.visible { opacity: 1; transform: translateY(0); }
 
 /* ════ RESPONSIVE ════ */
-@media (max-width: 900px) { .mc-mob-wrap { display: none; } }
 @media (max-width: 768px) {
   nav { padding: 0 16px; }
   .nav-right { display: none; }
