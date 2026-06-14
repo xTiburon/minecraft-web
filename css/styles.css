@@ -247,13 +247,10 @@ nav::before { display: none; }
 
 .edition-card-header { display: flex; align-items: center; gap: 14px; }
 .edition-card-icon-wrap {
-  width: 48px; height: 48px;
+  width: 64px; height: 64px;
   display: flex; align-items: center; justify-content: center; flex-shrink: 0;
-  box-shadow: 2px 2px 0px #000;
 }
-.java-card    .edition-card-icon-wrap { background: rgba(232,124,42,.2); border: 2px solid rgba(232,124,42,.4); }
-.bedrock-card .edition-card-icon-wrap { background: rgba(61,186,78,.15);  border: 2px solid rgba(61,186,78,.3); }
-.edition-card-icon { width: 28px; height: 28px; image-rendering: pixelated; }
+.edition-card-icon { width: 64px; height: 64px; object-fit: contain; image-rendering: pixelated; }
 .edition-card-title {
   font-family: var(--head); font-size: .75rem;
   letter-spacing: 2px; text-shadow: var(--pixel-shadow);
