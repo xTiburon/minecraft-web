@@ -398,7 +398,6 @@ footer::before { display: none; }
   .nav-right { display: none; }
   .nav-toggle { display: block; }
   footer { flex-direction: column; text-align: center; padding: 30px 20px; }
-  .planet-deco, .planet-deco-2 { display: none; }
   .hero-logo-img, .hero-logo-fallback { width: 200px; height: 200px; }
   .hero-cta-cards { flex-direction: column; align-items: stretch; }
   .hero-cta-card  { min-width: unset; }
@@ -409,6 +408,9 @@ footer::before { display: none; }
   .hero-cta-card { padding: 14px 16px; }
   .platform-icons { gap: 6px; }
   .platform-badge { font-size: .7rem; padding: 4px 8px; }
+  .edition-card { min-width: 0; width: 100%; }
+  .container { padding: 0 16px; }
+  #inicio { padding: 90px 16px 50px; }
 }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
