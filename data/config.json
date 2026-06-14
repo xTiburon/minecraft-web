@@ -14,8 +14,5 @@
   "analytics": {
     "gtm_id": "GTM-M62PP28N",
     "ga_id":  "G-Q0E6MBKTMR"
-  },
-  "intro": {
-    "hide_delay_ms": 2650
   }
 }
