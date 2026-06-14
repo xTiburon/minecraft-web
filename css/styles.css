@@ -320,6 +320,36 @@ nav::before { display: none; }
 .hero-cta-card.shop    { background: #4a2a7a; border-color: #7c3aed; color: #c4a8ff; }
 .hero-cta-card.wiki    { background: #1a4a2a; border-color: #3dba4e; color: #a0e8aa; }
 
+/* ════ MODOS DE JUEGO ════ */
+.modes-section { padding: 60px 0 70px; }
+.section-title {
+  font-family: var(--head); font-size: 1rem; letter-spacing: 2px;
+  color: var(--text-bright); text-shadow: var(--pixel-shadow);
+  text-align: center; margin-bottom: 18px;
+}
+.section-intro {
+  font-family: var(--mono); font-size: 1.05rem; line-height: 1.7;
+  color: var(--text-dim); text-align: center;
+  max-width: 760px; margin: 0 auto 36px;
+}
+.modes-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
+.mode-card {
+  background: var(--panel); border: 2px solid var(--border);
+  padding: 18px 20px; box-shadow: 3px 3px 0px #000;
+}
+.mode-card h3 {
+  font-family: var(--head); font-size: .7rem; letter-spacing: 1.5px;
+  color: var(--accent); text-shadow: var(--pixel-shadow);
+  margin-bottom: 10px;
+}
+.mode-card p {
+  font-family: var(--body); font-size: .95rem; line-height: 1.6;
+  color: var(--text);
+}
+
 /* ════ FOOTER ════ */
 footer {
   position: relative; z-index: 1;
@@ -337,6 +367,12 @@ footer::before { display: none; }
 }
 .foot-logo-img { width: 32px; height: 32px; object-fit: contain; flex-shrink: 0; image-rendering: pixelated; }
 .foot-logo span { color: var(--accent); }
+.foot-social { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; justify-content: center; }
+.foot-social a {
+  color: var(--text-dim); font-size: 1.1rem; transition: color .15s;
+  display: flex; align-items: center; justify-content: center;
+}
+.foot-social a:hover { color: var(--accent); }
 .foot-copy { font-family: var(--mono); font-size: .85rem; color: var(--text-dim); letter-spacing: 1px; }
 
 /* ════ TOAST ════ */
