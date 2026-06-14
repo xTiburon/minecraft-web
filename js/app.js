@@ -1,7 +1,7 @@
 /* ════════════════════════════════════════════════
    app.js — PlanetMC
    Combina: main.js + status.js + ui.js
-   Eliminado: i18n, intro/loading screen
+   Eliminado: i18n, intro/loading screen, sprites de mobs
    ════════════════════════════════════════════════ */
 
 /* ════ CONFIG & LINKS ════ */
@@ -117,52 +117,6 @@ function drawDust() {
   requestAnimationFrame(drawDust);
 }
 
-/* ════ MINECRAFT PIXEL SPRITES ════ */
-function drawSprite(id, data, scale) {
-  const cv = document.getElementById(id); if (!cv) return;
-  const cx = cv.getContext('2d'); cx.imageSmoothingEnabled = false;
-  cx.clearRect(0, 0, cv.width, cv.height);
-  data.forEach((row, y) => row.forEach((col, x) => {
-    if (!col) return;
-    cx.fillStyle = col;
-    cx.fillRect(x * scale, y * scale, scale, scale);
-  }));
-}
-
-function initSprites() {
-  const _ = null;
-  const YB='#FFD700', YD='#D4AF00', OC='#FF7A00', ED='#1A0800', HW='#FFFACC', FS='#FF9500';
-  const chickData = [
-    [_,_,YB,YB,YB,YB,YB,_,_,_], [_,YB,YB,YB,YB,YB,YB,YB,_,_],
-    [_,YB,HW,ED,YB,YB,YB,YB,_,_], [_,YB,YB,OC,OC,YB,YB,YB,_,_],
-    [_,YB,YB,YB,YB,YB,YB,YB,_,_], [_,_,YB,YD,YD,YD,YB,_,_,_],
-    [_,_,YB,YD,YD,YD,YB,_,_,_], [_,_,_,YB,YB,YB,_,_,_,_],
-    [_,_,_,FS,_,FS,_,_,_,_], [_,_,_,FS,_,FS,_,_,_,_],
-  ];
-
-  const AP='#FF6B9D', AL='#FFC0D8', AG='#CC2266', AE='#180007', AT='#FF3380';
-  const axolotlData = [
-    [_,AG,_,AG,_,AG,_,_,_,_,_,_,_,_,_,_,_,_], [_,AG,AG,AG,AG,AG,AG,_,_,_,_,_,_,_,_,_,_,_],
-    [AP,AP,AP,AP,AP,AP,AP,AP,AP,_,_,_,_,_,_,_,_,_], [AP,AP,AE,AP,AL,AL,AP,AP,AP,AP,AP,_,_,_,_,_,_,_],
-    [AP,AP,AP,AL,AL,AL,AL,AP,AP,AP,AP,AP,_,_,_,_,_,_], [AP,AP,AL,AL,AL,AL,AP,AP,AP,AP,AP,AP,AP,_,_,_,_,_],
-    [_,AP,AP,AP,AP,AP,AP,AP,AP,AP,AP,AP,AP,AP,_,_,_,_], [_,_,_,_,AP,AP,AP,AP,AP,AP,AP,AP,AP,AP,AT,_,_,_],
-    [_,_,_,_,_,_,AP,AP,AP,AP,AT,AT,_,_,_,_,_,_],
-  ];
-
-  const TG='#3CB54E', TD='#1E6B2A', TM='#2B8F3C', TW='#92E8A0', TE='#0D1A0D', TL='#72D480';
-  const turtleData = [
-    [_,_,_,TD,TD,TD,TD,TD,TD,TD,_,_,_,_], [_,_,TD,TG,TM,TD,TM,TD,TM,TG,TD,_,_,_],
-    [TG,TG,TG,TM,TD,TM,TD,TM,TD,TM,TG,TG,TG,_], [TG,TE,TG,TG,TG,TG,TG,TG,TG,TG,TG,TG,TG,TG],
-    [TG,TG,TW,TW,TW,TW,TW,TW,TW,TW,TW,TG,TG,_], [_,TG,TW,TW,TW,TW,TW,TW,TW,TW,TG,_,_,_],
-    [_,TG,TL,TL,_,TL,TL,_,_,TL,TG,_,_,_], [_,_,TG,TG,_,TG,TG,_,_,TG,_,_,_,_],
-    [_,_,TG,_,_,TG,_,_,_,_,_,_,_,_],
-  ];
-
-  drawSprite('mc-chick',   chickData,   5);
-  drawSprite('mc-axolotl', axolotlData, 5);
-  drawSprite('mc-turtle',  turtleData,  5);
-}
-
 /* ════ SCROLL REVEAL ════ */
 function initReveal() {
   const obs = new IntersectionObserver(entries => {
@@ -238,7 +192,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   resizeStarCanvas(); initStars(); drawStars();
   resizeDust();       initDust();  drawDust();
-  initSprites();
   initReveal();
   initMobileNav();
   initEditionCards();
