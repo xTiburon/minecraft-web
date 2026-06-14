@@ -320,7 +320,7 @@ nav::before { display: none; }
 .hero-cta-card.shop    { background: #4a2a7a; border-color: #7c3aed; color: #c4a8ff; }
 .hero-cta-card.wiki    { background: #1a4a2a; border-color: #3dba4e; color: #a0e8aa; }
 
-/* ════ MODOS DE JUEGO ════ */
+/* ════ SURVIVAL FEATURES ════ */
 .modes-section { padding: 60px 0 70px; }
 .section-title {
   font-family: var(--head); font-size: 1rem; letter-spacing: 2px;
@@ -338,7 +338,18 @@ nav::before { display: none; }
 }
 .mode-card {
   background: var(--panel); border: 2px solid var(--border);
-  padding: 18px 20px; box-shadow: 3px 3px 0px #000;
+  padding: 22px 20px 20px; box-shadow: 3px 3px 0px #000;
+  position: relative; overflow: hidden;
+  transition: filter .2s ease, transform .15s ease, border-color .2s ease;
+}
+.mode-card::after {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: var(--accent);
+}
+.mode-card:hover { filter: brightness(1.08); transform: translateY(-2px); border-color: var(--accent); }
+.mode-card-icon {
+  font-size: 1.3rem; margin-bottom: 10px;
+  display: block; color: var(--accent);
 }
 .mode-card h3 {
   font-family: var(--head); font-size: .7rem; letter-spacing: 1.5px;
@@ -392,13 +403,12 @@ footer::before { display: none; }
 }
 .ip-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
-/* ════ DIVIDER ════ */
-.divider-mc { position: relative; height: 2px; margin: 0 40px; background: #222222; overflow: visible; }
-.divider-mc::before {
-  content: '⬛'; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
-  font-size: .7rem; opacity: .35;
-  text-shadow: -16px 0 0 rgba(91,155,213,.2), 16px 0 0 rgba(91,155,213,.2);
+/* ════ DIVIDER — sin cuadrados de colores ════ */
+.divider-mc {
+  position: relative; height: 2px; margin: 0 40px;
+  background: #222222; overflow: visible;
 }
+.divider-mc::before { display: none; }
 
 /* ════ ANIMATIONS ════ */
 @keyframes logoPulse {
