@@ -37,7 +37,7 @@
 <meta name="theme-color" content="#0d0d0d">
 <link rel="canonical" href="https://planetmc.net/">
 
-<!-- ════ HREFLANG — Indexación multilingüe/geográfica ════ -->
+<!-- ════ HREFLANG ════ -->
 <link rel="alternate" hreflang="es"       href="https://planetmc.net/">
 <link rel="alternate" hreflang="en"       href="https://planetmc.net/">
 <link rel="alternate" hreflang="pt"       href="https://planetmc.net/">
@@ -170,7 +170,7 @@
     {
       "@type": "Question",
       "name": "¿Qué modos de juego tiene PlanetMC?",
-      "acceptedAnswer": { "@type": "Answer", "text": "PlanetMC ofrece Survival, Skyblock, Factions, PvP y eventos semanales con premios para toda la comunidad." }
+      "acceptedAnswer": { "@type": "Answer", "text": "PlanetMC ofrece Survival con economía, PvP, clanes y eventos frecuentes para toda la comunidad." }
     },
     {
       "@type": "Question",
@@ -190,7 +190,7 @@
     {
       "@type": "Question",
       "name": "What gamemodes does PlanetMC have?",
-      "acceptedAnswer": { "@type": "Answer", "text": "PlanetMC features Survival, Skyblock, Factions, PvP and weekly community events with prizes." }
+      "acceptedAnswer": { "@type": "Answer", "text": "PlanetMC features Survival with economy, PvP, clans and weekly community events with prizes." }
     },
     {
       "@type": "Question",
@@ -206,7 +206,7 @@
 }
 </script>
 
-<!-- ════ PERFORMANCE: Preload recursos críticos ════ -->
+<!-- ════ PERFORMANCE ════ -->
 <link rel="preload" href="/assets/img/logo.png" as="image">
 <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
 <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
@@ -277,9 +277,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <section id="inicio" aria-labelledby="hero-heading">
     <div class="hero-inner">
 
-      <!-- H1 semántico para SEO — oculto visualmente, presente en el DOM -->
       <h1 id="hero-heading" class="visually-hidden">
-        PlanetMC — Servidor de Minecraft Survival, Skyblock, Factions, PvP y Eventos en Español | Java y Bedrock | IP: planetmc.net
+        PlanetMC — Servidor de Minecraft Survival con Economía, PvP, Clanes y Eventos en Español | Java y Bedrock | IP: planetmc.net
       </h1>
 
       <img
@@ -408,42 +407,49 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
   </section>
 
-  <!-- ════ MODOS DE JUEGO ════
-       SEO: sección visible con contenido indexable sobre los modos del servidor.
-       Eliminado: class="visually-hidden" y aria-hidden="true" que impedían la indexación.
-  ════ -->
+  <!-- ════ SURVIVAL FEATURES ════ -->
   <div class="divider-mc" aria-hidden="true"></div>
 
-  <section id="modos" class="modes-section" aria-labelledby="modes-heading">
+  <section id="survival" class="modes-section" aria-labelledby="survival-heading">
     <div class="container">
-      <h2 id="modes-heading" class="section-title reveal">Modos de juego en PlanetMC</h2>
+      <h2 id="survival-heading" class="section-title reveal">¿Qué encontrarás en nuestro Survival?</h2>
       <p class="section-intro reveal">
-        PlanetMC es un servidor de Minecraft en español pensado para jugadores de España y Latinoamérica,
-        compatible con Java y Bedrock, cuentas Premium y No Premium, y disponible en PC, móvil y consolas
-        (Xbox, PlayStation y Nintendo Switch). Descubre todos los modos de juego disponibles:
+        Explora una experiencia Survival completa con economía, PvP, clanes, eventos y una comunidad
+        activa donde siempre tendrás nuevos objetivos por cumplir.
       </p>
 
       <div class="modes-grid">
+
         <article class="mode-card reveal">
-          <h3>Survival</h3>
-          <p>El modo clásico de Minecraft: sobrevive, construye y progresa junto a tu comunidad en un mundo persistente con economía y protección de terrenos.</p>
+          <span class="mode-card-icon" aria-hidden="true"><i class="fas fa-coins"></i></span>
+          <h3>Economía</h3>
+          <p>Participa en una economía dinámica comerciando con otros jugadores, completando misiones, realizando trabajos y generando ingresos para progresar dentro del servidor.</p>
         </article>
+
         <article class="mode-card reveal">
-          <h3>Skyblock</h3>
-          <p>Empieza con una isla flotante y muy pocos recursos. Expande tu isla, completa desafíos y compite en los rankings del servidor.</p>
-        </article>
-        <article class="mode-card reveal">
-          <h3>Factions</h3>
-          <p>Forma o únete a una facción, conquista territorio, defiende tu base y lucha contra otros grupos por el control del mapa.</p>
-        </article>
-        <article class="mode-card reveal">
+          <span class="mode-card-icon" aria-hidden="true"><i class="fas fa-shield-halved"></i></span>
           <h3>PvP</h3>
-          <p>Combate contra otros jugadores en arenas y zonas especiales, con kits, rankings y recompensas para los mejores guerreros.</p>
+          <p>Demuestra tus habilidades en combate enfrentándote a otros jugadores en las zonas PvP y compite para convertirte en uno de los más fuertes del servidor.</p>
         </article>
+
         <article class="mode-card reveal">
-          <h3>Eventos</h3>
-          <p>Eventos semanales con minijuegos, torneos y premios exclusivos para toda la comunidad, anunciados en nuestro Discord.</p>
+          <span class="mode-card-icon" aria-hidden="true"><i class="fas fa-flag"></i></span>
+          <h3>Clanes</h3>
+          <p>Crea un clan junto a tus amigos, recluta nuevos miembros y compite contra otros grupos para alcanzar la cima del servidor.</p>
         </article>
+
+        <article class="mode-card reveal">
+          <span class="mode-card-icon" aria-hidden="true"><i class="fas fa-trophy"></i></span>
+          <h3>Eventos</h3>
+          <p>Participa en eventos frecuentes con desafíos únicos, recompensas especiales y actividades diseñadas para toda la comunidad.</p>
+        </article>
+
+        <article class="mode-card reveal">
+          <span class="mode-card-icon" aria-hidden="true"><i class="fas fa-users"></i></span>
+          <h3>Comunidad</h3>
+          <p>Forma parte de una comunidad activa, conoce nuevos jugadores, colabora en proyectos y disfruta de una experiencia multijugador más entretenida.</p>
+        </article>
+
       </div>
     </div>
   </section>
@@ -459,7 +465,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     PLANET<span>MC</span>
   </a>
 
-  <!-- Iconos sociales: diseño limpio, uniforme y sin líneas ════ -->
   <nav class="foot-social" aria-label="Redes sociales de PlanetMC">
 
     <a href="https://discord.gg/HvcPfgXVHf" target="_blank" rel="noopener noreferrer" aria-label="Discord de PlanetMC">
@@ -470,14 +475,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <i class="fab fa-x-twitter" aria-hidden="true"></i>
     </a>
 
-    <!-- CORRECCIÓN: Icono de Kick — SVG vectorial limpio en lugar de la letra "K" con tipografía incorrecta -->
     <a href="https://kick.com/xtiiburon" target="_blank" rel="noopener noreferrer" aria-label="Kick de xTiburon" class="kick-icon">
       <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <!--
-          Logo de Kick: forma de K geométrica.
-          Barra izquierda (borde izquierdo) + dos brazos formando una V apuntando a la izquierda en el centro.
-          Path: rectángulo con muesca triangular en el lado derecho.
-        -->
         <path d="M2 2H22L12 12L22 22H2Z"/>
       </svg>
     </a>
