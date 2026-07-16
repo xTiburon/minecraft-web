@@ -10,14 +10,6 @@
       ]
     }
   ],
-  "redirects": [
-    {
-      "source": "/(.*)",
-      "has": [{ "type": "host", "value": "www.planetmc.net" }],
-      "destination": "https://planetmc.net/$1",
-      "permanent": true
-    }
-  ],
   "cleanUrls": true,
   "trailingSlash": false
 }
