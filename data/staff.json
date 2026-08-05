@@ -1,0 +1,23 @@
+[
+  {
+    "rank": "CEO",
+    "icon": "fa-meteor",
+    "accent": "#ffd166",
+    "description": "Dirección general del proyecto y la comunidad.",
+    "members": [
+      { "name": "xTiburon", "discord": "" }
+    ]
+  },
+  {
+    "rank": "Owner",
+    "icon": "fa-crown",
+    "accent": "#ff8a5c",
+    "description": "Máxima autoridad técnica y administrativa del servidor.",
+    "members": [
+      { "name": "Eloise", "discord": "" },
+      { "name": "Littlebel", "discord": "" },
+      { "name": "SSylents", "discord": "" },
+      { "name": "RAPTORGAM3R4058", "discord": "" }
+    ]
+  }
+]

@@ -7,7 +7,6 @@ Allow: /
 
 # ════ BLOQUEAR ARCHIVOS INTERNOS (no tienen valor en Google) ════
 Disallow: /data/
-Disallow: /assets/fonts/
 
 # ════ SITEMAP ════
 Sitemap: https://planetmc.net/sitemap.xml

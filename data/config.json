@@ -1,18 +1,20 @@
 {
   "server": {
-    "ip": "planetmc.net",
+    "host": "planetmc.net",
     "port_bedrock": 19132,
-    "status": "online"
+    "status_api": "https://api.mcsrvstat.us/3/planetmc.net",
+    "status_api_bedrock": "https://api.mcsrvstat.us/bedrock/3/planetmc.net",
+    "fallback_status": "online"
   },
   "links": {
-    "discord":          "https://discord.gg/HvcPfgXVHf",
-    "discord-ticket":   "https://discord.gg/HvcPfgXVHf",
-    "shop":             "https://planetmc.tebex.io/",
-    "wiki":             "https://wiki.planetmc.net/",
-    "staff":            "https://forms.gle/po1fM57gG9oQtKCc7"
+    "discord": "https://discord.gg/HvcPfgXVHf",
+    "discord-ticket": "https://discord.gg/HvcPfgXVHf",
+    "shop": "https://planetmc.tebex.io/",
+    "staff": "https://forms.gle/po1fM57gG9oQtKCc7",
+    "vote": "https://www.40servidoresmc.es/planetmc/votar"
   },
   "analytics": {
     "gtm_id": "GTM-M62PP28N",
-    "ga_id":  "G-Q0E6MBKTMR"
+    "ga_id": "G-Q0E6MBKTMR"
   }
 }

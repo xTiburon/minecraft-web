@@ -1,0 +1,33 @@
+/* ════════════════════════════════════════════════
+   animations.css — PlanetMC
+   ════════════════════════════════════════════════ */
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes floatY {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-10px); }
+}
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1;  }
+  50%      { opacity: .35; }
+}
+@keyframes spinSlow {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+.hero-logo-img,
+.hero-logo-fallback { animation: fadeUp .7s var(--ease) both, floatY 6s ease-in-out 1s infinite; }
+.hero-eyebrow      { animation: fadeUp .6s var(--ease) both; }
+.hero-title        { animation: fadeUp .7s .1s var(--ease) both; }
+.hero-sub          { animation: fadeUp .7s .2s var(--ease) both; }
+.hero-btns-wrap    { animation: fadeUp .7s .3s var(--ease) both; }
+
+.hero-logo-fallback .planet-ring2 { animation: spinSlow 40s linear infinite; }
+
+/* ════ SCROLL REVEAL ════ */
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s var(--ease), transform .7s var(--ease); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
