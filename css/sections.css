@@ -62,7 +62,8 @@ section[id] { scroll-margin-top: 76px; }
 .status-section,
 .about-section,
 .staff-section,
-.join-section { padding: 84px 0; }
+.join-section,
+.faq-section { padding: 84px 0; }
 
 /* ════ ABOUT ════ */
 .about-section .container { max-width: 1100px; }
@@ -80,7 +81,7 @@ section[id] { scroll-margin-top: 76px; }
   .hero-cta-card  { min-width: unset; }
   .edition-cards-wrap { flex-direction: column; align-items: center; }
   .edition-card   { max-width: 100%; }
-  .modes-section, .shop-section, .status-section, .about-section, .staff-section, .join-section { padding: 60px 0; }
+  .modes-section, .shop-section, .status-section, .about-section, .staff-section, .join-section, .faq-section { padding: 60px 0; }
 }
 @media (max-width: 480px) {
   .hero-cta-card { padding: 16px 18px; }

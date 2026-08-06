@@ -92,12 +92,20 @@ nav {
 .nav-mobile-menu .menu-divider { height: 1px; background: var(--border); margin: 8px 4px; }
 .nav-mobile-menu .mobile-ticket,
 .nav-mobile-menu .mobile-staff,
-.nav-mobile-menu .mobile-vote { justify-content: center; font-weight: 700; }
+.nav-mobile-menu .mobile-vote,
+.nav-mobile-menu .mobile-wiki { justify-content: center; font-weight: 700; }
 .nav-mobile-menu .mobile-ticket { background: rgba(88,101,242,.16); border: 1px solid rgba(88,101,242,.4); color: #c8ccff; }
 .nav-mobile-menu .mobile-staff  { background: rgba(255,209,102,.12); border: 1px solid rgba(255,209,102,.4); color: var(--gold); }
 .nav-mobile-menu .mobile-vote   { background: rgba(61,220,132,.14); border: 1px solid rgba(61,220,132,.4); color: var(--online); }
+.nav-mobile-menu .mobile-wiki   { background: rgba(139,107,242,.14); border: 1px solid rgba(139,107,242,.4); color: #ceb8ff; }
 
-@media (max-width: 980px) {
+@media (max-width: 1300px) {
+  .nav-links { gap: 16px; font-size: .9rem; }
+  .btn-ghost-discord, .btn-ghost-staff, .btn-ghost-vote, .btn-ghost-wiki { padding: 9px 12px; font-size: .8rem; }
+  .nav-right { gap: 6px; }
+}
+
+@media (max-width: 1240px) {
   .nav-links { display: none; }
   .nav-right { display: none; }
   .nav-toggle { display: block; }
