@@ -1,0 +1,12 @@
+# robots.txt — PlanetMC
+# https://planetmc.net
+
+# ════ PERMITIR TODO A GOOGLE Y BUSCADORES ════
+User-agent: *
+Allow: /
+
+# ════ BLOQUEAR ARCHIVOS INTERNOS (no tienen valor en Google) ════
+Disallow: /data/
+
+# ════ SITEMAP ════
+Sitemap: https://planetmc.net/sitemap.xml
