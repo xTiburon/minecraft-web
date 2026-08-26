@@ -3,7 +3,7 @@
 const FALLBACK_LINKS = {
   discord: 'https://discord.gg/HvcPfgXVHf',
   'discord-ticket': 'https://discord.gg/HvcPfgXVHf',
-  shop: 'https://planetmc.tebex.io/',
+  shop: 'https://tienda.planetmc.net/',
   staff: 'https://forms.gle/po1fM57gG9oQtKCc7',
 };
 
