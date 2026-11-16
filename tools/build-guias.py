@@ -75,13 +75,42 @@ GROUPS = ['Empezar', 'Tu base', 'Dinero', 'Comunidad', 'Más']
 
 BY_SLUG = {p[0]: p for p in PAGES}
 
+# Preguntas de /guias/faq marcadas para los resultados enriquecidos de Google.
+FAQ = [
+    ('¿Es gratis jugar en PlanetMC?',
+     'Sí, es gratis. Solo necesitas Minecraft Java o Bedrock Edition y conectarte a planetmc.net.'),
+    ('¿PlanetMC acepta cuentas no premium?',
+     'Sí. La primera vez que entras registras una contraseña y la usas cada vez que vuelves a conectarte.'),
+    ('¿Se puede jugar desde consola o móvil?',
+     'Sí, con Bedrock Edition: Xbox, PlayStation, Nintendo Switch, Android, iOS y Windows. '
+     'La dirección es planetmc.net y el puerto 19132.'),
+    ('¿Java y Bedrock juegan juntos en PlanetMC?',
+     'Sí, hay crossplay total: ambas ediciones comparten el mismo mundo, el mismo chat y la misma economía.'),
+    ('¿Qué versión de Minecraft necesito?',
+     'Lo mejor es la más reciente, aunque también se puede entrar con versiones anteriores a partir de la 1.16.'),
+    ('¿Cómo protejo mi casa en PlanetMC?',
+     'Con el comando /p: coge la protección gratuita de 11x11 y colócala en el centro de tu construcción. '
+     'Dentro de la zona nadie más puede romper bloques ni abrir tus cofres.'),
+    ('¿Cómo se gana dinero en el Survival?',
+     'Vendiendo objetos en /shop, trabajando con /trabajos, completando /misiones, reclamando /recompensas '
+     'cada día y votando por el servidor con /vote40.'),
+    ('¿Me pueden atacar otros jugadores sin avisar?',
+     'No. El PvP está desactivado por defecto y hace falta que los dos jugadores lo tengan activado, '
+     'salvo dentro de las arenas del spawn.'),
+]
+FAQ_LD = ('<script type="application/ld+json">'
+          '{"@context":"https://schema.org","@type":"FAQPage","mainEntity":['
+          + ','.join('{"@type":"Question","name":"%s","acceptedAnswer":{"@type":"Answer","text":"%s"}}'
+                     % (q.replace('"', "'"), a.replace('"', "'")) for q, a in FAQ)
+          + ']}</script>' + chr(10))
+
 
 def head(title, desc, canonical, extra=''):
     return f'''<!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="format-detection" content="telephone=no">
 <script>(function(w,d,s,l,i){{w[l]=w[l]||[];w[l].push({{'gtm.start':new Date().getTime(),event:'gtm.js'}});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);}})(window,document,'script','dataLayer','GTM-M62PP28N');</script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q0E6MBKTMR"></script>
@@ -91,6 +120,10 @@ def head(title, desc, canonical, extra=''):
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
 <meta name="theme-color" content="#0A0B0D">
 <link rel="canonical" href="{canonical}">
+<link rel="alternate" hreflang="es" href="{canonical}">
+<link rel="alternate" hreflang="es-419" href="{canonical}">
+<link rel="alternate" hreflang="es-ES" href="{canonical}">
+<link rel="alternate" hreflang="x-default" href="{canonical}">
 <link rel="icon" type="image/png" href="/assets/img/logo-192.png" sizes="192x192">
 <link rel="shortcut icon" href="/favicon.ico">
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
@@ -110,6 +143,11 @@ def head(title, desc, canonical, extra=''):
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&amp;family=JetBrains+Mono:wght@400;600&amp;display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/wiki.css">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="PlanetMC">
 {extra}</head>
 <body>
 '''
@@ -151,6 +189,8 @@ def sidebar(slug):
             cur = ' aria-current="page"' if s == slug else ''
             out.append(f'<a href="/guias/{s}"{cur}>{t}</a>')
         out.append('</div>')
+    out.append('<div class="wk-side-group" data-pwa-install data-pwa-class="wk-btn wk-btn-ac" '
+               'data-pwa-full="1" hidden></div>')
     out.append('''<div class="wk-side-group wk-side-mobonly"><p>PlanetMC</p>
       <a href="/">Página principal</a>
       <a href="''' + DISCORD + '''" target="_blank" rel="noopener noreferrer">Discord</a>
@@ -176,6 +216,7 @@ def footer():
 </footer>
 <script src="/assets/wiki-index.js"></script>
 <script src="/assets/wiki.js"></script>
+<script defer src="/assets/pwa.js"></script>
 </body>
 </html>
 '''
@@ -225,6 +266,18 @@ def build():
               '{"@type":"ListItem","position":2,"name":"Guías","item":"%s/guias"},'
               '{"@type":"ListItem","position":3,"name":"%s","item":"%s/guias/%s"}]}'
               '</script>\n' % (SITE, SITE, title, SITE, slug))
+        ld += ('<script type="application/ld+json">'
+               '{"@context":"https://schema.org","@type":"TechArticle",'
+               '"headline":"%s","description":"%s","url":"%s/guias/%s",'
+               '"inLanguage":"es","datePublished":"%s","dateModified":"%s",'
+               '"author":{"@type":"Organization","name":"PlanetMC","url":"%s/"},'
+               '"publisher":{"@id":"%s/#organization"},'
+               '"isPartOf":{"@type":"CollectionPage","name":"Guias de PlanetMC","url":"%s/guias"},'
+               '"about":{"@type":"VideoGame","name":"Minecraft"},'
+               '"audience":{"@type":"Audience","audienceType":"Jugadores de Minecraft"}}'
+               '</script>\n' % (title, desc.replace('"', "'"), SITE, slug, HOY, HOY, SITE, SITE, SITE))
+        if slug == 'faq':
+            ld += FAQ_LD
 
         html = (head(f'{title} — Guías de PlanetMC', desc, f'{SITE}/guias/{slug}', ld)
                 + header()

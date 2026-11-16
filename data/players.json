@@ -1,0 +1,10 @@
+{
+ "_": "Historial de jugadores conectados. Lo escribe .github/workflows/historial-jugadores.yml cada 2 h. t = milisegundos UTC, n = jugadores.",
+ "updated": 1794869878055,
+ "samples": [
+  {
+   "t": 1794866400000,
+   "n": 230
+  }
+ ]
+}

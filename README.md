@@ -5,7 +5,14 @@ Sitio estático de PlanetMC: página principal + **guías del Survival** (la wik
 ## Estructura
 
 ```
-index.html                 página principal (HTML + CSS inline + JS al final)
+index.html                 página principal (HTML + JS al final)
+assets/home.css            estilos de la portada
+sw.js                      service worker: guías sin conexión
+assets/pwa.js              registro del service worker y botón «Instalar»
+sin-conexion.html          página que se muestra sin conexión
+data/players.json          historial de jugadores (GENERADO cada 2 h)
+tools/muestra-jugadores.py toma una muestra y la añade a data/players.json
+.github/workflows/historial-jugadores.yml  tarea que lo ejecuta cada 2 h
 guias.html                 portada de las guías        -> planetmc.net/guias
 guias/<tema>.html          cada guía                   -> planetmc.net/guias/<tema>
 assets/wiki.css            estilos de las guías
@@ -71,11 +78,41 @@ BASE=http://127.0.0.1:8099 node tools/audit-movil.mjs
 Mide desbordamiento horizontal, zonas táctiles, errores de JS y comprueba el buscador en
 320, 390, 393, 768 y 1440 px; deja capturas en `caps/` (no se versiona).
 
+## La gráfica de jugadores
+
+La portada dibuja **12 barras de 2 h** (24 h en total); la última es el bloque en curso y
+muestra los jugadores conectados ahora mismo. Al pasar el ratón o tocar una barra sale
+cuántos hubo en ese tramo.
+
+Los datos salen de dos sitios que se combinan:
+
+1. `data/players.json`, que escribe la tarea de GitHub Actions cada 2 h consultando
+   `api.mcsrvstat.us`. Es el historial **compartido**: todos los visitantes ven lo mismo.
+2. Las muestras que el propio navegador va guardando en `localStorage` mientras la
+   página está abierta, que rellenan el bloque en curso.
+
+Si la tarea no ha corrido todavía, la gráfica funciona igual con lo que haya.
+Para añadir una muestra a mano: `python tools/muestra-jugadores.py`.
+
+> La tarea necesita que el repositorio tenga **Actions con permiso de escritura**
+> (Settings → Actions → General → Workflow permissions → *Read and write*).
+
+## Aplicación instalable (PWA)
+
+`site.webmanifest` + `sw.js` hacen que el sitio se pueda instalar en el móvil desde el
+navegador y que **las guías se puedan leer sin conexión**. El service worker guarda las
+17 páginas de guías y sus estáticos al instalarse; el HTML va por red primero y tira de
+la copia solo si no hay internet.
+
+Al cambiar el contenido hay que subir la versión en `sw.js` (`const VERSION = 'pmc-v1'`)
+para que los navegadores descarten la caché vieja.
+
 ## Qué hace el JavaScript
 
 - **index.html**: consulta `api.mcsrvstat.us` cada 30 s (jugadores, capacidad, versión),
-  dibuja la gráfica de 24 h con muestras guardadas en `localStorage`, copia la IP y abre
-  el menú móvil.
+  dibuja las barras de 24 h, copia la IP y abre el menú móvil.
+- **assets/pwa.js**: registra el service worker y enseña el botón «Instalar» cuando el
+  navegador lo permite (en iOS explica el gesto de «Añadir a pantalla de inicio»).
 - **assets/wiki.js**: abre el índice lateral en móvil y resuelve el buscador contra
   `assets/wiki-index.js` (busca en páginas y secciones, ignorando tildes y mayúsculas,
   con `↑ ↓ Enter` y el atajo `/`).
