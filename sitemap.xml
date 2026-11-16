@@ -3,111 +3,111 @@
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
 
   <url>
-    <loc>https://planetmc.net/</loc>
+    <loc>https://www.planetmc.net/</loc>
     <lastmod>2026-11-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <image:image>
-      <image:loc>https://planetmc.net/assets/img/logo.png</image:loc>
+      <image:loc>https://www.planetmc.net/assets/img/logo.png</image:loc>
       <image:title>PlanetMC — Logo oficial del servidor</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://planetmc.net/assets/img/banner.jpg</image:loc>
+      <image:loc>https://www.planetmc.net/assets/img/banner.jpg</image:loc>
       <image:title>PlanetMC — Banner del servidor Minecraft</image:title>
     </image:image>
   </url>
   <url>
-    <loc>https://planetmc.net/guias</loc>
+    <loc>https://www.planetmc.net/guias</loc>
     <lastmod>2026-11-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://planetmc.net/guias/primeros-pasos</loc>
+    <loc>https://www.planetmc.net/guias/primeros-pasos</loc>
     <lastmod>2026-11-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://planetmc.net/guias/comandos</loc>
+    <loc>https://www.planetmc.net/guias/comandos</loc>
     <lastmod>2026-11-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://planetmc.net/guias/protecciones</loc>
+    <loc>https://www.planetmc.net/guias/protecciones</loc>
     <lastmod>2026-11-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://planetmc.net/guias/casas-y-warps</loc>
+    <loc>https://www.planetmc.net/guias/casas-y-warps</loc>
     <lastmod>2026-11-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://planetmc.net/guias/rtp</loc>
+    <loc>https://www.planetmc.net/guias/rtp</loc>
     <lastmod>2026-11-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://planetmc.net/guias/economia</loc>
+    <loc>https://www.planetmc.net/guias/economia</loc>
     <lastmod>2026-11-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://planetmc.net/guias/trabajos</loc>
+    <loc>https://www.planetmc.net/guias/trabajos</loc>
     <lastmod>2026-11-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://planetmc.net/guias/misiones</loc>
+    <loc>https://www.planetmc.net/guias/misiones</loc>
     <lastmod>2026-11-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://planetmc.net/guias/subastas</loc>
+    <loc>https://www.planetmc.net/guias/subastas</loc>
     <lastmod>2026-11-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://planetmc.net/guias/pvp</loc>
+    <loc>https://www.planetmc.net/guias/pvp</loc>
     <lastmod>2026-11-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://planetmc.net/guias/clanes</loc>
+    <loc>https://www.planetmc.net/guias/clanes</loc>
     <lastmod>2026-11-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://planetmc.net/guias/rangos</loc>
+    <loc>https://www.planetmc.net/guias/rangos</loc>
     <lastmod>2026-11-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://planetmc.net/guias/extras</loc>
+    <loc>https://www.planetmc.net/guias/extras</loc>
     <lastmod>2026-11-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://planetmc.net/guias/normas</loc>
+    <loc>https://www.planetmc.net/guias/normas</loc>
     <lastmod>2026-11-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://planetmc.net/guias/faq</loc>
+    <loc>https://www.planetmc.net/guias/faq</loc>
     <lastmod>2026-11-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>

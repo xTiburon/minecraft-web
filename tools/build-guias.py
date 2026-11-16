@@ -17,7 +17,7 @@ import datetime
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CONTENT = os.path.join(ROOT, 'tools', 'content')
 
-SITE = 'https://planetmc.net'
+SITE = 'https://www.planetmc.net'
 DISCORD = 'https://discord.gg/HvcPfgXVHf'
 TIENDA = 'https://tienda.planetmc.net/'
 HOY = datetime.date.today().isoformat()

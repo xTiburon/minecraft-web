@@ -1,5 +1,5 @@
 # robots.txt — PlanetMC
-# https://planetmc.net
+# https://www.planetmc.net
 
 # ════ PERMITIR TODO A GOOGLE Y BUSCADORES ════
 User-agent: *
@@ -9,4 +9,4 @@ Allow: /
 Disallow: /data/
 
 # ════ SITEMAP ════
-Sitemap: https://planetmc.net/sitemap.xml
+Sitemap: https://www.planetmc.net/sitemap.xml
