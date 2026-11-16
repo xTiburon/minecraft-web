@@ -22,7 +22,8 @@ tools/build-guias.py       generador de las páginas de guías
 tools/content/*.html       EL CONTENIDO EDITABLE de cada guía
 tools/serve-local.py       servidor de pruebas que imita el cleanUrls de Vercel
 tools/audit-movil.mjs      auditor de móvil/escritorio con Playwright (opcional)
-assets/                    logo.webp, java.webp, bedrock.webp, hero.png
+assets/                    logo.webp, java.webp, bedrock.webp
+assets/hero.webp           fondo de la portada (100 KB); hero.png es el respaldo
 assets/img/                logo.png, logo-192.png, banner.jpg (OG / favicons)
 favicon.*, apple-touch-icon.png, site.webmanifest
 robots.txt, sitemap.xml (GENERADO), vercel.json
@@ -121,6 +122,18 @@ para que los navegadores descarten la caché vieja.
 
 - **Vercel**: importar el repo; no hay comando de build, la raíz es el sitio.
 - `vercel.json` ya trae las cabeceras de seguridad, el CSP y `cleanUrls`.
+
+## Imágenes
+
+El fondo de la portada se sirve en **WebP** (100 KB) con `image-set`, y `hero.png`
+(1,4 MB) queda solo como respaldo para navegadores que no lo soporten: nunca se
+descargan los dos. El `apple-touch-icon.png` está a 180×180 (38 KB).
+
+Para regenerar un WebP sin instalar nada, con el Chromium de Playwright:
+
+```bash
+node tools/convertir-imagen.mjs assets/hero.png assets/hero.webp 1920 image/webp 0.82
+```
 
 ## Analítica
 

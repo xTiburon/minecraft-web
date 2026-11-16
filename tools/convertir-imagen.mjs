@@ -1,0 +1,23 @@
+import { chromium } from 'playwright';
+import fs from 'node:fs';
+const [,, src, dest, ancho, tipo, calidad] = process.argv;
+const b = await chromium.launch();
+const p = await b.newPage();
+const datos = fs.readFileSync(src).toString('base64');
+const mime = src.endsWith('.png') ? 'image/png' : 'image/jpeg';
+const out = await p.evaluate(async ({ datos, mime, ancho, tipo, calidad }) => {
+  const img = new Image();
+  img.src = 'data:' + mime + ';base64,' + datos;
+  await img.decode();
+  const w = ancho ? Number(ancho) : img.width;
+  const h = Math.round(img.height * (w / img.width));
+  const c = document.createElement('canvas');
+  c.width = w; c.height = h;
+  const ctx = c.getContext('2d');
+  ctx.imageSmoothingQuality = 'high';
+  ctx.drawImage(img, 0, 0, w, h);
+  return { url: c.toDataURL(tipo, calidad ? Number(calidad) : undefined), w, h };
+}, { datos, mime, ancho, tipo, calidad });
+fs.writeFileSync(dest, Buffer.from(out.url.split(',')[1], 'base64'));
+console.log(`${dest}: ${out.w}x${out.h}, ${(fs.statSync(dest).size/1024).toFixed(0)} KB`);
+await b.close();

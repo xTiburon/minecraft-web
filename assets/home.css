@@ -7,7 +7,7 @@
 .hm-hero{position:relative;max-width:1240px;margin:0 auto;padding:clamp(40px,7vw,96px) 22px clamp(32px,5vw,64px)}
 .hm-hero-bg{position:absolute;left:50%;transform:translateX(-50%);top:calc(-66px - env(safe-area-inset-top));width:100vw;height:clamp(420px,58vw,720px);pointer-events:none;overflow:hidden}
 .hm-hero-bg i{position:absolute;inset:0;display:block}
-.hm-hero-bg .img{background-image:url(/assets/hero.png);background-size:cover;background-position:center 26%;opacity:.75;filter:saturate(.82) contrast(1.02);
+.hm-hero-bg .img{background-image:url(/assets/hero.png);background-image:-webkit-image-set(url(/assets/hero.webp) type('image/webp'),url(/assets/hero.png) type('image/png'));background-image:image-set(url(/assets/hero.webp) type('image/webp'),url(/assets/hero.png) type('image/png'));background-size:cover;background-position:center 26%;opacity:.75;filter:saturate(.82) contrast(1.02);
   -webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 42%,rgba(0,0,0,.45) 72%,transparent 96%);mask-image:linear-gradient(to bottom,#000 0%,#000 42%,rgba(0,0,0,.45) 72%,transparent 96%)}
 .hm-hero-bg .vel{background:radial-gradient(95% 62% at 50% 34%,rgba(10,11,13,.86) 0%,rgba(10,11,13,.62) 46%,rgba(10,11,13,.3) 74%,rgba(10,11,13,.1) 100%)}
 .hm-hero-bg .fade{background:linear-gradient(to bottom,rgba(10,11,13,.72) 0%,rgba(10,11,13,.3) 22%,rgba(10,11,13,.36) 60%,var(--bg) 100%)}
