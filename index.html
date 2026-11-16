@@ -55,7 +55,7 @@
 {"@context":"https://schema.org","@type":"WebSite","@id":"https://planetmc.net/#website","name":"PlanetMC","url":"https://planetmc.net/","inLanguage":"es","publisher":{"@id":"https://planetmc.net/#organization"}}
 </script>
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"SiteNavigationElement","name":["Inicio","Cómo entrar","Dudas","Tienda","Wiki"],"url":["https://planetmc.net/#inicio","https://planetmc.net/#entrar","https://planetmc.net/#faq","https://tienda.planetmc.net/","https://wiki.planetmc.net/"]}
+{"@context":"https://schema.org","@type":"SiteNavigationElement","name":["Inicio","Guías","Comandos","Cómo entrar","Dudas","Tienda"],"url":["https://planetmc.net/#inicio","https://planetmc.net/guias","https://planetmc.net/guias/comandos","https://planetmc.net/#entrar","https://planetmc.net/guias/faq","https://tienda.planetmc.net/"]}
 </script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"¿PlanetMC es gratis?","acceptedAnswer":{"@type":"Answer","text":"Sí. Solo necesitas Minecraft Java o Bedrock y conectarte a planetmc.net."}},{"@type":"Question","name":"¿PlanetMC funciona en consola y móvil?","acceptedAnswer":{"@type":"Answer","text":"Sí, mediante Bedrock Edition: Xbox, PlayStation, Nintendo Switch, Android e iOS, además de PC."}},{"@type":"Question","name":"¿PlanetMC acepta cuentas No Premium?","acceptedAnswer":{"@type":"Answer","text":"Sí, puedes entrar con cuenta Premium o No Premium sin diferencias de acceso."}},{"@type":"Question","name":"¿Java y Bedrock juegan juntos en PlanetMC?","acceptedAnswer":{"@type":"Answer","text":"Sí, crossplay total: ambas ediciones comparten el mismo mundo y economía."}},{"@type":"Question","name":"¿Desde qué países puedo jugar en PlanetMC?","acceptedAnswer":{"@type":"Answer","text":"Desde cualquiera. Es un servidor en español abierto a jugadores de todo el mundo."}},{"@type":"Question","name":"¿Cómo reporto un problema en PlanetMC?","acceptedAnswer":{"@type":"Answer","text":"Abre un ticket en nuestro Discord; el staff responde lo antes posible."}}]}
@@ -88,6 +88,8 @@ img, svg { max-width: 100%; }
 
 [data-copy]:active { border-color: rgba(92,225,255,.55) !important; background: #13161B !important; }
 @media (max-width: 900px) {
+  footer nav a { display: inline-flex; align-items: center; min-height: 40px; }
+  footer a[href="#inicio"], header a[href="#inicio"] { min-height: 44px; }
   #mobileMenu { max-height: 72vh; overflow-y: auto; -webkit-overflow-scrolling: touch; }
   #mobileMenu a { padding: 15px 0 !important; }
   #mobileMenu > div a { min-height: 48px; display: flex !important; align-items: center; justify-content: center; }
@@ -132,6 +134,8 @@ img, svg { max-width: 100%; }
 
       <div class="desk" style="display:flex; align-items:center; gap:28px; flex:1">
         <nav style="display:flex; align-items:center; gap:26px; margin-left:14px; font-size:14px; color:#9AA1AC">
+          <a href="/guias" style="color:#9AA1AC">Guías</a>
+          <a href="/guias/comandos" style="color:#9AA1AC">Comandos</a>
           <a href="#entrar" style="color:#9AA1AC">Cómo entrar</a>
           <a href="#faq" style="color:#9AA1AC">Dudas</a>
         </nav>
@@ -149,6 +153,8 @@ img, svg { max-width: 100%; }
     </div>
 
     <nav id="mobileMenu" hidden style="display:flex; flex-direction:column; padding:8px 22px 20px; gap:2px; border-top:1px solid rgba(255,255,255,.06)">
+        <a href="/guias" style="color:#C9CED6; font-size:16px; padding:13px 0; border-bottom:1px solid rgba(255,255,255,.05)">Guías del Survival</a>
+        <a href="/guias/comandos" style="color:#C9CED6; font-size:16px; padding:13px 0; border-bottom:1px solid rgba(255,255,255,.05)">Comandos</a>
         <a href="#entrar" data-close-menu style="color:#C9CED6; font-size:16px; padding:13px 0; border-bottom:1px solid rgba(255,255,255,.05)">Cómo entrar</a>
         <a href="#faq" data-close-menu style="color:#C9CED6; font-size:16px; padding:13px 0; border-bottom:1px solid rgba(255,255,255,.05)">Dudas</a>
         <div style="display:flex; gap:10px; margin-top:16px">
@@ -278,6 +284,50 @@ img, svg { max-width: 100%; }
     </div>
   </section>
 
+  <section id="guias" style="max-width:1160px; margin:0 auto; padding:0 22px clamp(60px,8vw,110px)">
+    <div style="background:#0D0F12; border:1px solid rgba(255,255,255,.08); border-radius:18px; padding:clamp(28px,4vw,52px)">
+      <div style="display:inline-flex; align-items:center; gap:9px; padding:7px 14px; border:1px solid rgba(92,225,255,.26); background:rgba(92,225,255,.05); border-radius:999px; font-family:'JetBrains Mono', monospace; font-size:11.5px; letter-spacing:.14em; text-transform:uppercase; color:#5CE1FF; margin-bottom:18px">Wiki oficial</div>
+      <h2 style="font-size:clamp(26px,3.6vw,40px); font-weight:700; letter-spacing:-.02em">Guías del Survival</h2>
+      <p style="font-size:16px; line-height:1.6; color:#9AA1AC; max-width:56ch; margin-top:14px">Todo lo que necesitas saber para jugar, explicado paso a paso: comandos, dinero, protecciones, casas, PvP y mucho más. Y un buscador para encontrarlo en un segundo.</p>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(min(100%, 250px), 1fr)); gap:14px; margin-top:34px">
+      <a href="/guias/primeros-pasos" style="display:block; background:#101216; border:1px solid rgba(255,255,255,.09); border-radius:14px; padding:20px" class="hv3">
+        <div style="font-family:'JetBrains Mono', monospace; font-size:11.5px; letter-spacing:.1em; text-transform:uppercase; color:#5CE1FF">Empieza aquí</div>
+        <h3 style="font-size:17.5px; font-weight:500; color:#E9EBEE; margin-top:10px">Primeros pasos</h3>
+        <p style="font-size:14px; line-height:1.6; color:#9AA1AC; margin-top:7px">Entrar, buscar sitio, levantar tu casa, protegerla y conseguir tus primeras monedas.</p>
+      </a>
+      <a href="/guias/comandos" style="display:block; background:#101216; border:1px solid rgba(255,255,255,.09); border-radius:14px; padding:20px" class="hv3">
+        <div style="font-family:'JetBrains Mono', monospace; font-size:11.5px; letter-spacing:.1em; text-transform:uppercase; color:#5CE1FF">Referencia</div>
+        <h3 style="font-size:17.5px; font-weight:500; color:#E9EBEE; margin-top:10px">Todos los comandos</h3>
+        <p style="font-size:14px; line-height:1.6; color:#9AA1AC; margin-top:7px">La lista completa por temas, con la función de cada uno y un ejemplo.</p>
+      </a>
+      <a href="/guias/protecciones" style="display:block; background:#101216; border:1px solid rgba(255,255,255,.09); border-radius:14px; padding:20px" class="hv3">
+        <div style="font-family:'JetBrains Mono', monospace; font-size:11.5px; letter-spacing:.1em; text-transform:uppercase; color:#5CE1FF">Tu base</div>
+        <h3 style="font-size:17.5px; font-weight:500; color:#E9EBEE; margin-top:10px">Protecciones</h3>
+        <p style="font-size:14px; line-height:1.6; color:#9AA1AC; margin-top:7px">Cómo proteger tu construcción para que nadie pueda romperla ni abrir tus cofres.</p>
+      </a>
+      <a href="/guias/economia" style="display:block; background:#101216; border:1px solid rgba(255,255,255,.09); border-radius:14px; padding:20px" class="hv3">
+        <div style="font-family:'JetBrains Mono', monospace; font-size:11.5px; letter-spacing:.1em; text-transform:uppercase; color:#5CE1FF">Dinero</div>
+        <h3 style="font-size:17.5px; font-weight:500; color:#E9EBEE; margin-top:10px">Economía</h3>
+        <p style="font-size:14px; line-height:1.6; color:#9AA1AC; margin-top:7px">Las cinco formas de ganar monedas y cómo usar la tienda del servidor.</p>
+      </a>
+      <a href="/guias/pvp" style="display:block; background:#101216; border:1px solid rgba(255,255,255,.09); border-radius:14px; padding:20px" class="hv3">
+        <div style="font-family:'JetBrains Mono', monospace; font-size:11.5px; letter-spacing:.1em; text-transform:uppercase; color:#5CE1FF">Combate</div>
+        <h3 style="font-size:17.5px; font-weight:500; color:#E9EBEE; margin-top:10px">PvP y arenas</h3>
+        <p style="font-size:14px; line-height:1.6; color:#9AA1AC; margin-top:7px">Cómo se activa el PvP y qué arriesgas en las arenas Crystal y Pot.</p>
+      </a>
+      <a href="/guias/faq" style="display:block; background:#101216; border:1px solid rgba(255,255,255,.09); border-radius:14px; padding:20px" class="hv3">
+        <div style="font-family:'JetBrains Mono', monospace; font-size:11.5px; letter-spacing:.1em; text-transform:uppercase; color:#5CE1FF">Dudas</div>
+        <h3 style="font-size:17.5px; font-weight:500; color:#E9EBEE; margin-top:10px">Preguntas frecuentes</h3>
+        <p style="font-size:14px; line-height:1.6; color:#9AA1AC; margin-top:7px">Si es gratis, consolas y móviles, versiones y qué hacer si no puedes conectar.</p>
+      </a>
+      </div>
+      <div style="display:flex; flex-wrap:wrap; gap:12px; margin-top:34px">
+        <a href="/guias" style="font-size:15px; font-weight:500; color:#07131A; background:#5CE1FF; padding:13px 20px; border-radius:9px" class="hv5">Ver todas las guías</a>
+        <a href="/guias/comandos" style="font-size:15px; color:#C9CED6; padding:13px 20px; border:1px solid rgba(255,255,255,.12); border-radius:9px" class="hv6">Buscar un comando</a>
+      </div>
+    </div>
+  </section>
+
   <section id="entrar" style="max-width:1160px; margin:0 auto; padding:0 22px clamp(60px,8vw,110px)">
     <div style="background:#0D0F12; border:1px solid rgba(255,255,255,.08); border-radius:18px; padding:clamp(28px,4vw,52px)">
       <h2 style="font-size:clamp(26px,3.6vw,40px); font-weight:700; letter-spacing:-.02em">Cómo entrar</h2>
@@ -302,7 +352,7 @@ img, svg { max-width: 100%; }
       </div>
       <div style="display:flex; flex-wrap:wrap; gap:12px; margin-top:40px">
         <a href="https://discord.gg/HvcPfgXVHf" target="_blank" rel="noopener noreferrer" style="font-size:15px; font-weight:500; color:#07131A; background:#5CE1FF; padding:13px 20px; border-radius:9px" class="hv5">Soporte en Discord</a>
-        <a href="https://wiki.planetmc.net/" target="_blank" rel="noopener noreferrer" style="font-size:15px; color:#C9CED6; padding:13px 20px; border:1px solid rgba(255,255,255,.12); border-radius:9px" class="hv6">Leer la Wiki</a>
+        <a href="/guias/primeros-pasos" style="font-size:15px; color:#C9CED6; padding:13px 20px; border:1px solid rgba(255,255,255,.12); border-radius:9px" class="hv6">Guía para empezar</a>
       </div>
     </div>
   </section>
@@ -411,7 +461,7 @@ img, svg { max-width: 100%; }
         <a href="https://www.youtube.com/@planetmc-net" target="_blank" rel="noopener noreferrer" style="color:#9AA1AC">YouTube</a>
         <a href="https://www.tiktok.com/@planetmc.net" target="_blank" rel="noopener noreferrer" style="color:#9AA1AC">TikTok</a>
         <a href="https://kick.com/xtiburon" target="_blank" rel="noopener noreferrer" style="color:#9AA1AC">Kick</a>
-        <a href="https://wiki.planetmc.net/" target="_blank" rel="noopener noreferrer" style="color:#9AA1AC">Wiki</a>
+        <a href="/guias" style="color:#9AA1AC">Guías</a>
       </nav>
       <div style="margin-left:auto; font-size:13px; color:#5F656E; font-family:'JetBrains Mono', monospace">planetmc.net · © 2026</div>
     </div>

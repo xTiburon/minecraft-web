@@ -1,0 +1,96 @@
+<h1>Casas y warps</h1>
+<p class="wk-lede">Dos sistemas para no perder nunca el camino: las <strong>casas</strong> son tus puntos privados y los <strong>warps</strong> son los sitios públicos del servidor.</p>
+
+<h2 id="casas">Casas: tus propios puntos de viaje</h2>
+<p>Una «casa» es simplemente un lugar guardado al que puedes volver cuando quieras escribiendo un comando. No construye nada ni protege nada: es una marca en el mapa, solo para ti.</p>
+<div class="wk-cmds">
+  <div class="wk-cmd">
+    <code>/sethome &lt;nombre&gt;</code>
+    <p>Guarda el punto exacto donde estás parado con el nombre que le pongas.</p>
+    <span class="wk-ej">Ejemplo: <b>/sethome base</b></span>
+  </div>
+  <div class="wk-cmd">
+    <code>/home &lt;nombre&gt;</code>
+    <p>Te teletransporta a esa casa desde cualquier parte del mundo.</p>
+    <span class="wk-ej">Ejemplo: <b>/home base</b></span>
+  </div>
+  <div class="wk-cmd">
+    <code>/homes</code>
+    <p>Abre un menú con todas tus casas. Cada icono te dice en qué mundo está y sus coordenadas; haz clic para viajar.</p>
+  </div>
+  <div class="wk-cmd">
+    <code>/delhome &lt;nombre&gt;</code>
+    <p>Borra la marca. Lo que has construido ahí sigue intacto.</p>
+    <span class="wk-ej">Ejemplo: <b>/delhome base</b></span>
+  </div>
+  <div class="wk-cmd">
+    <code>/renamehome &lt;nombre&gt; &lt;nuevo&gt;</code>
+    <p>Cambia el nombre de una casa guardada.</p>
+    <span class="wk-ej">Ejemplo: <b>/renamehome base casa-vieja</b></span>
+  </div>
+</div>
+<div class="wk-tip">
+  <b>Consejos que ahorran disgustos</b>
+  <p>Ponle nombres que entiendas (<code>base</code>, <code>mina</code>, <code>granja</code>, <code>nether</code>) y <strong>guarda la casa dentro de tu protección</strong>: así siempre apareces en terreno seguro.</p>
+</div>
+<p>Cuando usas <code>/home</code> hay una pequeña cuenta atrás antes de viajar. Si te mueves durante la cuenta, el viaje se cancela: es lo que evita que alguien huya de una pelea teletransportándose.</p>
+
+<h2 id="back">Volver atrás: /back</h2>
+<div class="wk-cmds">
+  <div class="wk-cmd">
+    <code>/back</code>
+    <p>Te devuelve al último sitio del que te teletransportaste. Si acabas de morir, te lleva al punto exacto donde murieron.</p>
+  </div>
+</div>
+<p>Es el comando que salva el día cuando te teletransportas sin querer o cuando mueres lejos de casa y quieres recuperar lo que se te cayó. Corre: los objetos del suelo no duran para siempre.</p>
+
+<h2 id="warps">Warps: los sitios públicos</h2>
+<p>Los warps son zonas del servidor abiertas a todo el mundo. Para ver la lista completa y actualizada:</p>
+<div class="wk-cmds">
+  <div class="wk-cmd">
+    <code>/warps</code>
+    <p>Abre el menú con todos los warps disponibles; haz clic en uno para viajar.</p>
+  </div>
+  <div class="wk-cmd">
+    <code>/warp &lt;nombre&gt;</code>
+    <p>Te lleva directamente a ese warp, sin pasar por el menú.</p>
+    <span class="wk-ej">Ejemplo: <b>/warp cajas</b></span>
+  </div>
+</div>
+
+<h3 id="warps-destacados">Los warps que más se usan</h3>
+<div class="wk-tablewrap">
+  <table>
+    <tr><th>Warp</th><th>Qué hay ahí</th></tr>
+    <tr><td><code>/warp afk</code></td><td>La <strong>zona AFK</strong>. Mientras estés dentro ganas <strong>una gema por minuto</strong> sin hacer nada. Nadie te expulsa por estar ausente ahí.</td></tr>
+    <tr><td><code>/warp cajas</code></td><td>Las <strong>cajas de recompensas</strong>. Se abren con llaves y sueltan objetos según su rareza. Ver <a href="/guias/extras">Otras mecánicas</a>.</td></tr>
+    <tr><td><code>/warp crystal</code></td><td>Arena de <strong>Crystal PvP</strong>: se puede construir y romper, y el terreno se regenera solo. Ver <a href="/guias/pvp">PvP</a>.</td></tr>
+    <tr><td><code>/warp pot</code></td><td>Arena de <strong>Pot PvP</strong>: combate directo, sin construir. Ver <a href="/guias/pvp">PvP</a>.</td></tr>
+  </table>
+</div>
+<div class="wk-bad">
+  <b>Crystal y Pot son zonas de riesgo</b>
+  <p>Son arenas de PvP: ahí <strong>puedes perder todo lo que lleves encima</strong> si mueres. No entres con tu equipo bueno.</p>
+</div>
+
+<h2 id="spawn">Volver al spawn</h2>
+<div class="wk-cmds">
+  <div class="wk-cmd">
+    <code>/spawn</code>
+    <p>Te lleva al spawn del servidor desde donde estés. Es una zona segura: ahí no se construye, no se rompe nada y no se puede pelear fuera de las arenas.</p>
+  </div>
+</div>
+
+<h2 id="tpa">Viajar hasta otro jugador</h2>
+<p>Para reunirte con alguien, pídeselo: nadie puede teletransportarse a tu lado sin tu permiso.</p>
+<div class="wk-cmds">
+  <div class="wk-cmd"><code>/tpa &lt;jugador&gt;</code><p>Pides permiso para ir hasta donde está esa persona.</p><span class="wk-ej">Ejemplo: <b>/tpa Xavier27</b></span></div>
+  <div class="wk-cmd"><code>/tpahere &lt;jugador&gt;</code><p>Le pides que venga hasta ti.</p></div>
+  <div class="wk-cmd"><code>/tpaccept</code><p>Aceptas la petición que te han enviado.</p></div>
+  <div class="wk-cmd"><code>/tpdeny</code><p>La rechazas.</p></div>
+  <div class="wk-cmd"><code>/tptoggle</code><p>Dejas de recibir peticiones por completo (o vuelves a aceptarlas).</p></div>
+</div>
+<div class="wk-warn">
+  <b>No aceptes a desconocidos</b>
+  <p>Al aceptar apareces justo al lado de esa persona con todo tu inventario encima. Es la trampa más vieja del Survival.</p>
+</div>
