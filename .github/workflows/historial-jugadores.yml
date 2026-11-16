@@ -1,12 +1,13 @@
-# Toma una muestra de jugadores conectados cada 2 h y la guarda en
-# data/players.json, que es lo que dibuja la gráfica de la portada.
+# Toma una muestra de jugadores conectados cada hora y la guarda en
+# data/players.json (un valor por bloque de 2 h, el pico), que es lo que
+# dibuja la gráfica de la portada. Se conservan 30 días de historial.
 # Así el historial de 24 h es el mismo para todos los visitantes, en vez de
 # vivir en el navegador de cada uno.
 name: Historial de jugadores
 
 on:
   schedule:
-    - cron: '5 */2 * * *'   # a y 5 de cada dos horas (UTC)
+    - cron: '5 * * * *'   # a y 5 de cada hora (UTC)
   workflow_dispatch:         # también se puede lanzar a mano
 
 permissions:

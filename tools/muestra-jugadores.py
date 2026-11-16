@@ -2,12 +2,15 @@
 # -*- coding: utf-8 -*-
 """Añade una muestra de jugadores conectados a data/players.json.
 
-Lo ejecuta .github/workflows/historial-jugadores.yml cada 2 h. También se puede
+Lo ejecuta .github/workflows/historial-jugadores.yml cada hora. También se puede
 lanzar a mano:  python tools/muestra-jugadores.py
 
 Guarda una muestra por bloque de 2 h (si ya hay una del bloque en curso, se
-queda con el valor más alto) y conserva 48 h, el doble de lo que dibuja la
-portada, para que un fallo puntual de la tarea no deje huecos visibles.
+queda con el valor más alto) y conserva 30 días de historial, aunque la portada
+solo dibuje las últimas 24 h: así queda registro de la actividad del servidor y
+un fallo puntual de la tarea no deja huecos visibles.
+
+También lleva el récord de jugadores conectados y la fecha en que se alcanzó.
 """
 
 import json
@@ -20,7 +23,7 @@ import urllib.request
 API = 'https://api.mcsrvstat.us/3/planetmc.net'
 RUTA = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'data', 'players.json')
 BLOQUE_MS = 2 * 60 * 60 * 1000
-CONSERVAR_MS = 48 * 60 * 60 * 1000
+CONSERVAR_MS = 30 * 24 * 60 * 60 * 1000
 
 
 def consultar():
@@ -61,17 +64,26 @@ def main():
     corte = ahora - CONSERVAR_MS
     muestras = sorted([s for s in muestras if s['t'] >= corte], key=lambda s: s['t'])
 
+    # Récord histórico: no se pierde aunque la muestra que lo marcó ya haya caducado.
+    record = datos.get('record') if isinstance(datos.get('record'), dict) else {}
+    mejor = max([s['n'] for s in muestras] + [n])
+    if not isinstance(record.get('n'), int) or mejor > record['n']:
+        record = {'n': mejor, 't': bloque}
+
     salida = {
         '_': ('Historial de jugadores conectados. Lo escribe '
-              '.github/workflows/historial-jugadores.yml cada 2 h. '
-              't = milisegundos UTC, n = jugadores.'),
+              '.github/workflows/historial-jugadores.yml cada hora. '
+              't = milisegundos UTC, n = jugadores (pico del bloque de 2 h). '
+              'Se conservan 30 días.'),
         'updated': ahora,
+        'record': record,
         'samples': muestras,
     }
     with open(RUTA, 'w', encoding='utf-8', newline='\n') as f:
         json.dump(salida, f, ensure_ascii=False, indent=1)
         f.write('\n')
-    print('Muestra guardada: %d jugadores (%d muestras en el archivo)' % (n, len(muestras)))
+    print('Muestra guardada: %d jugadores · %d muestras · récord %d'
+          % (n, len(muestras), record['n']))
     return 0
 
 

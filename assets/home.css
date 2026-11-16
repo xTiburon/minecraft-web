@@ -25,25 +25,35 @@
 
 /* ── Tarjetas de IP y panel de actividad ────────────────── */
 .hm-estado{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:14px;width:100%;max-width:1000px;margin-top:10px;text-align:left;align-items:stretch}
-.hm-ips{display:flex;flex-direction:column;gap:14px}
-.hm-ip{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:17px;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.hm-ips{display:flex;flex-direction:column;gap:14px;height:100%}
+.hm-ip{display:flex;flex-direction:column;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:17px;-webkit-tap-highlight-color:transparent}
+.hm-ip:hover{border-color:rgba(255,255,255,.14)}
+.hm-ip.verde:hover{border-color:rgba(255,255,255,.14)}
+.hm-ip-doble{display:flex;flex-direction:column;gap:8px;margin-top:auto}
 .hm-ip:hover{border-color:rgba(92,225,255,.45);background:#13161B}
 .hm-ip:active{border-color:rgba(92,225,255,.55);background:#13161B}
 .hm-ip.verde:hover{border-color:rgba(110,231,168,.45)}
-.hm-ip-cab{display:flex;align-items:center;gap:11px;margin-bottom:13px}
+.hm-ip-cab{display:flex;align-items:center;gap:11px;margin-bottom:14px}
 .hm-ip-cab img{width:22px;height:22px;display:block}
 .hm-ip-cab b{font-size:15px;font-weight:500;color:var(--tx)}
 .hm-ip-cab span{margin-left:auto;font-size:12px;color:var(--mut2)}
-.hm-ip-val{display:flex;align-items:center;justify-content:space-between;gap:12px;background:var(--bg);border:1px solid var(--line2);border-radius:9px;padding:11px 14px;min-height:44px}
+.hm-ip-val{display:flex;align-items:center;gap:12px;background:var(--bg);border:1px solid var(--line2);border-radius:9px;padding:10px 14px;min-height:48px;cursor:pointer;transition:border-color .14s ease,background .14s ease}
+.hm-ip-val:hover{border-color:rgba(92,225,255,.45);background:#0D1014}
+.hm-ip.verde .hm-ip-val:hover{border-color:rgba(110,231,168,.45)}
+.hm-ip-val:active{border-color:rgba(92,225,255,.6)}
+.hm-ip-val .et{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--mut3);width:68px;flex:none}
+.hm-ip-val code{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis}
+.hm-ip-val em{flex:none}
 .hm-ip-val code{font-family:var(--mono);font-size:15px;color:var(--ac);background:none;border:0;padding:0}
 .hm-ip.verde .hm-ip-val code{color:var(--ok)}
 .hm-ip-val em{font-style:normal;font-size:12px;color:var(--mut2)}
+.hm-ip-val:hover em{color:var(--tx2)}
 
 .hm-panel{background:var(--bg2);border:1px solid var(--line);border-radius:14px;padding:17px;display:flex;flex-direction:column}
 .hm-panel-cab{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px}
 .hm-panel-cab .n{font-size:22px;font-weight:700;letter-spacing:-.02em;font-family:var(--mono)}
 .hm-panel-cab .lbl{font-size:13px;color:var(--mut)}
-.hm-panel-cab .rango{margin-left:auto;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--mut3);font-family:var(--mono)}
+.hm-panel-cab .rango{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--mut3);font-family:var(--mono)}
 #chart{position:relative;height:clamp(92px,12vw,118px);margin-top:14px;touch-action:pan-y}
 #chartTicks{position:relative;height:14px;margin-top:8px;font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;color:var(--mut3)}
 #samplingNote{font-size:11.5px;color:var(--mut3);margin-top:10px;line-height:1.4}
@@ -120,4 +130,22 @@
 @media (max-height:520px) and (orientation:landscape){
   .hm-hero{padding-top:28px}
   .hm-hero-bg{display:none}
+}
+
+@media (max-width:420px){
+  .hm-ip-val{gap:9px}
+  .hm-ip-val .et{width:56px;font-size:9.5px;letter-spacing:.1em}
+  .hm-ip-val code{font-size:14px}
+  .hm-ip-val em{font-size:11.5px}
+}
+
+/* ── Señal de que el dato está vivo ───────────────────────── */
+.hm-vivo{display:inline-flex;align-items:center;gap:6px;margin-left:auto;font-size:11.5px;color:var(--mut2)}
+.hm-vivo i{width:6px;height:6px;border-radius:50%;background:var(--ok);display:block}
+.hm-vivo.late i{animation:pmcLate 1.1s ease-out}
+@keyframes pmcLate{0%{transform:scale(1);box-shadow:0 0 0 0 rgba(110,231,168,.5)}60%{transform:scale(1.35);box-shadow:0 0 0 6px rgba(110,231,168,0)}100%{transform:scale(1)}}
+.cambia{animation:pmcCambia .5s ease-out}
+@keyframes pmcCambia{0%{color:var(--ac);transform:translateY(-2px)}100%{color:inherit;transform:none}}
+@media (prefers-reduced-motion:reduce){
+  .hm-vivo.late i,.cambia,.hm-estadopill .dot{animation:none !important}
 }
