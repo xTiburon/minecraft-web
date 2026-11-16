@@ -1,0 +1,76 @@
+<h1>Subastas</h1>
+<p class="wk-lede">La casa de subastas es el mercado entre jugadores: publicas un objeto con su precio y cualquiera puede comprarlo, estés conectado o no.</p>
+
+<h2 id="que-es">¿Qué es la casa de subastas?</h2>
+<p>Un escaparate común. Tú dejas el objeto con un precio fijo; quien lo quiera paga y se lo lleva, y a ti te llegan las monedas. No hay pujas ni esperas: el primero que paga se lo queda.</p>
+<div class="wk-cmds">
+  <div class="wk-cmd">
+    <code>/subasta</code>
+    <p>Abre la casa de subastas con todo lo que hay publicado. También vale <code>/ah</code>.</p>
+  </div>
+</div>
+
+<h2 id="vender">Publicar un objeto</h2>
+<ol>
+  <li>Coge en la mano el objeto que quieres vender.</li>
+  <li>Escribe <code>/subasta vender &lt;precio&gt;</code> con el precio que pides.</li>
+  <li>El objeto sale de tu inventario y queda publicado.</li>
+</ol>
+<div class="wk-cmds">
+  <div class="wk-cmd">
+    <code>/subasta vender &lt;precio&gt;</code>
+    <p>Publica el objeto que tienes en la mano por ese precio.</p>
+    <span class="wk-ej">Ejemplo: <b>/subasta vender 2500</b></span>
+  </div>
+  <div class="wk-cmd">
+    <code>/subasta misobjetos</code>
+    <p>Tus publicaciones: las activas, las que se han vendido y las que han caducado.</p>
+  </div>
+</div>
+<div class="wk-tablewrap">
+  <table>
+    <tr><th>Cuánto dura</th><td><strong>24 horas</strong>. Si no se vende, recuperas el objeto desde <code>/subasta misobjetos</code>.</td></tr>
+    <tr><th>Precio mínimo</th><td>1 moneda</td></tr>
+    <tr><th>Publicaciones a la vez</th><td><strong>3</strong> sin rango. Los rangos amplían el límite (ver abajo).</td></tr>
+    <tr><th>Cancelar</th><td>Puedes retirar una publicación antes de que caduque y recuperar el objeto.</td></tr>
+  </table>
+</div>
+
+<h3 id="limites">Publicaciones simultáneas por rango</h3>
+<div class="wk-tablewrap">
+  <table>
+    <tr><th>Rango</th><th>Publicaciones</th></tr>
+    <tr><td>Sin rango</td><td><strong>3</strong></td></tr>
+    <tr><td>VOID</td><td>5</td></tr>
+    <tr><td>NOVA</td><td>8</td></tr>
+    <tr><td>LUNAR</td><td>11</td></tr>
+    <tr><td>METEOR</td><td>17</td></tr>
+    <tr><td>ECLIPSE</td><td>25</td></tr>
+  </table>
+</div>
+
+<h2 id="comprar">Comprar</h2>
+<ol>
+  <li>Abre <code>/subasta</code> y busca lo que quieras entre las publicaciones.</li>
+  <li>Haz clic en el objeto para ver el precio y confirmar.</li>
+  <li>Las monedas salen de tu saldo y el objeto va a tu inventario.</li>
+</ol>
+<div class="wk-note">
+  <b>Haz hueco antes de comprar</b>
+  <p>Si tu inventario está lleno puede que no quepa lo que compras. Vacía un par de huecos (o usa una <code>/mochila</code>) antes de pulsar comprar.</p>
+</div>
+<p>No puedes comprar tus propias publicaciones: si te has equivocado con el precio, cancélala y vuelve a publicarla.</p>
+
+<h2 id="precios">Poner un buen precio</h2>
+<ul>
+  <li><strong>Mira antes qué hay publicado</strong>: si hay cinco iguales al mismo precio, baja un poco el tuyo y se venderá primero.</li>
+  <li><strong>Compara con <code>/shop</code></strong>: si la tienda del servidor paga más que tu precio, no tiene sentido publicarlo ahí.</li>
+  <li><strong>Lo que vale es lo que no se compra con monedas</strong>: equipo encantado, cabezas, objetos de cajas, materiales difíciles.</li>
+  <li><strong>Precios redondos se venden mejor</strong> que cifras raras.</li>
+</ul>
+
+<h2 id="seguridad">Por qué es más seguro que un trato a mano</h2>
+<div class="wk-tip">
+  <b>Nadie se queda con tu objeto sin pagar</b>
+  <p>El intercambio lo hace el servidor: o se entrega el objeto y se cobra el dinero, o no pasa nada. Para tratos cara a cara usa <code>/trade</code>, que también es seguro. Lo que <strong>no</strong> es seguro es tirar los objetos al suelo o pagar por adelantado con <code>/pay</code>.</p>
+</div>

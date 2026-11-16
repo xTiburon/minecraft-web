@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="format-detection" content="telephone=no">
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-M62PP28N');</script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q0E6MBKTMR"></script>
@@ -18,6 +18,8 @@
 <meta name="apple-mobile-web-app-title" content="PlanetMC">
 <link rel="canonical" href="https://planetmc.net/">
 <link rel="alternate" hreflang="es" href="https://planetmc.net/">
+<link rel="alternate" hreflang="es-419" href="https://planetmc.net/">
+<link rel="alternate" hreflang="es-ES" href="https://planetmc.net/">
 <link rel="alternate" hreflang="x-default" href="https://planetmc.net/">
 <link rel="icon" type="image/png" href="/assets/img/logo-192.png" sizes="192x192">
 <link rel="shortcut icon" href="/favicon.ico">
@@ -55,7 +57,7 @@
 {"@context":"https://schema.org","@type":"WebSite","@id":"https://planetmc.net/#website","name":"PlanetMC","url":"https://planetmc.net/","inLanguage":"es","publisher":{"@id":"https://planetmc.net/#organization"}}
 </script>
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"SiteNavigationElement","name":["Inicio","Cómo entrar","Dudas","Tienda","Wiki"],"url":["https://planetmc.net/#inicio","https://planetmc.net/#entrar","https://planetmc.net/#faq","https://tienda.planetmc.net/","https://wiki.planetmc.net/"]}
+{"@context":"https://schema.org","@type":"SiteNavigationElement","name":["Inicio","Guías","Comandos","Cómo entrar","Dudas","Tienda"],"url":["https://planetmc.net/#inicio","https://planetmc.net/guias","https://planetmc.net/guias/comandos","https://planetmc.net/#entrar","https://planetmc.net/guias/faq","https://tienda.planetmc.net/"]}
 </script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"¿PlanetMC es gratis?","acceptedAnswer":{"@type":"Answer","text":"Sí. Solo necesitas Minecraft Java o Bedrock y conectarte a planetmc.net."}},{"@type":"Question","name":"¿PlanetMC funciona en consola y móvil?","acceptedAnswer":{"@type":"Answer","text":"Sí, mediante Bedrock Edition: Xbox, PlayStation, Nintendo Switch, Android e iOS, además de PC."}},{"@type":"Question","name":"¿PlanetMC acepta cuentas No Premium?","acceptedAnswer":{"@type":"Answer","text":"Sí, puedes entrar con cuenta Premium o No Premium sin diferencias de acceso."}},{"@type":"Question","name":"¿Java y Bedrock juegan juntos en PlanetMC?","acceptedAnswer":{"@type":"Answer","text":"Sí, crossplay total: ambas ediciones comparten el mismo mundo y economía."}},{"@type":"Question","name":"¿Desde qué países puedo jugar en PlanetMC?","acceptedAnswer":{"@type":"Answer","text":"Desde cualquiera. Es un servidor en español abierto a jugadores de todo el mundo."}},{"@type":"Question","name":"¿Cómo reporto un problema en PlanetMC?","acceptedAnswer":{"@type":"Answer","text":"Abre un ticket en nuestro Discord; el staff responde lo antes posible."}}]}
@@ -69,371 +71,281 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&amp;family=JetBrains+Mono:wght@400;600&amp;display=swap" rel="stylesheet">
-<style>
-html { -webkit-text-size-adjust: 100%; }
-body { overflow-x: hidden; }
-img, svg { max-width: 100%; }
-@media (hover: hover) {
-
-}
-  html { scroll-behavior: smooth; }
-  body { margin: 0; background: #0A0B0D; color: #E9EBEE; font-family: 'Space Grotesk', system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
-  * { box-sizing: border-box; }
-  a { color: #5CE1FF; text-decoration: none; }
-  a:hover { color: #9FEEFF; }
-  h1, h2, h3, p { margin: 0; }
-  summary::-webkit-details-marker { display: none; }
-  @keyframes pmcToast { from { opacity: 0; transform: translate(-50%, 12px); } to { opacity: 1; transform: translate(-50%, 0); } }
-  @keyframes pmcPulse { 0%, 100% { opacity: 1; } 50% { opacity: .35; } }
-
-[data-copy]:active { border-color: rgba(92,225,255,.55) !important; background: #13161B !important; }
-@media (max-width: 900px) {
-  #mobileMenu { max-height: 72vh; overflow-y: auto; -webkit-overflow-scrolling: touch; }
-  #mobileMenu a { padding: 15px 0 !important; }
-  #mobileMenu > div a { min-height: 48px; display: flex !important; align-items: center; justify-content: center; }
-  header a[href^="https"] { min-height: 44px; display: inline-flex; align-items: center; }
-  #navToggle { width: 44px !important; height: 44px !important; }
-}
-@media (max-width: 620px) {
-  #estado { gap: 12px !important; }
-  h1 { letter-spacing: -.02em !important; }
-}
-</style>
-<style>
-.hv1:hover{border-color:rgba(92,225,255,.5) !important;color:#FFFFFF !important}
-.hv2:hover{background:#9FEEFF !important}
-.hv3:hover{border-color:rgba(92,225,255,.45) !important;background:#13161B !important}
-.hv4:hover{border-color:rgba(110,231,168,.45) !important;background:#13161B !important}
-.hv5:hover{background:#9FEEFF !important}
-.hv6:hover{border-color:rgba(92,225,255,.5) !important;color:#FFFFFF !important}
-.hv7:hover{background:#9FEEFF !important}
-.hv8:hover{border-color:rgba(92,225,255,.5) !important;color:#FFFFFF !important}
-.desk { display: flex; }
-#navToggle.mob { display: none !important; }
-#mobileMenu[hidden], [hidden] { display: none !important; }
-@media (max-width: 900px) {
-  .desk { display: none !important; }
-  #navToggle.mob { display: flex !important; margin-left: auto; }
-  #mobileMenu:not([hidden]) { display: flex !important; }
-}
-[data-copy] { -webkit-tap-highlight-color: transparent; }
-:focus-visible { outline: 2px solid #5CE1FF; outline-offset: 2px; }
-</style>
+<link rel="stylesheet" href="/assets/wiki.css">
+<link rel="stylesheet" href="/assets/home.css">
+<link rel="preload" as="image" href="/assets/hero.webp" type="image/webp" fetchpriority="high">
 </head>
 <body>
-<div style="background:#0A0B0D; min-height:100vh; overflow-x:hidden">
 
-  <header style="position:sticky; top:0; z-index:50; background:rgba(10,11,13,.82); backdrop-filter:blur(14px); border-bottom:1px solid rgba(255,255,255,.07)">
-    <div style="max-width:1160px; margin:0 auto; padding:0 22px; height:66px; display:flex; align-items:center; gap:28px">
-      <a href="#inicio" style="display:flex; align-items:center; gap:10px; color:#E9EBEE; font-weight:700; letter-spacing:.02em; font-size:16px">
-        <img src="assets/logo.webp" alt="PlanetMC" width="26" height="26" style="display:block; width:26px; height:26px">
-        PLANET<span style="color:#5CE1FF">MC</span>
-      </a>
-
-      <div class="desk" style="display:flex; align-items:center; gap:28px; flex:1">
-        <nav style="display:flex; align-items:center; gap:26px; margin-left:14px; font-size:14px; color:#9AA1AC">
-          <a href="#entrar" style="color:#9AA1AC">Cómo entrar</a>
-          <a href="#faq" style="color:#9AA1AC">Dudas</a>
-        </nav>
-        <div style="margin-left:auto; display:flex; align-items:center; gap:10px">
-          <a href="https://discord.gg/HvcPfgXVHf" target="_blank" rel="noopener noreferrer" style="font-size:14px; color:#C9CED6; padding:9px 14px; border:1px solid rgba(255,255,255,.12); border-radius:8px" class="hv1">Discord</a>
-          <a href="https://tienda.planetmc.net/" target="_blank" rel="noopener noreferrer" style="font-size:14px; font-weight:500; color:#07131A; background:#5CE1FF; padding:10px 16px; border-radius:8px" class="hv2">Tienda</a>
-        </div>
-      </div>
-
-      <button id="navToggle" class="mob" aria-label="Menú" style="margin-left:auto; background:transparent; border:1px solid rgba(255,255,255,.14); border-radius:8px; width:40px; height:40px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px; cursor:pointer; padding:0">
-          <span style="display:block; width:16px; height:1.5px; background:#E9EBEE"></span>
-          <span style="display:block; width:16px; height:1.5px; background:#E9EBEE"></span>
-          <span style="display:block; width:16px; height:1.5px; background:#E9EBEE"></span>
-        </button>
-    </div>
-
-    <nav id="mobileMenu" hidden style="display:flex; flex-direction:column; padding:8px 22px 20px; gap:2px; border-top:1px solid rgba(255,255,255,.06)">
-        <a href="#entrar" data-close-menu style="color:#C9CED6; font-size:16px; padding:13px 0; border-bottom:1px solid rgba(255,255,255,.05)">Cómo entrar</a>
-        <a href="#faq" data-close-menu style="color:#C9CED6; font-size:16px; padding:13px 0; border-bottom:1px solid rgba(255,255,255,.05)">Dudas</a>
-        <div style="display:flex; gap:10px; margin-top:16px">
-          <a href="https://discord.gg/HvcPfgXVHf" target="_blank" rel="noopener noreferrer" style="flex:1; text-align:center; font-size:15px; color:#C9CED6; padding:13px 14px; border:1px solid rgba(255,255,255,.12); border-radius:8px">Discord</a>
-          <a href="https://tienda.planetmc.net/" target="_blank" rel="noopener noreferrer" style="flex:1; text-align:center; font-size:15px; font-weight:500; color:#07131A; background:#5CE1FF; padding:13px 14px; border-radius:8px">Tienda</a>
-        </div>
+<header class="wk-head">
+  <div class="wk-head-in">
+    <a class="wk-logo" href="/"><img src="/assets/logo.webp" alt="PlanetMC" width="26" height="26">PLANET<span>MC</span></a>
+    <nav class="wk-nav">
+      <a href="/guias">Guías</a>
+      <a href="/guias/comandos">Comandos</a>
+      <a href="#entrar">Cómo entrar</a>
+      <a href="#faq">Dudas</a>
     </nav>
-  </header>
-
-  <section id="inicio" style="position:relative; max-width:1160px; margin:0 auto; padding:clamp(56px,9vw,120px) 22px clamp(48px,6vw,80px)">
-    <div aria-hidden="true" style="position:absolute; left:50%; transform:translateX(-50%); top:-66px; width:100vw; height:clamp(460px,62vw,760px); pointer-events:none; overflow:hidden">
-      <div style="position:absolute; inset:0; background-image:url(assets/hero.png); background-size:cover; background-position:center 26%; opacity:.8; filter:saturate(.82) contrast(1.02); mask-image:linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 42%, rgba(0,0,0,.45) 72%, rgba(0,0,0,0) 96%); -webkit-mask-image:linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 42%, rgba(0,0,0,.45) 72%, rgba(0,0,0,0) 96%)"></div>
-      <div style="position:absolute; inset:0; background:radial-gradient(95% 62% at 50% 34%, rgba(10,11,13,.86) 0%, rgba(10,11,13,.62) 46%, rgba(10,11,13,.28) 74%, rgba(10,11,13,.1) 100%)"></div>
-      <div style="position:absolute; inset:0; background:linear-gradient(to bottom, rgba(10,11,13,.7) 0%, rgba(10,11,13,.3) 22%, rgba(10,11,13,.35) 60%, #0A0B0D 100%)"></div>
-      <div style="position:absolute; left:0; right:0; bottom:0; height:38%; background:linear-gradient(to bottom, rgba(10,11,13,0), #0A0B0D)"></div>
+    <div class="wk-head-cta">
+      <a class="wk-btn" href="https://discord.gg/HvcPfgXVHf" target="_blank" rel="noopener noreferrer">Discord</a>
+      <a class="wk-btn wk-btn-ac" href="https://tienda.planetmc.net/" target="_blank" rel="noopener noreferrer">Tienda</a>
     </div>
-    <div style="position:relative; z-index:1; display:flex; flex-direction:column; align-items:center; text-align:center; gap:22px">
-      <div style="display:inline-flex; align-items:center; gap:10px; padding:9px 16px 9px 14px; border:1px solid rgba(110,231,168,.28); background:rgba(110,231,168,.05); border-radius:999px; box-shadow:0 0 24px rgba(110,231,168,.07)">
-        <span style="width:7px; height:7px; border-radius:50%; animation:pmcPulse 2s ease-in-out infinite; background:#9AA1AC" id="statusDot"></span>
-        <span style="font-family:'JetBrains Mono', monospace; font-size:17px; font-weight:600; color:#6EE7A8; letter-spacing:-.01em" id="pillCount">—</span>
-        <span style="font-family:'JetBrains Mono', monospace; font-size:13px; letter-spacing:.14em; text-transform:uppercase; color:#787F8A" id="statusWord">cargando</span>
+    <button id="navToggle" aria-label="Menú" aria-expanded="false" aria-controls="mobileMenu"><i></i><i></i><i></i></button>
+  </div>
+  <nav id="mobileMenu" hidden>
+    <a href="/guias" data-close-menu>Guías del Survival</a>
+    <a href="/guias/comandos" data-close-menu>Comandos</a>
+    <a href="#entrar" data-close-menu>Cómo entrar</a>
+    <a href="#faq" data-close-menu>Dudas</a>
+    <div class="botones">
+      <a class="wk-btn" href="https://discord.gg/HvcPfgXVHf" target="_blank" rel="noopener noreferrer">Discord</a>
+      <a class="wk-btn wk-btn-ac" href="https://tienda.planetmc.net/" target="_blank" rel="noopener noreferrer">Tienda</a>
+    </div>
+  </nav>
+</header>
+
+<main>
+
+  <!-- ═══ Portada ═══ -->
+  <section class="hm-hero" id="inicio">
+    <div class="hm-hero-bg" aria-hidden="true"><i class="img"></i><i class="vel"></i><i class="fade"></i></div>
+    <div class="hm-hero-in">
+      <div class="hm-estadopill">
+        <span class="dot" id="statusDot"></span>
+        <span class="n" id="pillCount">—</span>
+        <span class="w" id="statusWord">cargando</span>
       </div>
 
-      <h1 style="font-size:clamp(38px,7vw,74px); line-height:1.02; font-weight:700; letter-spacing:-.03em; max-width:16ch; text-wrap:balance">El mejor Survival de Minecraft en español</h1>
+      <h1>El mejor Survival de Minecraft en español</h1>
+      <p class="hm-sub">Java y Bedrock en el mismo mundo. Economía, clanes, trabajos, misiones y PvP. Gratis, con cuenta Premium o No Premium.</p>
 
-      <p style="font-size:clamp(16px,1.9vw,19px); line-height:1.6; color:#9AA1AC; max-width:56ch; text-wrap:pretty">Juega desde <strong>Java o Bedrock</strong> y comparte el mismo mundo con toda la comunidad. <br>Economía, clanes, misiones, trabajos, eventos y mucho más.</p>
+      <div class="hm-acciones">
+        <a class="wk-btn wk-btn-ac" href="#entrar">Cómo entrar</a>
+        <a class="wk-btn" href="/guias/primeros-pasos">Guía para empezar</a>
+      </div>
 
-      <div id="estado" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap:14px; width:100%; max-width:980px; margin-top:14px; text-align:left; align-items:stretch">
-        <div style="display:flex; flex-direction:column; gap:14px">
-        <div data-copy="planetmc.net" data-msg="IP de Java copiada: planetmc.net" role="button" tabindex="0" style="cursor:pointer; background:#101216; border:1px solid rgba(255,255,255,.09); border-radius:14px; padding:18px" class="hv3">
-          <div style="display:flex; align-items:center; gap:11px; margin-bottom:14px">
-            <img src="assets/java.webp" alt="" width="22" height="22" style="width:22px; height:22px; display:block">
-            <div style="font-size:15px; font-weight:500">Java Edition</div>
-            <div style="margin-left:auto; font-size:12px; color:#787F8A">PC · Mac · Linux</div>
-          </div>
-          <div style="display:flex; align-items:center; justify-content:space-between; gap:12px; background:#0A0B0D; border:1px solid rgba(255,255,255,.07); border-radius:9px; padding:11px 14px">
-            <span style="font-family:'JetBrains Mono', monospace; font-size:15px; color:#5CE1FF">planetmc.net</span>
-            <span style="font-size:12px; color:#787F8A">Copiar IP</span>
-          </div>
-        </div>
-        <div data-copy="planetmc.net" data-msg="IP de Bedrock copiada: planetmc.net · puerto 19132" role="button" tabindex="0" style="cursor:pointer; background:#101216; border:1px solid rgba(255,255,255,.09); border-radius:14px; padding:18px" class="hv4">
-          <div style="display:flex; align-items:center; gap:11px; margin-bottom:14px">
-            <img src="assets/bedrock.webp" alt="" width="22" height="22" style="width:22px; height:22px; display:block">
-            <div style="font-size:15px; font-weight:500">Bedrock Edition</div>
-            <div style="margin-left:auto; font-size:12px; color:#787F8A">Consola · Móvil</div>
-          </div>
-          <div style="display:flex; align-items:center; justify-content:space-between; gap:12px; background:#0A0B0D; border:1px solid rgba(255,255,255,.07); border-radius:9px; padding:11px 14px">
-            <span style="font-family:'JetBrains Mono', monospace; font-size:15px; color:#6EE7A8">planetmc.net<span style="color:#787F8A">:19132</span></span>
-            <span style="font-size:12px; color:#787F8A">Copiar IP</span>
-          </div>
-        </div>
-        </div>
-
-        <div style="background:#0D0F12; border:1px solid rgba(255,255,255,.08); border-radius:14px; padding:18px; display:flex; flex-direction:column">
-          <div style="display:flex; align-items:baseline; gap:10px">
-            <span style="font-size:22px; font-weight:700; letter-spacing:-.02em; font-family:'JetBrains Mono', monospace" id="chartCount">—</span>
-            <span style="font-size:13px; color:#9AA1AC">jugadores</span>
-            <span style="margin-left:auto; font-size:10.5px; letter-spacing:.14em; text-transform:uppercase; color:#5F656E; font-family:'JetBrains Mono', monospace" id="rangeLabel">Últimas 24 h</span>
-          </div>
-
-          <div id="chart" style="position:relative; height:clamp(84px,11vw,110px); margin-top:14px; touch-action:pan-y">
-            <div id="chartEmpty" style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; text-align:center">
-              <p style="font-size:12.5px; color:#5F656E; max-width:30ch; line-height:1.5">Midiendo la actividad del servidor…</p>
+      <div class="hm-estado" id="estado">
+        <div class="hm-ips">
+          <div class="hm-ip">
+            <div class="hm-ip-cab">
+              <img src="/assets/java.webp" alt="" width="22" height="22">
+              <b>Java Edition</b><span>PC · Mac · Linux</span>
+            </div>
+            <div class="hm-ip-doble">
+              <div class="hm-ip-val" data-copy="planetmc.net" data-msg="IP de Java copiada: planetmc.net" role="button" tabindex="0" aria-label="Copiar la IP del servidor">
+                <span class="et">Dirección</span><code>planetmc.net</code><em>Copiar</em>
+              </div>
             </div>
           </div>
+          <div class="hm-ip verde">
+            <div class="hm-ip-cab">
+              <img src="/assets/bedrock.webp" alt="" width="22" height="22">
+              <b>Bedrock Edition</b><span>Consola · Móvil</span>
+            </div>
+            <div class="hm-ip-doble">
+              <div class="hm-ip-val" data-copy="planetmc.net" data-msg="Dirección copiada: planetmc.net" role="button" tabindex="0" aria-label="Copiar la dirección del servidor">
+                <span class="et">Dirección</span><code>planetmc.net</code><em>Copiar</em>
+              </div>
+              <div class="hm-ip-val" data-copy="19132" data-msg="Puerto copiado: 19132" role="button" tabindex="0" aria-label="Copiar el puerto">
+                <span class="et">Puerto</span><code>19132</code><em>Copiar</em>
+              </div>
+            </div>
+          </div>
+        </div>
 
-          <div id="samplingNote" hidden style="font-size:11.5px; color:#5F656E; margin-top:8px; line-height:1.4">Recopilando historial · por ahora se muestran las muestras en vivo</div>
-
-          <div id="chartTicks" style="position:relative; height:14px; margin-top:8px; font-family:'JetBrains Mono', monospace; font-size:10.5px; letter-spacing:.06em; color:#5F656E"></div>
-
-          <div style="margin-top:auto; padding-top:14px; display:flex; flex-wrap:wrap; gap:6px 18px; font-size:12px; color:#787F8A">
-            <span>Capacidad <span style="color:#C9CED6; font-family:'JetBrains Mono', monospace" id="statMax">—</span></span>
-            <span>Versión <span style="color:#C9CED6; font-family:'JetBrains Mono', monospace" id="statVersion">—</span></span>
+        <div class="hm-panel">
+          <div class="hm-panel-cab">
+            <span class="n" id="chartCount">—</span>
+            <span class="lbl">jugadores</span>
+            <span class="hm-vivo" id="statVivo" hidden><i></i>En vivo</span>
+            <span class="rango" id="rangeLabel">Últimas 24 h</span>
+          </div>
+          <div id="chart"></div>
+          <div id="chartTicks"></div>
+          <div id="samplingNote" hidden>Midiendo la actividad del servidor…</div>
+          <div class="hm-panel-pie">
+            <span>Pico 24 h <b id="statPico">—</b></span>
+            <span id="statRecordBox" hidden>Récord <b id="statRecord">—</b></span>
+            <span>Capacidad <b id="statMax">—</b></span>
+            <span>Versión <b id="statVersion">—</b></span>
           </div>
         </div>
       </div>
 
-      <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:22px; margin-top:10px; font-size:14px; color:#787F8A">
-        <span>Xbox</span><span>PlayStation</span><span>Switch</span><span>Android</span><span>iOS</span><span>Windows</span>
-      </div>
-
-      <div id="playersList" style="display:flex; flex-wrap:wrap; gap:8px; justify-content:center; max-width:980px"></div>
+      <div class="hm-plataformas"><span>Xbox</span><span>PlayStation</span><span>Switch</span><span>Android</span><span>iOS</span><span>Windows</span></div>
+      <div id="playersList"></div>
     </div>
   </section>
 
-  <section id="survival" style="max-width:1160px; margin:0 auto; padding:0 22px clamp(60px,8vw,110px)">
-    
-    <h2 style="font-size: clamp(26px,3.6vw,40px); font-weight: 700; letter-spacing: -.02em; text-decoration-line: none"><span style="font-size: clamp(26px, 3.6vw, 40px); letter-spacing: -0.02em;">¿Que encontrarás en el Survival?</span></h2><p style="font-size:16px; line-height:1.6; color:#9AA1AC; max-width:52ch; margin-top:14px">
-      Siete cosas que definen la experiencia dentro del servidor.
-    </p>
-    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap:26px 34px; margin-top:44px">
-      <div style="border-top:1px solid rgba(255,255,255,.1); padding-top:18px">
-        <div style="font-family:'JetBrains Mono', monospace; font-size:12px; color:#5CE1FF">01</div>
-        <h3 style="font-size:18px; font-weight:500; margin-top:10px">Economía</h3>
-        <p style="font-size:14.5px; line-height:1.6; color:#9AA1AC; margin-top:8px">Comercia con otros jugadores, cumple misiones y construye tu fortuna.</p>
+  <!-- ═══ Guías ═══ -->
+  <section class="hm-sec" id="guias">
+    <div class="hm-caja">
+      <span class="wk-pill">Wiki oficial</span>
+      <h2 style="margin-top:16px">Guías del Survival</h2>
+      <p>Comandos, dinero, protecciones, casas y PvP, explicados paso a paso. Con buscador.</p>
+      <div class="wk-grid">
+        <a class="wk-card" href="/guias/primeros-pasos">
+          <div class="wk-ico">Empieza aquí</div><h3>Primeros pasos</h3>
+          <p>De entrar al servidor a tener tu casa protegida.</p>
+        </a>
+        <a class="wk-card" href="/guias/comandos">
+          <div class="wk-ico">Referencia</div><h3>Todos los comandos</h3>
+          <p>La lista completa, por temas y con ejemplos.</p>
+        </a>
+        <a class="wk-card" href="/guias/protecciones">
+          <div class="wk-ico">Tu base</div><h3>Protecciones</h3>
+          <p>Para que nadie rompa tu casa ni abra tus cofres.</p>
+        </a>
+        <a class="wk-card" href="/guias/economia">
+          <div class="wk-ico">Dinero</div><h3>Economía</h3>
+          <p>Cinco formas de ganar monedas y en qué gastarlas.</p>
+        </a>
+        <a class="wk-card" href="/guias/pvp">
+          <div class="wk-ico">Combate</div><h3>PvP y arenas</h3>
+          <p>Crystal, Pot y lo que arriesgas al pelear.</p>
+        </a>
+        <a class="wk-card" href="/guias/faq">
+          <div class="wk-ico">Dudas</div><h3>Preguntas frecuentes</h3>
+          <p>Consolas, móviles, versiones y problemas al entrar.</p>
+        </a>
       </div>
-      <div style="border-top:1px solid rgba(255,255,255,.1); padding-top:18px">
-        <div style="font-family:'JetBrains Mono', monospace; font-size:12px; color:#5CE1FF">02</div>
-        <h3 style="font-size:18px; font-weight:500; margin-top:10px">PvP</h3>
-        <p style="font-size:14.5px; line-height:1.6; color:#9AA1AC; margin-top:8px">Zonas de combate abiertas para medir tu habilidad cuando quieras.</p>
+      <div class="hm-acciones" style="justify-content:flex-start;margin-top:30px">
+        <a class="wk-btn wk-btn-ac" href="/guias">Ver todas las guías</a>
+        <span data-pwa-install data-pwa-class="wk-btn" hidden></span>
       </div>
-      <div style="border-top:1px solid rgba(255,255,255,.1); padding-top:18px">
-        <div style="font-family:'JetBrains Mono', monospace; font-size:12px; color:#5CE1FF">03</div>
-        <h3 style="font-size:18px; font-weight:500; margin-top:10px">Clanes</h3>
-        <p style="font-size:14.5px; line-height:1.6; color:#9AA1AC; margin-top:8px">Funda tu clan, recluta miembros y compite por el territorio.</p>
-      </div>
-      <div style="border-top:1px solid rgba(255,255,255,.1); padding-top:18px">
-        <div style="font-family:'JetBrains Mono', monospace; font-size:12px; color:#5CE1FF">04</div>
-        <h3 style="font-size:18px; font-weight:500; margin-top:10px">Eventos mensuales</h3>
-        <p style="font-size:14.5px; line-height:1.6; color:#9AA1AC; margin-top:8px">Retos con recompensas exclusivas para toda la comunidad.</p>
-      </div>
-      <div style="border-top:1px solid rgba(255,255,255,.1); padding-top:18px">
-        <div style="font-family:'JetBrains Mono', monospace; font-size:12px; color:#5CE1FF">05</div>
-        <h3 style="font-size:18px; font-weight:500; margin-top:10px">Crossplay total</h3>
-        <p style="font-size:14.5px; line-height:1.6; color:#9AA1AC; margin-top:8px">Java y Bedrock en el mismo mundo, sin mundos separados.</p>
-      </div>
-      <div style="border-top:1px solid rgba(255,255,255,.1); padding-top:18px">
-        <div style="font-family:'JetBrains Mono', monospace; font-size:12px; color:#5CE1FF">06</div>
-        <h3 style="font-size:18px; font-weight:500; margin-top:10px">Chat de voz</h3>
-        <p style="font-size:14.5px; line-height:1.6; color:#9AA1AC; margin-top:8px">Voz por proximidad en Java con el mod Simple Voice Chat.</p>
-      </div>
-      <div style="border-top:1px solid rgba(255,255,255,.1); padding-top:18px">
-        <div style="font-family:'JetBrains Mono', monospace; font-size:12px; color:#5CE1FF">07</div>
-        <h3 style="font-size:18px; font-weight:500; margin-top:10px">Comunidad activa</h3>
-        <p style="font-size:14.5px; line-height:1.6; color:#9AA1AC; margin-top:8px">Staff presente y jugadores de todo el mundo, todos los días.</p>
-      </div>
+      <p id="pwaIosAviso" hidden style="margin-top:14px;font-size:14px;color:var(--mut)">En iPhone: toca <strong>Compartir</strong> y luego <strong>Añadir a pantalla de inicio</strong>. Tendrás PlanetMC como una app, y las guías funcionan sin conexión.</p>
     </div>
   </section>
 
-  <section id="entrar" style="max-width:1160px; margin:0 auto; padding:0 22px clamp(60px,8vw,110px)">
-    <div style="background:#0D0F12; border:1px solid rgba(255,255,255,.08); border-radius:18px; padding:clamp(28px,4vw,52px)">
-      <h2 style="font-size:clamp(26px,3.6vw,40px); font-weight:700; letter-spacing:-.02em">Cómo entrar</h2>
-      <p style="font-size:16px; line-height:1.6; color:#9AA1AC; max-width:48ch; margin-top:14px">Menos de un minuto, en cualquier plataforma.</p>
-      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(min(100%, 220px), 1fr)); gap:24px; margin-top:40px">
-        <div>
-          <div style="font-family:'JetBrains Mono', monospace; font-size:13px; color:#787F8A">Paso 1</div>
-          <p style="font-size:15.5px; line-height:1.6; margin-top:10px; color:#E9EBEE">Abre Minecraft Java o Bedrock en tu PC, consola o móvil.</p>
-        </div>
-        <div>
-          <div style="font-family:'JetBrains Mono', monospace; font-size:13px; color:#787F8A">Paso 2</div>
-          <p style="font-size:15.5px; line-height:1.6; margin-top:10px; color:#E9EBEE">Entra a Multijugador y elige «Añadir servidor».</p>
-        </div>
-        <div>
-          <div style="font-family:'JetBrains Mono', monospace; font-size:13px; color:#787F8A">Paso 3</div>
-          <p style="font-size:15.5px; line-height:1.6; margin-top:10px; color:#E9EBEE">Escribe <strong style="font-family:'JetBrains Mono', monospace; color:#5CE1FF; font-weight:600">planetmc.net</strong>. En Bedrock añade el puerto <strong style="font-family:'JetBrains Mono', monospace; color:#6EE7A8; font-weight:600">19132</strong>.</p>
-        </div>
-        <div>
-          <div style="font-family:'JetBrains Mono', monospace; font-size:13px; color:#787F8A">Paso 4</div>
-          <p style="font-size:15.5px; line-height:1.6; margin-top:10px; color:#E9EBEE">Guarda, conéctate y empieza tu aventura.</p>
-        </div>
+  <!-- ═══ Qué hay dentro ═══ -->
+  <section class="hm-sec" id="survival">
+    <h2>Qué encontrarás dentro</h2>
+    <p>Seis cosas que definen el Survival.</p>
+    <div class="hm-features">
+      <div class="hm-feature"><div class="num">01</div><h3>Economía</h3><p>Comercia con otros jugadores, trabaja y construye tu fortuna.</p></div>
+      <div class="hm-feature"><div class="num">02</div><h3>Protecciones</h3><p>Tu terreno es tuyo: nadie entra a tus cofres sin permiso.</p></div>
+      <div class="hm-feature"><div class="num">03</div><h3>PvP opcional</h3><p>Arenas abiertas, y fuera de ellas nadie te ataca sin tu permiso.</p></div>
+      <div class="hm-feature"><div class="num">04</div><h3>Clanes</h3><p>Funda tu clan, recluta miembros y compite por el territorio.</p></div>
+      <div class="hm-feature"><div class="num">05</div><h3>Crossplay total</h3><p>Java y Bedrock en el mismo mundo, sin mundos separados.</p></div>
+      <div class="hm-feature"><div class="num">06</div><h3>Chat de voz</h3><p>Voz por proximidad en Java con el mod Simple Voice Chat.</p></div>
+    </div>
+  </section>
+
+  <!-- ═══ Cómo entrar ═══ -->
+  <section class="hm-sec" id="entrar">
+    <div class="hm-caja">
+      <h2>Cómo entrar</h2>
+      <p>Menos de un minuto, en cualquier plataforma.</p>
+      <div class="hm-pasos">
+        <div class="hm-paso"><div class="num">Paso 1</div><p>Abre Minecraft Java o Bedrock.</p></div>
+        <div class="hm-paso"><div class="num">Paso 2</div><p>Multijugador → «Añadir servidor».</p></div>
+        <div class="hm-paso"><div class="num">Paso 3</div><p>Escribe <code style="color:#5CE1FF">planetmc.net</code>. En Bedrock, puerto <code style="color:#6EE7A8">19132</code>.</p></div>
+        <div class="hm-paso"><div class="num">Paso 4</div><p>Conéctate y empieza tu aventura.</p></div>
       </div>
-      <div style="display:flex; flex-wrap:wrap; gap:12px; margin-top:40px">
-        <a href="https://discord.gg/HvcPfgXVHf" target="_blank" rel="noopener noreferrer" style="font-size:15px; font-weight:500; color:#07131A; background:#5CE1FF; padding:13px 20px; border-radius:9px" class="hv5">Soporte en Discord</a>
-        <a href="https://wiki.planetmc.net/" target="_blank" rel="noopener noreferrer" style="font-size:15px; color:#C9CED6; padding:13px 20px; border:1px solid rgba(255,255,255,.12); border-radius:9px" class="hv6">Leer la Wiki</a>
+      <div class="hm-acciones" style="justify-content:flex-start;margin-top:34px">
+        <a class="wk-btn wk-btn-ac" href="https://discord.gg/HvcPfgXVHf" target="_blank" rel="noopener noreferrer">Soporte en Discord</a>
+        <a class="wk-btn" href="/guias/primeros-pasos">Guía para empezar</a>
       </div>
     </div>
   </section>
 
-  <section id="tienda" style="max-width:1160px; margin:0 auto; padding:0 22px clamp(60px,8vw,110px)">
-    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap:40px; align-items:start">
-      <div>
-        <h2 style="font-size:clamp(26px,3.6vw,40px); font-weight:700; letter-spacing:-.02em; max-width:18ch">Apoya al servidor</h2>
-        <p style="font-size:16px; line-height:1.6; color:#9AA1AC; max-width:44ch; margin-top:14px">
-          Rangos, kits y cosméticos que mantienen PlanetMC en línea. Entrega automática al comprar.
-        </p>
-        <div style="display:flex; flex-wrap:wrap; gap:12px; margin-top:28px">
-          <a href="https://tienda.planetmc.net/" target="_blank" rel="noopener noreferrer" style="font-size:15px; font-weight:500; color:#07131A; background:#5CE1FF; padding:13px 20px; border-radius:9px" class="hv7">Ver la tienda</a>
-          <a href="https://www.40servidoresmc.es/planetmc/votar" target="_blank" rel="noopener noreferrer" style="font-size:15px; color:#C9CED6; padding:13px 20px; border:1px solid rgba(255,255,255,.12); border-radius:9px" class="hv8">Votar (gratis)</a>
-        </div>
-      </div>
-      <div style="display:flex; flex-direction:column">
-        <div style="display:flex; justify-content:space-between; gap:16px; padding:16px 0; border-top:1px solid rgba(255,255,255,.1)">
-          <span style="font-size:15.5px">Rangos</span><span style="font-size:14px; color:#787F8A; text-align:right">Beneficios permanentes</span>
-        </div>
-        <div style="display:flex; justify-content:space-between; gap:16px; padding:16px 0; border-top:1px solid rgba(255,255,255,.1)">
-          <span style="font-size:15.5px">Kits</span><span style="font-size:14px; color:#787F8A; text-align:right">Equipo para empezar fuerte</span>
-        </div>
-        <div style="display:flex; justify-content:space-between; gap:16px; padding:16px 0; border-top:1px solid rgba(255,255,255,.1)">
-          <span style="font-size:15.5px">Cosméticos</span><span style="font-size:14px; color:#787F8A; text-align:right">Partículas, tags y efectos</span>
-        </div>
-        <div style="display:flex; justify-content:space-between; gap:16px; padding:16px 0; border-top:1px solid rgba(255,255,255,.1); border-bottom:1px solid rgba(255,255,255,.1)">
-          <span style="font-size:15.5px">Soporte prioritario</span><span style="font-size:14px; color:#787F8A; text-align:right">Atención preferente en Discord</span>
-        </div>
+  <!-- ═══ Tienda ═══ -->
+  <section class="hm-sec" id="tienda">
+    <h2>Apoya al servidor</h2>
+    <p>Rangos, kits y cosméticos con entrega automática. Opcional: se puede jugar entero sin comprar nada.</p>
+    <div class="wk-grid">
+      <div class="wk-card"><div class="wk-ico">Rangos</div><h3>Más límites</h3><p>Más protecciones, más subastas y más trabajos a la vez.</p></div>
+      <div class="wk-card"><div class="wk-ico">Kits</div><h3>Equipo</h3><p>Un kit propio por rango, reclamable con <code>/kit</code>.</p></div>
+      <div class="wk-card"><div class="wk-ico">Cosméticos</div><h3>Personaliza</h3><p>Partículas, mascotas y etiquetas en el chat.</p></div>
+    </div>
+    <div class="hm-acciones" style="justify-content:flex-start;margin-top:28px">
+      <a class="wk-btn wk-btn-ac" href="https://tienda.planetmc.net/" target="_blank" rel="noopener noreferrer">Ver la tienda</a>
+      <a class="wk-btn" href="/guias/rangos">Qué incluye cada rango</a>
+    </div>
+  </section>
+
+  <!-- ═══ Equipo ═══ -->
+  <section class="hm-sec" id="equipo">
+    <h2>El equipo</h2>
+    <p>Quienes mantienen el servidor justo, seguro y actualizado.</p>
+    <div class="hm-equipo">
+      <div class="hm-fila"><div class="rol">CEO</div><div class="gente"><span>xTiburon</span></div></div>
+      <div class="hm-fila"><div class="rol">Owners</div><div class="gente"><span>LittleBel</span><span>Eloise</span></div></div>
+      <div class="hm-fila"><div class="rol">Admin</div><div class="gente"><span>Sorcefel</span><span>GodDavid</span></div></div>
+      <div class="hm-staff">
+        <span>Buscamos moderadores activos para la comunidad.</span>
+        <a href="https://postulacion.planetmc.net/" target="_blank" rel="noopener noreferrer">Únete al staff →</a>
       </div>
     </div>
   </section>
 
-  <section id="equipo" style="max-width:1160px; margin:0 auto; padding:0 22px clamp(60px,8vw,110px)">
-    <h2 style="font-size:clamp(26px,3.6vw,40px); font-weight:700; letter-spacing:-.02em">El equipo</h2>
-    <p style="font-size:16px; line-height:1.6; color:#9AA1AC; max-width:50ch; margin-top:14px">
-      Quienes mantienen el servidor justo, seguro y actualizado.
-    </p>
-    <div style="max-width:760px; margin-top:36px">
-      <div style="display:grid; grid-template-columns:minmax(96px, 150px) 1fr; gap:16px 24px; align-items:baseline; padding:18px 0; border-top:1px solid rgba(255,255,255,.09)">
-        <div style="font-family:'JetBrains Mono', monospace; font-size:11.5px; letter-spacing:.14em; text-transform:uppercase; color:#5CE1FF">CEO</div>
-        <div style="display:flex; flex-wrap:wrap; gap:8px 20px; font-size:16px; color:#E9EBEE">
-          <span>xTiburon</span>
-        </div>
-      </div>
-      <div style="display:grid; grid-template-columns:minmax(96px, 150px) 1fr; gap:16px 24px; align-items:baseline; padding:18px 0; border-top:1px solid rgba(255,255,255,.09)">
-        <div style="font-family:'JetBrains Mono', monospace; font-size:11.5px; letter-spacing:.14em; text-transform:uppercase; color:#5CE1FF">Owners</div>
-        <div style="display:flex; flex-wrap:wrap; gap:8px 20px; font-size:16px; color:#E9EBEE">
-          <span>LittleBel</span>
-          <span>Eloise</span>
-        </div>
-      </div>
-      <div style="display:grid; grid-template-columns:minmax(96px, 150px) 1fr; gap:16px 24px; align-items:baseline; padding:18px 0; border-top:1px solid rgba(255,255,255,.09)">
-        <div style="font-family:'JetBrains Mono', monospace; font-size:11.5px; letter-spacing:.14em; text-transform:uppercase; color:#5CE1FF">Admin</div>
-        <div style="display:flex; flex-wrap:wrap; gap:8px 20px; font-size:16px; color:#E9EBEE">
-          <span>Sorcefel</span>
-          <span>GodDavid</span>
-        </div>
-      </div>
-      <div style="display:flex; flex-wrap:wrap; align-items:baseline; justify-content:space-between; gap:12px 24px; padding:18px 0; border-top:1px solid rgba(255,255,255,.09); border-bottom:1px solid rgba(255,255,255,.09)">
-        <span style="font-size:14.5px; color:#787F8A">Buscamos moderadores activos para la comunidad.</span>
-        <a href="https://postulacion.planetmc.net/" target="_blank" rel="noopener noreferrer" style="font-size:14.5px; color:#5CE1FF">Únete al staff →</a>
-      </div>
+  <!-- ═══ Dudas ═══ -->
+  <section class="hm-sec" id="faq">
+    <h2>Dudas frecuentes</h2>
+    <div class="hm-faq">
+      <details><summary>¿Es gratis?</summary><p>Sí. Solo necesitas Minecraft Java o Bedrock y conectarte a planetmc.net.</p></details>
+      <details><summary>¿Funciona en consola y móvil?</summary><p>Sí, con Bedrock Edition: Xbox, PlayStation, Nintendo Switch, Android e iOS, además de PC.</p></details>
+      <details><summary>¿Acepta cuentas No Premium?</summary><p>Sí, puedes entrar con cuenta Premium o No Premium sin diferencias de acceso.</p></details>
+      <details><summary>¿Java y Bedrock juegan juntos?</summary><p>Sí, crossplay total: ambas ediciones comparten mundo, chat y economía.</p></details>
+      <details><summary>¿Cómo reporto un problema?</summary><p>Abre un ticket en nuestro Discord; el staff responde lo antes posible.</p></details>
+    </div>
+    <div class="hm-acciones" style="justify-content:flex-start;margin-top:26px">
+      <a class="wk-btn" href="/guias/faq">Más preguntas y problemas al conectar</a>
     </div>
   </section>
 
-  <section id="faq" style="max-width:1160px; margin:0 auto; padding:0 22px clamp(60px,8vw,110px)">
-    <h2 style="font-size:clamp(26px,3.6vw,40px); font-weight:700; letter-spacing:-.02em">Dudas frecuentes</h2>
-    <div style="margin-top:36px; max-width:820px">
-      <details style="border-top:1px solid rgba(255,255,255,.1)">
-        <summary style="cursor:pointer; list-style:none; padding:20px 0; font-size:16.5px; display:flex; justify-content:space-between; gap:16px">¿Es gratis? <span style="color:#787F8A">+</span></summary>
-        <p style="font-size:15px; line-height:1.65; color:#9AA1AC; padding:0 0 22px">Sí. Solo necesitas Minecraft Java o Bedrock y conectarte a planetmc.net.</p>
-      </details>
-      <details style="border-top:1px solid rgba(255,255,255,.1)">
-        <summary style="cursor:pointer; list-style:none; padding:20px 0; font-size:16.5px; display:flex; justify-content:space-between; gap:16px">¿Funciona en consola y móvil? <span style="color:#787F8A">+</span></summary>
-        <p style="font-size:15px; line-height:1.65; color:#9AA1AC; padding:0 0 22px">Sí, mediante Bedrock Edition: Xbox, PlayStation, Nintendo Switch, Android e iOS, además de PC.</p>
-      </details>
-      <details style="border-top:1px solid rgba(255,255,255,.1)">
-        <summary style="cursor:pointer; list-style:none; padding:20px 0; font-size:16.5px; display:flex; justify-content:space-between; gap:16px">¿Acepta cuentas No Premium? <span style="color:#787F8A">+</span></summary>
-        <p style="font-size:15px; line-height:1.65; color:#9AA1AC; padding:0 0 22px">Sí, puedes entrar con cuenta Premium o No Premium sin diferencias de acceso.</p>
-      </details>
-      <details style="border-top:1px solid rgba(255,255,255,.1)">
-        <summary style="cursor:pointer; list-style:none; padding:20px 0; font-size:16.5px; display:flex; justify-content:space-between; gap:16px">¿Java y Bedrock juegan juntos? <span style="color:#787F8A">+</span></summary>
-        <p style="font-size:15px; line-height:1.65; color:#9AA1AC; padding:0 0 22px">Sí, crossplay total: ambas ediciones comparten el mismo mundo y economía.</p>
-      </details>
-      <details style="border-top:1px solid rgba(255,255,255,.1)">
-        <summary style="cursor:pointer; list-style:none; padding:20px 0; font-size:16.5px; display:flex; justify-content:space-between; gap:16px">¿Desde qué países puedo jugar? <span style="color:#787F8A">+</span></summary>
-        <p style="font-size:15px; line-height:1.65; color:#9AA1AC; padding:0 0 22px">Desde cualquiera. Es un servidor en español abierto a jugadores de todo el mundo.</p>
-      </details>
-      <details style="border-top:1px solid rgba(255,255,255,.1); border-bottom:1px solid rgba(255,255,255,.1)">
-        <summary style="cursor:pointer; list-style:none; padding:20px 0; font-size:16.5px; display:flex; justify-content:space-between; gap:16px">¿Cómo reporto un problema? <span style="color:#787F8A">+</span></summary>
-        <p style="font-size:15px; line-height:1.65; color:#9AA1AC; padding:0 0 22px">Abre un ticket en nuestro Discord; el staff responde lo antes posible.</p>
-      </details>
-    </div>
-  </section>
+</main>
 
-  <footer style="border-top:1px solid rgba(255,255,255,.07)">
-    <div style="max-width:1160px; margin:0 auto; padding:36px 22px; display:flex; flex-wrap:wrap; align-items:center; gap:20px 28px">
-      <a href="#inicio" style="display:flex; align-items:center; gap:10px; color:#E9EBEE; font-weight:700; font-size:15px">
-        <img src="assets/logo.webp" alt="" width="22" height="22" style="width:22px; height:22px; display:block">
-        PLANET<span style="color:#5CE1FF">MC</span>
-      </a>
-      <nav style="display:flex; flex-wrap:wrap; gap:18px; font-size:14px">
-        <a href="https://discord.gg/HvcPfgXVHf" target="_blank" rel="noopener noreferrer" style="color:#9AA1AC">Discord</a>
-        <a href="https://x.com/Planetmcnet_" target="_blank" rel="noopener noreferrer" style="color:#9AA1AC">X</a>
-        <a href="https://www.youtube.com/@planetmc-net" target="_blank" rel="noopener noreferrer" style="color:#9AA1AC">YouTube</a>
-        <a href="https://www.tiktok.com/@planetmc.net" target="_blank" rel="noopener noreferrer" style="color:#9AA1AC">TikTok</a>
-        <a href="https://kick.com/xtiburon" target="_blank" rel="noopener noreferrer" style="color:#9AA1AC">Kick</a>
-        <a href="https://wiki.planetmc.net/" target="_blank" rel="noopener noreferrer" style="color:#9AA1AC">Wiki</a>
-      </nav>
-      <div style="margin-left:auto; font-size:13px; color:#5F656E; font-family:'JetBrains Mono', monospace">planetmc.net · © 2026</div>
-    </div>
-  </footer>
+<footer class="wk-foot">
+  <div class="wk-foot-in">
+    <a class="wk-logo" href="/"><img src="/assets/logo.webp" alt="" width="22" height="22">PLANET<span>MC</span></a>
+    <nav>
+      <a href="/guias">Guías</a>
+      <a href="/guias/comandos">Comandos</a>
+      <a href="/guias/normas">Normas</a>
+      <a href="https://discord.gg/HvcPfgXVHf" target="_blank" rel="noopener noreferrer">Discord</a>
+      <a href="https://x.com/Planetmcnet_" target="_blank" rel="noopener noreferrer">X</a>
+      <a href="https://www.youtube.com/@planetmc-net" target="_blank" rel="noopener noreferrer">YouTube</a>
+      <a href="https://www.tiktok.com/@planetmc.net" target="_blank" rel="noopener noreferrer">TikTok</a>
+      <a href="https://kick.com/xtiburon" target="_blank" rel="noopener noreferrer">Kick</a>
+    </nav>
+    <div class="wk-copy">planetmc.net · © 2026</div>
+  </div>
+</footer>
 
-  <div id="toast" hidden role="status" style="position:fixed; left:50%; bottom:26px; transform:translateX(-50%); z-index:80; background:#E9EBEE; color:#0A0B0D; font-size:14px; font-weight:500; padding:12px 18px; border-radius:999px; animation:pmcToast .22s ease-out; box-shadow:0 8px 30px rgba(0,0,0,.5)"></div>
-
-</div>
+<div id="toast" hidden role="status"></div>
 <script>
 (function () {
   'use strict';
+  /* Navegadores antiguos (consolas, móviles viejos): si falta algo básico la
+     página se queda estática pero legible, en vez de romperse entera. */
+  if (!window.fetch || !window.Promise || !document.querySelectorAll) { return; }
+  if (!Element.prototype.closest) {
+    Element.prototype.closest = function (sel) {
+      var el = this;
+      while (el && el.nodeType === 1) {
+        if (el.matches ? el.matches(sel) : (el.msMatchesSelector && el.msMatchesSelector(sel))) return el;
+        el = el.parentElement;
+      }
+      return null;
+    };
+  }
   var API = 'https://api.mcsrvstat.us/3/planetmc.net';
+  var API2 = 'https://api.mcstatus.io/v2/status/java/planetmc.net';
   var KEY = 'pmc:activity:v1';
-  var BUCKET_MS = 7200000, BUCKETS = 12, REFRESH_MS = 30000;
+  var HIST = '/data/players.json';
+  var BUCKET_MS = 7200000, BUCKETS = 12, REFRESH_MS = 20000;
   var $ = function (id) { return document.getElementById(id); };
   var chart = $('chart'), ticksEl = $('chartTicks');
-  var state = { online: null, players: 0, hoverIdx: null, data: null };
+  var state = { online: null, players: null, hoverIdx: null, data: null, shared: [] };
 
   /* ---------- menú móvil ---------- */
   var toggle = $('navToggle'), menu = $('mobileMenu');
   if (toggle && menu) {
-    toggle.addEventListener('click', function () { menu.hidden = !menu.hidden; });
+    toggle.addEventListener('click', function () {
+      menu.hidden = !menu.hidden;
+      toggle.setAttribute('aria-expanded', menu.hidden ? 'false' : 'true');
+    });
     Array.prototype.forEach.call(menu.querySelectorAll('[data-close-menu]'), function (a) {
       a.addEventListener('click', function () { menu.hidden = true; });
     });
@@ -466,7 +378,7 @@ img, svg { max-width: 100%; }
     el.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); run(); } });
   });
 
-  /* ---------- historial ---------- */
+  /* ---------- historial: archivo del servidor + muestras locales ---------- */
   function loadSamples() {
     try {
       var arr = JSON.parse(localStorage.getItem(KEY) || '[]');
@@ -478,131 +390,142 @@ img, svg { max-width: 100%; }
     var s = loadSamples(); s.push({ t: Date.now(), n: n });
     try { localStorage.setItem(KEY, JSON.stringify(s)); } catch (e) {}
   }
+  /* data/players.json lo escribe una tarea cada 2 h: así el historial es el
+     mismo para todo el mundo y no depende del navegador de cada visitante. */
+  function loadShared() {
+    fetch(HIST, { cache: 'no-store' })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (d) {
+        var arr = d && (d.samples || d.muestras);
+        if (d && d.record && typeof d.record.n === 'number') {
+          var caja = $('statRecordBox'), rec = $('statRecord');
+          if (caja && rec) {
+            rec.textContent = String(d.record.n);
+            if (d.record.t) {
+              caja.title = 'Máximo de jugadores a la vez, el ' +
+                new Date(d.record.t).toLocaleDateString('es', { day: 'numeric', month: 'long', year: 'numeric' });
+            }
+            caja.hidden = false;
+          }
+        }
+        if (!Array.isArray(arr)) return;
+        var cutoff = Date.now() - BUCKETS * BUCKET_MS;
+        state.shared = arr.filter(function (s) {
+          return s && typeof s.t === 'number' && typeof s.n === 'number' && s.t >= cutoff;
+        });
+        render();
+      })
+      .catch(function () {});
+  }
   function hhmm(t) {
     return new Date(t).toLocaleTimeString('es', { hour: '2-digit', minute: '2-digit', hour12: false });
   }
-  function buckets(samples) {
-    var end = Math.floor(Date.now() / BUCKET_MS) * BUCKET_MS + BUCKET_MS, out = [];
+  function hh(t) {
+    return new Date(t).toLocaleTimeString('es', { hour: '2-digit', hour12: false }) + ':00';
+  }
+
+  /* ---------- barras de 2 h ---------- */
+  function buckets() {
+    var now = Date.now();
+    var cur = Math.floor(now / BUCKET_MS) * BUCKET_MS;           // bloque en curso
+    var todas = state.shared.concat(loadSamples());
+    var out = [];
     for (var i = BUCKETS - 1; i >= 0; i--) {
-      var start = end - (i + 1) * BUCKET_MS;
-      var inR = samples.filter(function (s) { return s.t >= start && s.t < start + BUCKET_MS; });
-      out.push({ start: start, value: inR.length ? Math.max.apply(null, inR.map(function (s) { return s.n; })) : null });
+      var start = cur - i * BUCKET_MS;
+      var enBloque = todas.filter(function (s) { return s.t >= start && s.t < start + BUCKET_MS; });
+      var value = enBloque.length ? Math.max.apply(null, enBloque.map(function (s) { return s.n; })) : null;
+      var actual = i === 0;
+      if (actual && state.players !== null && state.online) {
+        value = value === null ? state.players : Math.max(value, state.players);
+      }
+      out.push({ start: start, end: start + BUCKET_MS, value: value, actual: actual });
     }
     return out;
   }
 
-  /* ---------- gráfica ---------- */
-  function build() {
-    if (!chart) return null;
-    var w = Math.max(240, chart.clientWidth || 320), h = 110;
-    var samples = loadSamples(), bk = buckets(samples);
-    var xAt = function (i) { return (i / (BUCKETS - 1)) * (w - 8) + 4; };
-    var known = [];
-    bk.forEach(function (b, i) { if (b.value !== null) known.push(i); });
-    var live = samples.filter(function (s) { return s.t >= bk[0].start; }).slice(-60);
-    var tickIdx = [0, 3, 6, 9, BUCKETS - 1];
-    var ticks = tickIdx.map(function (i, k) {
-      return {
-        label: k === tickIdx.length - 1 ? 'ahora' : hhmm(bk[i].start),
-        left: ((xAt(i) / w) * 100).toFixed(2) + '%',
-        shift: k === 0 ? '0%' : k === tickIdx.length - 1 ? '-100%' : '-50%'
-      };
-    });
-    if (!known.length && live.length < 2) return { w: w, h: h, ticks: ticks, points: [], empty: true };
-
-    var vals = known.map(function (i) { return bk[i].value; }).concat(live.map(function (s) { return s.n; }));
-    var peak = Math.max.apply(null, [1].concat(vals));
-    var yAt = function (v) { return h - 10 - (v / (peak * 1.18)) * (h - 24); };
-    var span = BUCKETS * BUCKET_MS;
-    var xFromTime = function (t) { return Math.min(w - 4, Math.max(4, ((t - bk[0].start) / span) * (w - 8) + 4)); };
-
-    var coords = [], points = [];
-    if (known.length >= 2) {
-      for (var i = known[0]; i <= known[known.length - 1]; i++) {
-        var v = bk[i].value;
-        if (v === null) {
-          var prev = known.filter(function (k) { return k < i; }).pop();
-          var next = known.filter(function (k) { return k > i; })[0];
-          v = Math.round((bk[prev].value + bk[next].value) / 2);
-        }
-        coords.push({ x: xAt(i), y: yAt(v) });
-      }
-      points = bk.map(function (b, i) {
-        return {
-          x: xAt(i), y: b.value === null ? null : yAt(b.value),
-          label: hhmm(b.start) + ' – ' + hhmm(b.start + BUCKET_MS),
-          text: b.value === null ? 'sin datos' : b.value + (b.value === 1 ? ' jugador (pico)' : ' jugadores (pico)')
-        };
-      });
-    } else {
-      coords = live.map(function (s) { return { x: xFromTime(s.t), y: yAt(s.n) }; });
-      points = live.map(function (s) {
-        return { x: xFromTime(s.t), y: yAt(s.n), label: hhmm(s.t), text: s.n + (s.n === 1 ? ' jugador' : ' jugadores') };
-      });
-    }
-    if (coords.length < 2) return { w: w, h: h, ticks: ticks, points: [], empty: true };
-
-    var line = 'M ' + coords[0].x.toFixed(1) + ' ' + coords[0].y.toFixed(1);
-    for (var k = 1; k < coords.length; k++) {
-      var a = coords[k - 1], b = coords[k], mx = (a.x + b.x) / 2;
-      line += ' C ' + mx.toFixed(1) + ' ' + a.y.toFixed(1) + ', ' + mx.toFixed(1) + ' ' + b.y.toFixed(1) + ', ' + b.x.toFixed(1) + ' ' + b.y.toFixed(1);
-    }
-    var last = coords[coords.length - 1];
-    var area = line + ' L ' + last.x.toFixed(1) + ' ' + h + ' L ' + coords[0].x.toFixed(1) + ' ' + h + ' Z';
-    return { w: w, h: h, ticks: ticks, points: points, line: line, area: area, last: last, sampling: known.length < 2, empty: false };
-  }
-
   function render() {
-    var d = state.data = build();
-    if (!d || !chart) return;
-    ticksEl.innerHTML = d.ticks.map(function (t) {
-      return '<span style="position:absolute;white-space:nowrap;left:' + t.left + ';transform:translateX(' + t.shift + ')">' + t.label + '</span>';
-    }).join('');
-    $('samplingNote').hidden = !d.sampling;
-    if (d.empty) {
-      chart.innerHTML = '<div id="chartEmpty" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center"><p style="font-size:12.5px;color:#5F656E;max-width:30ch;line-height:1.5">Midiendo la actividad del servidor…</p></div>';
-      return;
+    if (!chart) return;
+    var bk = state.data = buckets();
+    var conocidos = bk.filter(function (b) { return b.value !== null; });
+    var pico = conocidos.length ? Math.max.apply(null, conocidos.map(function (b) { return b.value; })) : 0;
+
+    if (ticksEl) {
+      ticksEl.innerHTML = bk.map(function (b, i) {
+        var paso = (chart.clientWidth || 320) < 460 ? 4 : 3;
+        var mostrar = (i % paso === 0 && i < BUCKETS - 2) || b.actual;
+        if (!mostrar) return '';
+        var izq = ((i + 0.5) / BUCKETS) * 100;
+        var desp = i === 0 ? '0' : (b.actual ? '-100%' : '-50%');
+        return '<span style="position:absolute;white-space:nowrap;left:' + izq.toFixed(2) + '%;transform:translateX(' + desp + ')">' +
+          (b.actual ? 'ahora' : hh(b.start)) + '</span>';
+      }).join('');
     }
-    var hv = state.hoverIdx !== null && d.points[state.hoverIdx] ? d.points[state.hoverIdx] : null;
-    var html = '<svg width="' + d.w + '" height="' + d.h + '" viewBox="0 0 ' + d.w + ' ' + d.h + '" style="display:block;overflow:visible" aria-label="Jugadores conectados en las últimas 24 horas">' +
-      '<defs><linearGradient id="pmcArea" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#5CE1FF" stop-opacity="0.18"></stop><stop offset="100%" stop-color="#5CE1FF" stop-opacity="0"></stop></linearGradient></defs>' +
-      '<line x1="4" y1="' + (d.h - 10) + '" x2="' + d.w + '" y2="' + (d.h - 10) + '" stroke="rgba(255,255,255,.07)" stroke-width="1"></line>' +
-      '<path d="' + d.area + '" fill="url(#pmcArea)"></path>' +
-      '<path d="' + d.line + '" fill="none" stroke="#5CE1FF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>' +
-      (hv ? '' : '<circle cx="' + d.last.x + '" cy="' + d.last.y + '" r="3" fill="#5CE1FF"></circle>') +
-      '</svg>';
+
+    var nota = $('samplingNote');
+    if (nota) nota.hidden = conocidos.length >= 3;
+    var pico24 = $('statPico');
+    if (pico24) pico24.textContent = pico > 0 ? String(pico) : '—';
+
+    var alto = chart.clientHeight || 110;
+    var html = '<div style="position:absolute;inset:0;display:flex;align-items:flex-end;gap:' +
+      (BUCKETS > 10 ? '3px' : '5px') + '" role="img" aria-label="Jugadores conectados en las últimas 24 horas, por bloques de 2 horas">';
+    bk.forEach(function (b, i) {
+      var vacio = b.value === null;
+      var ratio = (!vacio && pico > 0) ? (b.value / pico) : 0;
+      var px = vacio ? 8 : Math.max(8, Math.round(ratio * (alto - 18)) + 8);
+      var color = b.actual ? '#5CE1FF' : (vacio ? 'rgba(255,255,255,.07)' : 'rgba(92,225,255,.32)');
+      var sel = state.hoverIdx === i;
+      html += '<button type="button" data-bar="' + i + '" aria-label="' +
+        hh(b.start) + ' a ' + hh(b.end) + ': ' + (vacio ? 'sin datos' : b.value + ' jugadores') +
+        '" style="flex:1;min-width:0;height:' + px + 'px;border:0;padding:0;background:' +
+        (sel && !b.actual ? 'rgba(92,225,255,.55)' : color) +
+        ';border-radius:4px 4px 2px 2px;cursor:pointer;transition:background .14s ease;-webkit-tap-highlight-color:transparent"></button>';
+    });
+    html += '</div>';
+
+    var hv = state.hoverIdx !== null && bk[state.hoverIdx] ? bk[state.hoverIdx] : null;
     if (hv) {
-      var tipLeft = Math.min(Math.max(hv.x, 62), Math.max(62, d.w - 62));
-      html += '<div style="position:absolute;top:0;bottom:0;width:1px;background:rgba(92,225,255,.35);pointer-events:none;left:' + hv.x + 'px"></div>';
-      if (hv.y !== null) html += '<div style="position:absolute;width:7px;height:7px;border-radius:50%;background:#5CE1FF;box-shadow:0 0 0 3px rgba(92,225,255,.18);pointer-events:none;transform:translate(-50%,-50%);left:' + hv.x + 'px;top:' + hv.y + 'px"></div>';
-      html += '<div style="position:absolute;z-index:3;pointer-events:none;transform:translate(-50%,-100%);background:#1A1D23;border:1px solid rgba(255,255,255,.12);border-radius:8px;padding:7px 10px;box-shadow:0 6px 20px rgba(0,0,0,.45);white-space:nowrap;left:' + tipLeft + 'px;top:' + (hv.y !== null ? Math.max(0, hv.y - 14) : 6) + 'px">' +
-        '<div style="font-family:\'JetBrains Mono\', monospace;font-size:10.5px;letter-spacing:.06em;color:#787F8A">' + hv.label + '</div>' +
-        '<div style="font-size:13px;color:#E9EBEE;margin-top:2px">' + hv.text + '</div></div>';
+      var izq = ((state.hoverIdx + 0.5) / BUCKETS) * 100;
+      var pegado = izq < 20 ? '0%' : (izq > 80 ? '-100%' : '-50%');
+      html += '<div style="position:absolute;z-index:3;pointer-events:none;bottom:calc(100% - ' + (alto - 4) + 'px);left:' +
+        izq.toFixed(2) + '%;transform:translate(' + pegado + ',-100%);background:#1A1D23;border:1px solid rgba(255,255,255,.12);border-radius:8px;padding:7px 10px;box-shadow:0 6px 20px rgba(0,0,0,.45);white-space:nowrap">' +
+        '<div style="font-family:\'JetBrains Mono\', monospace;font-size:10.5px;letter-spacing:.06em;color:#787F8A">' +
+        (hv.actual ? 'Ahora · desde ' + hhmm(hv.start) : hhmm(hv.start) + ' – ' + hhmm(hv.end)) + '</div>' +
+        '<div style="font-size:13px;color:#E9EBEE;margin-top:2px">' +
+        (hv.value === null ? 'Sin datos todavía' : hv.value + (hv.value === 1 ? ' jugador' : ' jugadores')) +
+        '</div></div>';
     }
     chart.innerHTML = html;
   }
 
   if (chart) {
-    var move = function (e) {
-      var d = state.data;
-      if (!d || !d.points.length) return;
-      var r = chart.getBoundingClientRect();
-      var cx = e.clientX != null ? e.clientX : (e.touches && e.touches[0] && e.touches[0].clientX);
-      if (cx == null || r.width <= 8) return;
-      var px = ((cx - r.left) / r.width) * d.w, best = 0;
-      for (var k = 1; k < d.points.length; k++) {
-        if (Math.abs(d.points[k].x - px) < Math.abs(d.points[best].x - px)) best = k;
-      }
-      if (best !== state.hoverIdx) { state.hoverIdx = best; render(); }
+    var sobre = function (e) {
+      var b = e.target.closest ? e.target.closest('[data-bar]') : null;
+      if (!b) return;
+      var i = parseInt(b.getAttribute('data-bar'), 10);
+      if (i !== state.hoverIdx) { state.hoverIdx = i; render(); }
     };
-    chart.addEventListener('pointermove', move);
-    chart.addEventListener('pointerdown', move);
-    chart.addEventListener('pointerleave', function () { if (state.hoverIdx !== null) { state.hoverIdx = null; render(); } });
+    chart.addEventListener('pointermove', sobre);
+    chart.addEventListener('pointerdown', sobre);
+    chart.addEventListener('pointerleave', function () {
+      if (state.hoverIdx !== null) { state.hoverIdx = null; render(); }
+    });
+    chart.addEventListener('focusin', sobre);
     window.addEventListener('resize', render);
   }
 
   /* ---------- estado del servidor ---------- */
-  function setText(id, v) { var el = $(id); if (el) el.textContent = v; }
+  function setText(id, v) {
+    var el = $(id);
+    if (!el) return;
+    if (el.textContent === String(v)) return;
+    el.textContent = v;
+    if (el.id === 'pillCount' || el.id === 'chartCount') {
+      el.classList.remove('cambia');
+      void el.offsetWidth;
+      el.classList.add('cambia');
+    }
+  }
   function renderPlayers(list) {
     var box = $('playersList');
     if (!box) return;
@@ -611,31 +534,79 @@ img, svg { max-width: 100%; }
       var name = typeof entry === 'string' ? entry : (entry && entry.name);
       if (!name || !/^[A-Za-z0-9_]{1,16}$/.test(name)) return;
       var chip = document.createElement('span');
-      chip.setAttribute('style', 'display:inline-flex;align-items:center;gap:7px;background:#101216;border:1px solid rgba(255,255,255,.08);border-radius:999px;padding:5px 12px 5px 5px;font-size:13px;color:#C9CED6');
+      chip.className = 'hm-jugador';
       var img = document.createElement('img');
       img.src = 'https://mc-heads.net/avatar/' + encodeURIComponent(name) + '/40';
       img.alt = ''; img.width = 20; img.height = 20; img.loading = 'lazy'; img.referrerPolicy = 'no-referrer';
-      img.setAttribute('style', 'width:20px;height:20px;border-radius:50%;display:block');
       img.onerror = function () { img.style.display = 'none'; };
       chip.appendChild(img);
       chip.appendChild(document.createTextNode(name));
       box.appendChild(chip);
     });
   }
-  function refresh() {
-    fetch(API, { cache: 'no-store' })
+  /* La versión que anuncia el servidor es técnica: al jugador le sirve saber
+     qué cliente puede usar, no el nombre interno. */
+  function versionLegible(txt) {
+    if (!txt) return '—';
+    var t = String(txt).replace(/[§&][0-9a-fk-or]/gi, '').replace(/velocity|paper|spigot|bungeecord/gi, '').trim();
+    var m = t.match(/(\d+\.\d+(?:\.\d+)?)\s*[-–]\s*(\d+\.\d+(?:\.\d+)?)/);
+    if (m) return m[1] + ' – ' + m[2];
+    var u = t.match(/\d+\.\d+(?:\.\d+)?/);
+    return u ? u[0] : (t || '—');
+  }
+
+  /* Dos proveedores: si el primero falla o va lento, se usa el segundo. Ambos
+     cachean en torno a un minuto, así que el dato puede repetirse entre
+     consultas aunque la petición sí se esté haciendo. */
+  function pedirEstado() {
+    return fetch(API, { cache: 'no-store' })
       .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
       .then(function (d) {
-        var on = !!d.online;
-        var n = on && d.players ? (d.players.online || 0) : 0;
+        return {
+          online: !!d.online,
+          n: d.players ? (d.players.online || 0) : 0,
+          max: d.players ? d.players.max : null,
+          version: d.version,
+          list: d.players ? d.players.list : []
+        };
+      })
+      .catch(function () {
+        return fetch(API2, { cache: 'no-store' })
+          .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+          .then(function (d) {
+            return {
+              online: !!d.online,
+              n: d.players ? (d.players.online || 0) : 0,
+              max: d.players ? d.players.max : null,
+              version: d.version ? (d.version.name_clean || d.version.name_raw) : null,
+              list: d.players ? d.players.list : []
+            };
+          });
+      });
+  }
+
+  function refresh() {
+    pedirEstado()
+      .then(function (d) {
+        var on = d.online;
+        var n = on ? d.n : 0;
         setText('pillCount', on ? String(n) : '—');
         setText('chartCount', on ? String(n) : '—');
         setText('statusWord', on ? 'online' : 'offline');
-        setText('statMax', on && d.players ? String(d.players.max || '—') : '—');
-        setText('statVersion', on ? (d.version || '—') : '—');
+        setText('statMax', on && d.max ? String(d.max) : '—');
+        setText('statVersion', on ? versionLegible(d.version) : '—');
         var dot = $('statusDot');
         if (dot) dot.style.background = on ? '#6EE7A8' : '#FF6B6B';
-        renderPlayers(on && d.players ? d.players.list : []);
+        renderPlayers(on ? d.list : []);
+        var vivo = $('statVivo');
+        if (vivo) {
+          vivo.hidden = !on;
+          vivo.classList.remove('late');
+          void vivo.offsetWidth;          // reinicia la animación
+          vivo.classList.add('late');
+        }
+        state.online = on;
+        state.players = on ? n : null;
         if (on) saveSample(n);
         render();
       })
@@ -647,10 +618,14 @@ img, svg { max-width: 100%; }
       });
   }
   render();
+  loadShared();
+  setInterval(loadShared, 600000);
   refresh();
   setTimeout(refresh, 6000);
   setInterval(refresh, REFRESH_MS);
 })();
 </script>
+<script defer src="/assets/pwa.js"></script>
+<script defer src="/assets/pwa.js"></script>
 </body>
 </html>

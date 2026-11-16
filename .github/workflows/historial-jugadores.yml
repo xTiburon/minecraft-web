@@ -1,0 +1,39 @@
+# Toma una muestra de jugadores conectados cada hora y la guarda en
+# data/players.json (un valor por bloque de 2 h, el pico), que es lo que
+# dibuja la gráfica de la portada. Se conservan 30 días de historial.
+# Así el historial de 24 h es el mismo para todos los visitantes, en vez de
+# vivir en el navegador de cada uno.
+name: Historial de jugadores
+
+on:
+  schedule:
+    - cron: '5 * * * *'   # a y 5 de cada hora (UTC)
+  workflow_dispatch:         # también se puede lanzar a mano
+
+permissions:
+  contents: write
+
+concurrency:
+  group: historial-jugadores
+  cancel-in-progress: false
+
+jobs:
+  muestra:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Consultar el servidor y añadir la muestra
+        run: python tools/muestra-jugadores.py
+
+      - name: Guardar si cambió
+        run: |
+          if [ -n "$(git status --porcelain data/players.json)" ]; then
+            git config user.name  "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add data/players.json
+            git commit -m "Historial: muestra de jugadores"
+            git push
+          else
+            echo "Sin cambios"
+          fi
