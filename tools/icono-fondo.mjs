@@ -1,8 +1,11 @@
-/* Genera un icono cuadrado con el fondo del sitio ya pintado.
-   Los iconos con transparencia los compone iOS sobre BLANCO, así que en la
-   pantalla de inicio salían con un marco blanco alrededor del logo.
+/* Genera un icono cuadrado a partir del logo.
 
-   node tools/icono-fondo.mjs <origen> <destino> <lado> [margen 0-0.3] [color]
+   Con color de fondo, para donde el sistema lo exige (el icono de la pantalla
+   de inicio de iOS y el maskable de Android: si son transparentes, iOS los
+   compone sobre BLANCO). Con "none", el icono sale transparente, que es lo
+   que conviene en la pestaña del navegador.
+
+   node tools/icono-fondo.mjs <origen> <destino> <lado> [margen 0-0.3] [color|none]
 
    Necesita Playwright instalado (usa su Chromium para dibujar en un canvas).  */
 import { chromium } from 'playwright';
@@ -20,23 +23,25 @@ const color = colorArg || '#0A0B0D';
 const b = await chromium.launch();
 const p = await b.newPage();
 const datos = fs.readFileSync(src).toString('base64');
-const url = await p.evaluate(async ({ datos, lado, margen, color }) => {
+const url = await p.evaluate(async ({ datos, lado, margen, color, tipo }) => {
   const img = new Image();
   img.src = 'data:image/png;base64,' + datos;
   await img.decode();
   const c = document.createElement('canvas');
   c.width = lado; c.height = lado;
   const ctx = c.getContext('2d');
-  ctx.fillStyle = color;
-  ctx.fillRect(0, 0, lado, lado);
+  if (color !== 'none') {
+    ctx.fillStyle = color;
+    ctx.fillRect(0, 0, lado, lado);
+  }
   const hueco = Math.round(lado * (1 - margen * 2));
   const esc = Math.min(hueco / img.width, hueco / img.height);
   const w = Math.round(img.width * esc);
   const h = Math.round(img.height * esc);
   ctx.imageSmoothingQuality = 'high';
   ctx.drawImage(img, Math.round((lado - w) / 2), Math.round((lado - h) / 2), w, h);
-  return c.toDataURL('image/png');
-}, { datos, lado, margen, color });
+  return c.toDataURL(tipo, tipo === 'image/webp' ? 0.92 : undefined);
+}, { datos, lado, margen, color, tipo: dest.endsWith('.webp') ? 'image/webp' : 'image/png' });
 
 const png = Buffer.from(url.split(',')[1], 'base64');
 fs.writeFileSync(dest, png);
@@ -53,5 +58,5 @@ if (dest.endsWith('.ico')) {
   fs.writeFileSync(dest, Buffer.concat([cab, png]));
 }
 
-console.log(`${dest}: ${lado}x${lado}, fondo ${color}, ${(fs.statSync(dest).size / 1024).toFixed(0)} KB`);
+console.log(`${dest}: ${lado}x${lado}, ${color === 'none' ? 'sin fondo' : 'fondo ' + color}, ${(fs.statSync(dest).size / 1024).toFixed(0)} KB`);
 await b.close();
