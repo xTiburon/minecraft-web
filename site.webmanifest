@@ -8,15 +8,50 @@
   "start_url": "/?fuente=pwa",
   "scope": "/",
   "display": "standalone",
-  "display_override": ["standalone", "minimal-ui", "browser"],
+  "display_override": [
+    "standalone",
+    "minimal-ui",
+    "browser"
+  ],
   "orientation": "any",
   "theme_color": "#0A0B0D",
   "background_color": "#0A0B0D",
-  "categories": ["games", "entertainment", "education"],
+  "categories": [
+    "games",
+    "entertainment",
+    "education"
+  ],
   "icons": [
-    { "src": "/assets/img/logo-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
-    { "src": "/assets/img/logo.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
-    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+    {
+      "src": "/favicon-96.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/img/logo-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/img/logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/img/logo-maskable.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
   ],
   "shortcuts": [
     {
@@ -24,21 +59,39 @@
       "short_name": "Guías",
       "description": "Todas las guías del servidor",
       "url": "/guias?fuente=pwa",
-      "icons": [{ "src": "/assets/img/logo-192.png", "sizes": "192x192", "type": "image/png" }]
+      "icons": [
+        {
+          "src": "/assets/img/logo-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
     },
     {
       "name": "Todos los comandos",
       "short_name": "Comandos",
       "description": "La lista completa de comandos",
       "url": "/guias/comandos?fuente=pwa",
-      "icons": [{ "src": "/assets/img/logo-192.png", "sizes": "192x192", "type": "image/png" }]
+      "icons": [
+        {
+          "src": "/assets/img/logo-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
     },
     {
       "name": "Protecciones",
       "short_name": "Proteger",
       "description": "Cómo proteger tu casa",
       "url": "/guias/protecciones?fuente=pwa",
-      "icons": [{ "src": "/assets/img/logo-192.png", "sizes": "192x192", "type": "image/png" }]
+      "icons": [
+        {
+          "src": "/assets/img/logo-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
     }
   ]
 }

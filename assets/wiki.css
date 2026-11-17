@@ -8,7 +8,7 @@
   --warn:#FFC86B; --bad:#FF7A7A; --mono:'JetBrains Mono',ui-monospace,monospace;
 }
 *{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-padding-top:86px}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-padding-top:86px;background:#0A0B0D;color-scheme:dark}
 body{margin:0;min-height:100vh;min-height:100dvh;background:var(--bg);color:var(--tx);overscroll-behavior-y:none;font-family:'Space Grotesk',system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 img,svg{max-width:100%}
 a{color:var(--ac);text-decoration:none}

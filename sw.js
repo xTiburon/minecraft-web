@@ -3,7 +3,7 @@
    en el metro, con mala cobertura) y que la navegación sea instantánea.
    Estrategias: red primero para el HTML y los datos (con copia de respaldo),
    caché primero para los estáticos que no cambian de nombre. */
-const VERSION = 'pmc-v1';
+const VERSION = 'pmc-v2';
 const SHELL = 'shell-' + VERSION;
 const RUNTIME = 'run-' + VERSION;
 
@@ -34,6 +34,8 @@ const PRECACHE = [
   '/assets/java.webp',
   '/assets/bedrock.webp',
   '/assets/img/logo-192.png',
+  '/favicon-96.png',
+  '/apple-touch-icon.png',
   '/favicon.svg',
   '/site.webmanifest',
 ];
