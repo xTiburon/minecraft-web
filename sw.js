@@ -3,7 +3,7 @@
    en el metro, con mala cobertura) y que la navegación sea instantánea.
    Estrategias: red primero para el HTML y los datos (con copia de respaldo),
    caché primero para los estáticos que no cambian de nombre. */
-const VERSION = 'pmc-v3';
+const VERSION = 'pmc-v4';
 const SHELL = 'shell-' + VERSION;
 const RUNTIME = 'run-' + VERSION;
 

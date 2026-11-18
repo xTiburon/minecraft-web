@@ -155,24 +155,6 @@
             </div>
           </div>
         </div>
-
-        <div class="hm-panel">
-          <div class="hm-panel-cab">
-            <span class="n" id="chartCount">—</span>
-            <span class="lbl">jugadores</span>
-            <span class="hm-vivo" id="statVivo" hidden><i></i>En vivo</span>
-            <span class="rango" id="rangeLabel">Últimas 24 h</span>
-          </div>
-          <div id="chart"></div>
-          <div id="chartTicks"></div>
-          <div id="samplingNote" hidden>Midiendo la actividad del servidor…</div>
-          <div class="hm-panel-pie">
-            <span>Pico 24 h <b id="statPico">—</b></span>
-            <span id="statRecordBox" hidden>Récord <b id="statRecord">—</b></span>
-            <span>Capacidad <b id="statMax">—</b></span>
-            <span>Versión <b id="statVersion">—</b></span>
-          </div>
-        </div>
       </div>
 
       <div class="hm-plataformas"><span>Xbox</span><span>PlayStation</span><span>Switch</span><span>Android</span><span>iOS</span><span>Windows</span></div>
@@ -335,12 +317,8 @@
   }
   var API = 'https://api.mcsrvstat.us/3/planetmc.net';
   var API2 = 'https://api.mcstatus.io/v2/status/java/planetmc.net';
-  var KEY = 'pmc:activity:v1';
-  var HIST = '/data/players.json';
-  var BUCKET_MS = 7200000, BUCKETS = 12, REFRESH_MS = 20000;
+  var REFRESH_MS = 20000;
   var $ = function (id) { return document.getElementById(id); };
-  var chart = $('chart'), ticksEl = $('chartTicks');
-  var state = { online: null, players: null, hoverIdx: null, data: null, shared: [] };
 
   /* ---------- menú móvil ---------- */
   var toggle = $('navToggle'), menu = $('mobileMenu');
@@ -381,149 +359,13 @@
     el.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); run(); } });
   });
 
-  /* ---------- historial: archivo del servidor + muestras locales ---------- */
-  function loadSamples() {
-    try {
-      var arr = JSON.parse(localStorage.getItem(KEY) || '[]');
-      var cutoff = Date.now() - BUCKETS * BUCKET_MS;
-      return Array.isArray(arr) ? arr.filter(function (s) { return s && typeof s.t === 'number' && s.t >= cutoff; }) : [];
-    } catch (e) { return []; }
-  }
-  function saveSample(n) {
-    var s = loadSamples(); s.push({ t: Date.now(), n: n });
-    try { localStorage.setItem(KEY, JSON.stringify(s)); } catch (e) {}
-  }
-  /* data/players.json lo escribe una tarea cada 2 h: así el historial es el
-     mismo para todo el mundo y no depende del navegador de cada visitante. */
-  function loadShared() {
-    fetch(HIST, { cache: 'no-store' })
-      .then(function (r) { return r.ok ? r.json() : null; })
-      .then(function (d) {
-        var arr = d && (d.samples || d.muestras);
-        if (d && d.record && typeof d.record.n === 'number') {
-          var caja = $('statRecordBox'), rec = $('statRecord');
-          if (caja && rec) {
-            rec.textContent = String(d.record.n);
-            if (d.record.t) {
-              caja.title = 'Máximo de jugadores a la vez, el ' +
-                new Date(d.record.t).toLocaleDateString('es', { day: 'numeric', month: 'long', year: 'numeric' });
-            }
-            caja.hidden = false;
-          }
-        }
-        if (!Array.isArray(arr)) return;
-        var cutoff = Date.now() - BUCKETS * BUCKET_MS;
-        state.shared = arr.filter(function (s) {
-          return s && typeof s.t === 'number' && typeof s.n === 'number' && s.t >= cutoff;
-        });
-        render();
-      })
-      .catch(function () {});
-  }
-  function hhmm(t) {
-    return new Date(t).toLocaleTimeString('es', { hour: '2-digit', minute: '2-digit', hour12: false });
-  }
-  function hh(t) {
-    return new Date(t).toLocaleTimeString('es', { hour: '2-digit', hour12: false }) + ':00';
-  }
-
-  /* ---------- barras de 2 h ---------- */
-  function buckets() {
-    var now = Date.now();
-    var cur = Math.floor(now / BUCKET_MS) * BUCKET_MS;           // bloque en curso
-    var todas = state.shared.concat(loadSamples());
-    var out = [];
-    for (var i = BUCKETS - 1; i >= 0; i--) {
-      var start = cur - i * BUCKET_MS;
-      var enBloque = todas.filter(function (s) { return s.t >= start && s.t < start + BUCKET_MS; });
-      var value = enBloque.length ? Math.max.apply(null, enBloque.map(function (s) { return s.n; })) : null;
-      var actual = i === 0;
-      if (actual && state.players !== null && state.online) {
-        value = value === null ? state.players : Math.max(value, state.players);
-      }
-      out.push({ start: start, end: start + BUCKET_MS, value: value, actual: actual });
-    }
-    return out;
-  }
-
-  function render() {
-    if (!chart) return;
-    var bk = state.data = buckets();
-    var conocidos = bk.filter(function (b) { return b.value !== null; });
-    var pico = conocidos.length ? Math.max.apply(null, conocidos.map(function (b) { return b.value; })) : 0;
-
-    if (ticksEl) {
-      ticksEl.innerHTML = bk.map(function (b, i) {
-        var paso = (chart.clientWidth || 320) < 460 ? 4 : 3;
-        var mostrar = (i % paso === 0 && i < BUCKETS - 2) || b.actual;
-        if (!mostrar) return '';
-        var izq = ((i + 0.5) / BUCKETS) * 100;
-        var desp = i === 0 ? '0' : (b.actual ? '-100%' : '-50%');
-        return '<span style="position:absolute;white-space:nowrap;left:' + izq.toFixed(2) + '%;transform:translateX(' + desp + ')">' +
-          (b.actual ? 'ahora' : hh(b.start)) + '</span>';
-      }).join('');
-    }
-
-    var nota = $('samplingNote');
-    if (nota) nota.hidden = conocidos.length >= 3;
-    var pico24 = $('statPico');
-    if (pico24) pico24.textContent = pico > 0 ? String(pico) : '—';
-
-    var alto = chart.clientHeight || 110;
-    var html = '<div style="position:absolute;inset:0;display:flex;align-items:flex-end;gap:' +
-      (BUCKETS > 10 ? '3px' : '5px') + '" role="img" aria-label="Jugadores conectados en las últimas 24 horas, por bloques de 2 horas">';
-    bk.forEach(function (b, i) {
-      var vacio = b.value === null;
-      var ratio = (!vacio && pico > 0) ? (b.value / pico) : 0;
-      var px = vacio ? 8 : Math.max(8, Math.round(ratio * (alto - 18)) + 8);
-      var color = b.actual ? '#5CE1FF' : (vacio ? 'rgba(255,255,255,.07)' : 'rgba(92,225,255,.32)');
-      var sel = state.hoverIdx === i;
-      html += '<button type="button" data-bar="' + i + '" aria-label="' +
-        hh(b.start) + ' a ' + hh(b.end) + ': ' + (vacio ? 'sin datos' : b.value + ' jugadores') +
-        '" style="flex:1;min-width:0;height:' + px + 'px;border:0;padding:0;background:' +
-        (sel && !b.actual ? 'rgba(92,225,255,.55)' : color) +
-        ';border-radius:4px 4px 2px 2px;cursor:pointer;transition:background .14s ease;-webkit-tap-highlight-color:transparent"></button>';
-    });
-    html += '</div>';
-
-    var hv = state.hoverIdx !== null && bk[state.hoverIdx] ? bk[state.hoverIdx] : null;
-    if (hv) {
-      var izq = ((state.hoverIdx + 0.5) / BUCKETS) * 100;
-      var pegado = izq < 20 ? '0%' : (izq > 80 ? '-100%' : '-50%');
-      html += '<div style="position:absolute;z-index:3;pointer-events:none;bottom:calc(100% - ' + (alto - 4) + 'px);left:' +
-        izq.toFixed(2) + '%;transform:translate(' + pegado + ',-100%);background:#1A1D23;border:1px solid rgba(255,255,255,.12);border-radius:8px;padding:7px 10px;box-shadow:0 6px 20px rgba(0,0,0,.45);white-space:nowrap">' +
-        '<div style="font-family:\'JetBrains Mono\', monospace;font-size:10.5px;letter-spacing:.06em;color:#787F8A">' +
-        (hv.actual ? 'Ahora · desde ' + hhmm(hv.start) : hhmm(hv.start) + ' – ' + hhmm(hv.end)) + '</div>' +
-        '<div style="font-size:13px;color:#E9EBEE;margin-top:2px">' +
-        (hv.value === null ? 'Sin datos todavía' : hv.value + (hv.value === 1 ? ' jugador' : ' jugadores')) +
-        '</div></div>';
-    }
-    chart.innerHTML = html;
-  }
-
-  if (chart) {
-    var sobre = function (e) {
-      var b = e.target.closest ? e.target.closest('[data-bar]') : null;
-      if (!b) return;
-      var i = parseInt(b.getAttribute('data-bar'), 10);
-      if (i !== state.hoverIdx) { state.hoverIdx = i; render(); }
-    };
-    chart.addEventListener('pointermove', sobre);
-    chart.addEventListener('pointerdown', sobre);
-    chart.addEventListener('pointerleave', function () {
-      if (state.hoverIdx !== null) { state.hoverIdx = null; render(); }
-    });
-    chart.addEventListener('focusin', sobre);
-    window.addEventListener('resize', render);
-  }
-
   /* ---------- estado del servidor ---------- */
   function setText(id, v) {
     var el = $(id);
     if (!el) return;
     if (el.textContent === String(v)) return;
     el.textContent = v;
-    if (el.id === 'pillCount' || el.id === 'chartCount') {
+    if (el.id === 'pillCount') {
       el.classList.remove('cambia');
       void el.offsetWidth;
       el.classList.add('cambia');
@@ -547,17 +389,6 @@
       box.appendChild(chip);
     });
   }
-  /* La versión que anuncia el servidor es técnica: al jugador le sirve saber
-     qué cliente puede usar, no el nombre interno. */
-  function versionLegible(txt) {
-    if (!txt) return '—';
-    var t = String(txt).replace(/[§&][0-9a-fk-or]/gi, '').replace(/velocity|paper|spigot|bungeecord/gi, '').trim();
-    var m = t.match(/(\d+\.\d+(?:\.\d+)?)\s*[-–]\s*(\d+\.\d+(?:\.\d+)?)/);
-    if (m) return m[1] + ' – ' + m[2];
-    var u = t.match(/\d+\.\d+(?:\.\d+)?/);
-    return u ? u[0] : (t || '—');
-  }
-
   /* Dos proveedores: si el primero falla o va lento, se usa el segundo. Ambos
      cachean en torno a un minuto, así que el dato puede repetirse entre
      consultas aunque la petición sí se esté haciendo. */
@@ -594,35 +425,17 @@
         var on = d.online;
         var n = on ? d.n : 0;
         setText('pillCount', on ? String(n) : '—');
-        setText('chartCount', on ? String(n) : '—');
         setText('statusWord', on ? 'online' : 'offline');
-        setText('statMax', on && d.max ? String(d.max) : '—');
-        setText('statVersion', on ? versionLegible(d.version) : '—');
         var dot = $('statusDot');
         if (dot) dot.style.background = on ? '#6EE7A8' : '#FF6B6B';
         renderPlayers(on ? d.list : []);
-        var vivo = $('statVivo');
-        if (vivo) {
-          vivo.hidden = !on;
-          vivo.classList.remove('late');
-          void vivo.offsetWidth;          // reinicia la animación
-          vivo.classList.add('late');
-        }
-        state.online = on;
-        state.players = on ? n : null;
-        if (on) saveSample(n);
-        render();
       })
       .catch(function () {
         setText('statusWord', 'offline');
         var dot = $('statusDot');
         if (dot) dot.style.background = '#FF6B6B';
-        render();
       });
   }
-  render();
-  loadShared();
-  setInterval(loadShared, 600000);
   refresh();
   setTimeout(refresh, 6000);
   setInterval(refresh, REFRESH_MS);
