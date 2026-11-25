@@ -1,6 +1,6 @@
 {
  "_": "Historial de jugadores conectados. Lo escribe .github/workflows/historial-jugadores.yml cada hora. t = milisegundos UTC, n = jugadores (pico del bloque de 2 h). Se conservan 30 días.",
- "updated": 1795572924939,
+ "updated": 1795610139050,
  "record": {
   "n": 230,
   "t": 1794866400000
@@ -105,6 +105,10 @@
   {
    "t": 1795572000000,
    "n": 170
+  },
+  {
+   "t": 1795608000000,
+   "n": 98
   }
  ]
 }
